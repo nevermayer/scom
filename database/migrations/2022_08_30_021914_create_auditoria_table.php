@@ -15,7 +15,10 @@ return new class extends Migration
     {
         Schema::create('auditoria', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->date('fecha', $precision = 0);
+            $table->foreignId('id_usuario')
+            ->constrained('users')
+            ->cascadeOnUpdate();
         });
     }
 

@@ -15,7 +15,9 @@ return new class extends Migration
     {
         Schema::create('chef', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->foreignId('id_usuario')
+            ->constrained('users')
+            ->cascadeOnUpdate();
         });
     }
 
