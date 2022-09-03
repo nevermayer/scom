@@ -9,12 +9,15 @@ return new class extends Migration
     /**
      * Run the migrations.
      *
-     * @return void
+     * @return void 
      */
     public function up()
     {
         Schema::create('ingredientes', function (Blueprint $table) {
             $table->id();
+            $table->string('stock');
+            $table->string('nombre');
+            $table->string('fecha_vencimiento');
             $table->timestamps();
         });
     }
