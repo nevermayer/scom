@@ -9,12 +9,15 @@ return new class extends Migration
     /**
      * Run the migrations.
      *
-     * @return void
+     * @return void  
      */
     public function up()
     {
         Schema::create('platillos', function (Blueprint $table) {
             $table->id();
+            $table->time('tiempo_elalboracion');
+            $table->foreignId('producto_id')
+            ->constrained('producto');
             $table->timestamps();
         });
     }
