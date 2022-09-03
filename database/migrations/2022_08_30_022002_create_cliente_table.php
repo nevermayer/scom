@@ -9,12 +9,19 @@ return new class extends Migration
     /**
      * Run the migrations.
      *
-     * @return void
+     * @return void 
      */
     public function up()
     {
         Schema::create('cliente', function (Blueprint $table) {
             $table->id();
+            $table->string('nombre');
+            $table->string('apellido_pat');
+            $table->string('apellido_mat');
+            $table->string('email');
+            $table->string('pasword');
+            $table->int('telefono');
+            $table->string('activo');
             $table->timestamps();
         });
     }
