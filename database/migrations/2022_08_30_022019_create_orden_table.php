@@ -9,12 +9,22 @@ return new class extends Migration
     /**
      * Run the migrations.
      *
-     * @return void
+     * @return void 
      */
     public function up()
     {
         Schema::create('orden', function (Blueprint $table) {
             $table->id();
+            $table->string('nombre');
+            $table->string('apellido_pat');
+            $table->double('total');
+            $table->string('estado');
+            $table->date('fecha');
+            $table->int('telefono');
+            $table->foreignId('chef_id')
+            ->constrained('chef');
+            $table->foreignId('camarero_id')
+            ->constrained('camarero');
             $table->timestamps();
         });
     }
