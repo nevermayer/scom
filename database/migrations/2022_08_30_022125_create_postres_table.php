@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->time('tiempo_elaboracion');
             $table->foreignId('producto_id')
-            ->constrained('producto');
+            ->constrained('productos');
             $table->timestamps();
         });
     }

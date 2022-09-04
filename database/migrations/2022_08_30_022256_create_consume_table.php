@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('consume', function (Blueprint $table) {
             $table->id();
-            $table->int('cantidad');
+            $table->integer('cantidad');
             $table->foreignId('orden_id')
             ->constrained('orden');
             $table->timestamps();

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->double('total');
             $table->string('estado');
             $table->date('fecha');
-            $table->int('telefono');
+            $table->integer('telefono');
             $table->foreignId('chef_id')
             ->constrained('chef');
             $table->foreignId('camarero_id')
