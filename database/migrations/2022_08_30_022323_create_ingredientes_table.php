@@ -15,7 +15,9 @@ return new class extends Migration
     {
         Schema::create('ingredientes', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->integer('stock');
+            $table->string('nombre');
+            $table->timestamps('fecha_vencimiento');
         });
     }
 
