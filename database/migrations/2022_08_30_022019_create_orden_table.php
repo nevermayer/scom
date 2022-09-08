@@ -25,7 +25,6 @@ return new class extends Migration
             ->constrained('chef');
             $table->foreignId('camarero_id')
             ->constrained('camarero');
-            $table->timestamps();
         });
     }
 

@@ -9,15 +9,14 @@ return new class extends Migration
     /**
      * Run the migrations.
      *
-     * @return void
+     * @return void id,user_id
      */
     public function up()
     {
         Schema::create('administrador', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_usuario')
-            ->constrained('users')
-            ->cascadeOnUpdate();
+            ->constrained('users');
         });
     }
 

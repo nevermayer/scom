@@ -9,7 +9,7 @@ return new class extends Migration
     /**
      * Run the migrations.
      *
-     * @return void
+     * @return void 
      */
     public function up()
     {
@@ -17,8 +17,7 @@ return new class extends Migration
             $table->id();
             $table->date('fecha', $precision = 0);
             $table->foreignId('id_usuario')
-            ->constrained('users')
-            ->cascadeOnUpdate();
+            ->constrained('users');
         });
     }
 

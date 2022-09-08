@@ -18,7 +18,6 @@ return new class extends Migration
             $table->int('cantidad');
             $table->foreignId('orden_id')
             ->constrained('orden');
-            $table->timestamps();
         });
     }
 

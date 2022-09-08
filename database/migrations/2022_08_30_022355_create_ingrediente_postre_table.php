@@ -19,7 +19,6 @@ return new class extends Migration
             ->constrained('postres');
             $table->foreignId('ingredientes_id')
             ->constrained('ingredientes');
-            $table->timestamps();
         });
     }
 

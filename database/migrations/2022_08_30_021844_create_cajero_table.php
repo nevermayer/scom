@@ -16,8 +16,7 @@ return new class extends Migration
         Schema::create('cajero', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_usuario')
-            ->constrained('users')
-            ->cascadeOnUpdate();
+            ->constrained('users');
         });
     }
 

@@ -23,7 +23,6 @@ return new class extends Migration
             ->constrained('orden');
             $table->foreignId('cliente_id')
             ->constrained('cliente');
-            $table->timestamps();
         });
     }
 

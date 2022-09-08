@@ -26,7 +26,6 @@ return new class extends Migration
             ->constrained('camarero');
             $table->foreignId('cliente_id')
             ->constrained('cliente');
-            $table->timestamps();
         });
     }
 

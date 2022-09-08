@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('grado_alcoholico');
             $table->foreignId('producto_id')
             ->constrained('producto');
-            $table->timestamps();
         });
     }
 

@@ -22,7 +22,6 @@ return new class extends Migration
             $table->string('pasword');
             $table->int('telefono');
             $table->string('activo');
-            $table->timestamps();
         });
     }
 

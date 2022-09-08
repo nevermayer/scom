@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('stock');
             $table->string('nombre');
             $table->string('fecha_vencimiento');
-            $table->timestamps();
         });
     }
 
