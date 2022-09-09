@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('apellido_mat');
             $table->string('email');
             $table->string('pasword');
-            $table->int('telefono');
+            $table->integer('telefono');
             $table->string('activo');
         });
     }
