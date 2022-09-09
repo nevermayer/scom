@@ -21,7 +21,6 @@ return new class extends Migration
             ->cascadeOnUpdate();
         });
     }
-
     /**
      * Reverse the migrations.
      *
