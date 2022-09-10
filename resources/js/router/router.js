@@ -6,6 +6,7 @@ import register from '@/pages/register.vue';
 //administracion
 import dashboard from '@/pages/admin/dashboard.vue'
 import categories from '@/pages/admin/Categories.vue'
+import Login from '@/pages/admin/Login.vue'
 //definiendo rutas
 const routes=[
     {
@@ -27,6 +28,11 @@ const routes=[
         path:'/admin/dashboard',
         name:'Dashboard',
         component:dashboard
+    },
+    {
+        path:'/admin/login',
+        name:'ALogin',
+        component:Login
     },    
     {
         path:'/admin/categories',

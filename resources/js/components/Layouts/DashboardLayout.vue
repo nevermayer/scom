@@ -5,7 +5,7 @@
             <div class="sidebar-header">
                 <h3 class="brand">
                     <span class="ti-bolt"></span> 
-                    <span>Foodie</span>
+                    <span>ScoM</span>
                 </h3> 
                 <label for="sidebar-toggle" class="ti-menu-alt"></label>
             </div>
@@ -15,31 +15,31 @@
                     <li>
                         <router-link to="/admin/dashboard">
                             <span class="ti-home"></span>
-                            <span>Home</span>
+                            <span>Principal</span>
                         </router-link>
                     </li>
                     <li>
                         <router-link to="/admin/categories">
                             <span class="ti-face-smile"></span>
-                            <span>Categories</span>
+                            <span>Categorias</span>
                         </router-link>
                     </li>
                     <li>
                         <router-link to="/admin/menu">
                             <span class="ti-agenda"></span>
-                            <span>Menu</span>
+                            <span>Productos</span>
                         </router-link>
                     </li>
                     <li>
                         <router-link to="/admin/orders">
                             <span class="ti-clipboard"></span>
-                            <span>Orders</span>
+                            <span>Ordenes</span>
                         </router-link>
                     </li>
                     <li>
                         <router-link to="/admin/users">
                             <span class="ti-folder"></span>
-                            <span>Users</span>
+                            <span>Clientes</span>
                         </router-link>
                     </li>
                 </ul>
