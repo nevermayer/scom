@@ -18,6 +18,8 @@ return new class extends Migration
             $table->integer('cantidad');
             $table->foreignId('orden_id')
             ->constrained('orden');
+            $table->foreignId('producto_id')
+            ->constrained('productos');
         });
     }
 
