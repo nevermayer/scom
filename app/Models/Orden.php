@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Orden extends Model
 {
     use HasFactory;
+    
+    public function productos(){
+        return $this->belongsToMany(Productos::class, 'Consume');
+    }
 }

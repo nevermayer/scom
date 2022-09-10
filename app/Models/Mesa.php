@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Mesa extends Model
 {
     use HasFactory;
+    public function camarero(){
+        return $this->belongsTo(Camarero::class, 'id');
+    }
+    
+    public function cliente(){
+        return $this->belongsTo(Cliente::class, 'id');
+    }
+    
 }
