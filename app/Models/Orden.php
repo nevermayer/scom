@@ -19,4 +19,12 @@ class Orden extends Model
     public function productos(){
         return $this->belongsToMany(Productos::class,'consume');
     }
+
+    public function facturas(){
+        return $this->belongsTo(Factura::class,'id_factura');
+    }
+
+    public function mesas(){
+        return $this->belongsTo(Mesa::class,'id_mesa');
+    }
 }

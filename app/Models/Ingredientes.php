@@ -12,4 +12,11 @@ class Ingredientes extends Model
     public function chefs(){
         return $this->belongsToMany(Chef::class, 'solicitud_chef');
     }
+    public function platillos(){
+        return $this->belongsToMany(Platillos::class, 'ingrediente_platillo');
+    }
+
+    public function postres(){
+        return $this->belongsToMany(Postres::class, 'ingrediente_postre');
+    }
 }

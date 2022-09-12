@@ -12,5 +12,9 @@ class Cliente extends Model
     public function facturas(){
         return $this->hasMany(Factura::class,'id');
     }
+
+    public function mesas(){
+        return $this->hasMany(Mesa::class,'id');
+    }
    
 }

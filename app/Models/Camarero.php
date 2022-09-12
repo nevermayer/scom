@@ -12,4 +12,8 @@ class Camarero extends Model
     public function ordenes(){
         return $this->hasMany(Orden::class,'id');
     }
+
+    public function mesas(){
+        return $this->hasMany(Mesa::class,'id');
+    }
 }

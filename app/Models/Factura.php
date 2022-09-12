@@ -16,4 +16,7 @@ class Factura extends Model
     public function clientes(){
         return $this->belongsTo(Cliente::class,'id_cliente');
     }
+    public function ordens(){
+        return $this->hasMany(Orden::class,'id');
+    }
 }
