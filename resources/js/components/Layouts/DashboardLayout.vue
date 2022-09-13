@@ -52,7 +52,7 @@
             <header>
                 <div class="search-wrapper">
                     <span class="ti-search"></span>
-                    <input type="search" placeholder="Search">
+                    <input type="search" placeholder="Buscar...">
                 </div>
                 
                 <div class="social-icons">

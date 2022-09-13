@@ -54,8 +54,8 @@
                 <div class="cart-section">
                     <div class="cart-card">
                         <div class="cart-header">
-                            <h3>New Order</h3>
-                            <small>items in cart</small>
+                            <h3>Nueva Orden</h3>
+                            <small>Productos</small>
                         </div>
 
                         <div class="cart-body">
@@ -81,15 +81,6 @@
 
                             <div class="cart-sum">
                                 <div class="cart-address">
-                                    <div class="price-flex">
-                                        <div>
-                                            <small><b>Address</b></small>
-                                            <p>{{address}}</p>
-                                        </div>
-                                        <button class="btn btn-main-gradient" @click="showAddressModal = true">
-                                            <!--<span class="ti-location-pin"></span>--> Change
-                                        </button>
-                                    </div>
                                 </div>
 
                                 <div>
@@ -114,7 +105,7 @@
 
                                     <button v-else-if="!address" class="btn btn-success"
                                         @click="showAddressModal = true">
-                                        Add delivery address
+                                        Confirmar la Orden
                                     </button>
 
                                     <button v-else class="btn btn-success" @click="$router.push('/account')">

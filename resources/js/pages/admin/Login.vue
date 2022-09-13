@@ -1,7 +1,7 @@
 <template>
     <div class="admin-login-wrapper">
         <div class="admin-form-wrapper">
-            <h3>Sign into dashboard</h3>
+            <h3>Panel de Administración SCOM</h3>
 
             <div class="form-group">
                 <label for="">Nombre de cuenta</label>
@@ -14,17 +14,19 @@
             </div>
 
             <div class="form-group">
-                <button class="btn btn-main btn-block" @click="signin">Sign in</button>
+                <button class="btn btn-main btn-block" @click="signin">Ingresar</button>
             </div>
 
             <div class="form-group form-link">
-                <router-link to="/">Back to home</router-link>
+                <router-link to="/">Volver a Inicio</router-link>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import router from '../../router/router';
+
 export default {
     name: 'AdminLogin',
     data() {
@@ -38,19 +40,21 @@ export default {
     methods: {
         signin() {
             const { nombre_cuenta, password } = this.creds
-
             if (!nombre_cuenta || !password) {
-                console.error("hola");
+                console.log("hola");
+                return;
                 // return this.$alertify.error('Incomplete credentials');
             }
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
-                this.$axios.post('api/login', {
-                    email: this.email,
-                    password: this.password
+                this.$axios.post('/api/login', {
+                    nombre_cuenta,
+                    password
                 })
                     .then(response => {
                         if (response.data.success) {
-                            this.$router.go('/login')
+                            localStorage.setItem('token',response.data.access_token);
+                            router.push('/admin/dashboard');
+                           //this.$router.go('Home');
                         } else {
                             this.error = response.data.message
                         }
