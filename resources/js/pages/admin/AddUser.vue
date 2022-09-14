@@ -38,10 +38,11 @@
                             <div class="form-group">
                                 <label for="">Rol</label>
                                 <select v-model="user.role" class="form-control">
-                                    <option value="">Choose</option>
-                                    <option value="admin">Administrator</option>
-                                    <option value="customer">Customer</option>
-                                    <option value="driver">Driver</option>
+                                    <option value="">Cargo</option>
+                                    <option value="admin">Administrador</option>
+                                    <option value="cajero">Cajero</option>
+                                    <option value="camarero">Camarero</option>
+                                    <option value="chef">Chef</option>
                                 </select>
                             </div>
                             <div class="form-group">

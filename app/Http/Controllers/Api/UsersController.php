@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Administrador;
+use App\Models\Cajero;
+use App\Models\Camarero;
+use App\Models\Chef;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -32,8 +36,31 @@ class UsersController extends Controller
         $usuario->super_usuario = $request->super_usuario;
         $usuario->turno = $request->turno;
         $usuario->save();
+        if ($request->role == '') {
+            return response()->json([
+                "success" => true,
+                "message" => "Registro de usuario exitoso",
+            ]);
+        }
+        if ($request->role == "admin") {
+            $role = new Administrador();
+            $role->id_usuario = $usuario->id;
+        }
+        if ($request->role == "cajero") {
+            $role = new Cajero();
+            $role->id_usuario = $usuario->id;
+        }
+        if ($request->role == "chef") {
+            $role = new Chef();
+            $role->id_usuario = $usuario->id;
+        }
+        if ($request->role == "camarero") {
+            $role = new Camarero();
+            $role->id_usuario = $usuario->id;
+        }
+        $role->save();
         return response()->json([
-            "success" =>true,
+            "success" => true,
             "message" => "Registro de usuario exitoso",
         ]);
     }
@@ -85,7 +112,7 @@ class UsersController extends Controller
     }
     public function all()
     {
-        $usuario=User::all();
+        $usuario = User::all();
         return response()->json([
             "success" => true,
             "data" => $usuario

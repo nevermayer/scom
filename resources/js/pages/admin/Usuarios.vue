@@ -20,17 +20,17 @@
                                         <th>Nombre</th>
                                         <th>Paterno</th>
                                         <th>Materno</th>
-                                        <th>Cargo</th>
+                                        <th>Turno</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr v-for="(user, index) in users" :key="index" >
-                                        <td>#{{index + 1}}</td>
+                                        <td>{{user.id}}</td>
                                         <td>{{user.nombre_cuenta}}</td>
                                         <td>{{user.nombre}}</td>
                                         <td>{{user.apellido_pat}}</td>
                                         <td>{{user.apellido_mat}}</td>
-                                        <td>{{user.role}}</td>
+                                        <td>{{user.turno}}</td>
                                     </tr>
                                 </tbody>
                             </table>

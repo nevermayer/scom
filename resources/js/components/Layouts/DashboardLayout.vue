@@ -85,6 +85,11 @@ export default {
     name: 'DashboardLayout',
     methods: {
         signout() {
+            this.$axios.get('/api/logout', {
+                headers: {
+                    Authorization: `Bearer ${localStorage.token}`
+                }
+            })
             localStorage.removeItem('token')
             localStorage.removeItem('admin')
             this.$router.push('/admin/login');
