@@ -58,13 +58,13 @@ class UsersController extends Controller
                 return response()->json([
                     "success" => false,
                     "message" => "el password es incorrecto",
-                ], 404);
+                ]);
             }
         } else {
             return response()->json([
                 "success" => false,
                 "message" => "usuario no registrado",
-            ], 404);
+            ]);
         }
     }
     public function userprofile()
@@ -81,6 +81,14 @@ class UsersController extends Controller
         return response()->json([
             "success" => true,
             "message" => "cierre de session",
+        ]);
+    }
+    public function all()
+    {
+        $usuario=User::all();
+        return response()->json([
+            "success" => true,
+            "data" => $usuario
         ]);
     }
 }

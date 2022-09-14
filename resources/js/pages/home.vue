@@ -2,25 +2,25 @@
     <div class="front-wrapper">
         <div class="front-sidebar">
             <div class="brand">
-                <img src="../assets/img/fast-food.svg" alt="">
+                <img src="../assets/img/logo.svg" alt="">
             </div>
             <div class="front-sidemenu">
                 <ul>
                     <li>
                         <div>
-                            <img src="../assets/img/fast-food.svg" alt="">
+                            <img src="../assets/img/platillo.svg" alt="">
                             <h3 @click="getItems(category)">Platillos</h3>
                         </div>
                     </li>
                     <li>
                         <div>
-                            <img src="../assets/img/fast-food.svg" alt="">
+                            <img src="../assets/img/postre.svg" alt="">
                             <h3 @click="getItems(category)">Postres</h3>
                         </div>
                     </li>
                     <li>
                         <div>
-                            <img src="../assets/img/fast-food.svg" alt="">
+                            <img src="../assets/img/bebida.svg" alt="">
                             <h3 @click="getItems(category)">Bebidas</h3>
                         </div>
                     </li>
@@ -50,6 +50,7 @@
                             </button>
                         </div>
                     </div>
+
                 </div>
                 <div class="cart-section">
                     <div class="cart-card">
@@ -118,9 +119,6 @@
                 </div>
             </div>
         </div>
-
-
-
         <modal v-if="showAddressModal" @close="showAddressModal = false">
             <h4 slot="header">Provide your address</h4>
 
@@ -134,5 +132,11 @@
     </div>
 </template>
 <script>
-   import DashboardLayout from '@/components/Layouts/DashboardLayout.vue'
+import Nav from '@/components/Nav.vue'
+export default {
+    name: 'home',
+    components: {
+        Nav
+    }
+}
 </script>

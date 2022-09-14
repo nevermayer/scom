@@ -1,6 +1,6 @@
 <template>
     <dashboard-layout>
-        <div>
+        <div slot="main-content">
             <h2 class="dash-title">Categories</h2>
                     
             <div class="page-action">
@@ -44,7 +44,7 @@
 import DashboardLayout from '@/components/Layouts/DashboardLayout.vue'
 
 export default {
-    name: 'Categories',
+    name: 'Ordenes',
     components: {
         DashboardLayout,
     }

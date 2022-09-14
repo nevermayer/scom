@@ -1,8 +1,8 @@
 <template>
     <dashboard-layout>
-        <div slot="main-content">
+        <div>
             <h2 class="dash-title">Overview</h2>
-                    
+
             <div class="dash-cards">
                 <div class="card-single">
                     <div class="card-body">
@@ -16,7 +16,7 @@
                         <a href="">View all</a>
                     </div>
                 </div>
-                
+
                 <div class="card-single">
                     <div class="card-body">
                         <span class="ti-reload"></span>
@@ -29,7 +29,7 @@
                         <a href="">View all</a>
                     </div>
                 </div>
-                
+
                 <div class="card-single">
                     <div class="card-body">
                         <span class="ti-check-box"></span>
@@ -43,12 +43,12 @@
                     </div>
                 </div>
             </div>
-            
+
             <section class="recent">
                 <div class="">
                     <div class="activity-card">
                         <h3>Recent menu items</h3>
-                        
+
                         <div class="table-responsive">
                             <table>
                                 <thead>
@@ -62,14 +62,16 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="(menuItem, index) in menu" :key="index" >
+                                    <tr v-for="(menuItem, index) in menu" :key="index">
                                         <td>#{{index + 1}}</td>
-                                        <td><img :src="menuItem.image" style="border-radius: 50%" height="50px" width="50px" alt=""></td>
+                                        <td><img :src="menuItem.image" style="border-radius: 50%" height="50px"
+                                                width="50px" alt=""></td>
                                         <td>{{menuItem.name}}</td>
                                         <td>{{menuItem.category.name}}</td>
                                         <td>{{menuItem.price}}</td>
                                         <td>
-                                            <span class="badge success" v-if="Number(menuItem.isAvailable) === 1">Available</span>
+                                            <span class="badge success"
+                                                v-if="Number(menuItem.isAvailable) === 1">Available</span>
                                             <span class="badge warning" v-else>Not available</span>
                                         </td>
                                     </tr>

@@ -9,7 +9,6 @@
                 </h3> 
                 <label for="sidebar-toggle" class="ti-menu-alt"></label>
             </div>
-            
             <div class="sidebar-menu">
                 <ul>
                     <li>
@@ -25,19 +24,31 @@
                         </router-link>
                     </li>
                     <li>
-                        <router-link to="/admin/menu">
+                        <router-link to="/admin/productos">
                             <span class="ti-agenda"></span>
                             <span>Productos</span>
                         </router-link>
                     </li>
                     <li>
-                        <router-link to="/admin/orders">
+                        <router-link to="/admin/ingredientes">
+                            <span class="ti-agenda"></span>
+                            <span>Ingredientes</span>
+                        </router-link>
+                    </li>
+                    <li>
+                        <router-link to="/admin/ordenes">
                             <span class="ti-clipboard"></span>
                             <span>Ordenes</span>
                         </router-link>
                     </li>
                     <li>
-                        <router-link to="/admin/users">
+                        <router-link to="/admin/usuarios">
+                            <span class="ti-folder"></span>
+                            <span>Usuarios</span>
+                        </router-link>
+                    </li>
+                    <li>
+                        <router-link to="/admin/clientes">
                             <span class="ti-folder"></span>
                             <span>Clientes</span>
                         </router-link>
@@ -62,7 +73,7 @@
             </header>
             
             <main>
-                <slot name="main-content"></slot>
+                <slot></slot>
             </main>
             
         </div>
@@ -74,7 +85,7 @@ export default {
     name: 'DashboardLayout',
     methods: {
         signout() {
-            localStorage.removeItem('authtoken')
+            localStorage.removeItem('token')
             localStorage.removeItem('admin')
             this.$router.push('/admin/login');
         }
