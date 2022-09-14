@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UsersController;
+use App\Http\Controllers\IngredientesController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -24,4 +26,14 @@ Route::post('login',[UsersController::class,'login']);
 Route::group(['middleware'=>["auth:sanctum"]],function(){
     Route::get('usuario-profile',[UsersController::class,'userprofile']);
     Route::get('logout',[UsersController::class,'logout']);
+});
+
+
+// PARTE INGREDIENTES
+Route::controller(IngredientesController::class)->group(function(){
+    Route::get('/Ingredientes','index');
+    Route::post('/Ingrediente','store');
+    Route::get('/Ingrediente/{id}','show');
+    Route::put('/Ingrediente/{id}','update');
+    Route::delete('/Ingrediente/{id}','destroy');
 });
