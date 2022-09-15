@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Administrador;
+use App\Models\Cajero;
+use App\Models\Camarero;
+use App\Models\Chef;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -32,9 +36,32 @@ class UsersController extends Controller
         $usuario->super_usuario = $request->super_usuario;
         $usuario->turno = $request->turno;
         $usuario->save();
+        if ($request->role == '') {
+            return response()->json([
+                "success" => true,
+                "message" => "Registro de usuario exitoso",
+            ]);
+        }
+        if ($request->role == "admin") {
+            $role = new Administrador();
+            $role->id_usuario = $usuario->id;
+        }
+        if ($request->role == "cajero") {
+            $role = new Cajero();
+            $role->id_usuario = $usuario->id;
+        }
+        if ($request->role == "chef") {
+            $role = new Chef();
+            $role->id_usuario = $usuario->id;
+        }
+        if ($request->role == "camarero") {
+            $role = new Camarero();
+            $role->id_usuario = $usuario->id;
+        }
+        $role->save();
         return response()->json([
-            "status" => 1,
-            "msg" => "Registro de usuario exitoso",
+            "success" => true,
+            "message" => "Registro de usuario exitoso",
         ]);
     }
 
@@ -50,28 +77,28 @@ class UsersController extends Controller
                 //creando token 
                 $token = $usuario->createToken("auth_token")->plainTextToken;
                 return response()->json([
-                    "status" => 1,
-                    "msg" => "Usuario logueado exitosamente",
+                    "success" => true,
+                    "message" => "Usuario logueado exitosamente",
                     "access_token" => $token,
                 ]);
             } else {
                 return response()->json([
-                    "status" => 0,
-                    "msg" => "el password es incorrecto",
-                ], 404);
+                    "success" => false,
+                    "message" => "el password es incorrecto",
+                ]);
             }
         } else {
             return response()->json([
-                "status" => 0,
-                "msg" => "usuario no registrado",
-            ], 404);
+                "success" => false,
+                "message" => "usuario no registrado",
+            ]);
         }
     }
     public function userprofile()
     {
         return response()->json([
-            "status" => 0,
-            "msg" => "perfil del usuario",
+            "success" => true,
+            "message" => "perfil del usuario",
             "data" => auth()->user()
         ]);
     }
@@ -79,8 +106,16 @@ class UsersController extends Controller
     {
         auth()->user()->tokens()->delete();
         return response()->json([
-            "status" => 2,
-            "msg" => "cierre de session",
+            "success" => true,
+            "message" => "cierre de session",
+        ]);
+    }
+    public function all()
+    {
+        $usuario = User::all();
+        return response()->json([
+            "success" => true,
+            "data" => $usuario
         ]);
     }
 }

@@ -1,19 +1,51 @@
 <?php
 
+/**
+ * Created by Reliese Model.
+ */
+
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Camarero
+ * 
+ * @property int $id
+ * @property int $id_usuario
+ * 
+ * @property User $user
+ * @property Collection|Mesa[] $mesas
+ * @property Collection|Orden[] $ordens
+ *
+ * @package App\Models
+ */
 class Camarero extends Model
 {
-    use HasFactory;
+	protected $table = 'camarero';
+	public $timestamps = false;
 
-    public function ordenes(){
-        return $this->hasMany(Orden::class,'id');
-    }
+	protected $casts = [
+		'id_usuario' => 'int'
+	];
 
-    public function mesas(){
-        return $this->hasMany(Mesa::class,'id');
-    }
+	protected $fillable = [
+		'id_usuario'
+	];
+
+	public function user()
+	{
+		return $this->belongsTo(User::class, 'id_usuario');
+	}
+
+	public function mesas()
+	{
+		return $this->hasMany(Mesa::class);
+	}
+
+	public function ordens()
+	{
+		return $this->hasMany(Orden::class);
+	}
 }
