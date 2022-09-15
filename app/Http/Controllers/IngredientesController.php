@@ -34,7 +34,7 @@ class IngredientesController extends Controller
 
     public function update( Request $request,$id){
 
-        $ingrediente = Ingredientes::findOrFail($request->$id);
+        $ingrediente = Ingredientes::findOrFail($id);
         $ingrediente->stock = $request->stock;
         $ingrediente->nombre = $request->nombre;
         $ingrediente-> fecha_vencimiento= $request->fecha_vencimiento;
