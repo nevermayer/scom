@@ -26,9 +26,8 @@ Route::post('login',[UsersController::class,'login']);
 Route::group(['middleware'=>["auth:sanctum"]],function(){
     Route::get('usuario-profile',[UsersController::class,'userprofile']);
     Route::get('logout',[UsersController::class,'logout']);
-<<<<<<< HEAD
 });
-
+Route::get('users/all',[UsersController::class,'all']);
 
 // PARTE INGREDIENTES
 Route::controller(IngredientesController::class)->group(function(){
@@ -38,8 +37,4 @@ Route::controller(IngredientesController::class)->group(function(){
     Route::put('/Ingrediente/{id}','update');
     Route::delete('/Ingrediente/{id}','destroy');
 });
-=======
-    
-});
-Route::get('users/all',[UsersController::class,'all']);
->>>>>>> vue-vistas
+
