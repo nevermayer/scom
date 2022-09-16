@@ -10,12 +10,12 @@ use App\Models\Productos;
 class ProductosController extends Controller
 {
     
-    public function leer()
+    public function index()
     {
-        $productos= Productos::getall();
+        $productos= Productos::all();
         return $productos;
     }
-    public function guardar(Request $request)
+    public function store(Request $request)
     {
         $produto = new Productos();
         $produto->nombre = $request->nombre;
@@ -26,7 +26,12 @@ class ProductosController extends Controller
         $produto->save();
 
     }
-    public function editar(Request $request, $id)
+    public function show($id)
+    {
+        $producto=Productos::find($id);
+        return $producto;
+    }
+    public function update(Request $request, $id)
     {
          $producto = Productos::findOrFail($request->id);
          $produto->nombre = $request->nombre;
@@ -37,7 +42,7 @@ class ProductosController extends Controller
          $producto->save();
          return $producto;
     }
-    public function eliminar($id)
+    public function destroy($id)
     {
          $producto = Productos::destroy($id);
          return $producto;

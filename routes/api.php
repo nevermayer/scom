@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UsersController;
+use App\Http\Controllers\ProductosController;
+use App\Http\Controllers\ClienteController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -24,4 +26,24 @@ Route::post('login',[UsersController::class,'login']);
 Route::group(['middleware'=>["auth:sanctum"]],function(){
     Route::get('usuario-profile',[UsersController::class,'userprofile']);
     Route::get('logout',[UsersController::class,'logout']);
+});
+// PRODUCTOS...
+
+Route::controller(ProductosController:: class)->group(function () {
+       Route::get('/productos','index');
+       Route::post('/producto', 'store');
+       Route::get('/producto/{id}', 'show');
+       Route::put('/producto/{id}', 'update');
+       Route::delete('/producto/{id}', 'destroy');
+ 
+});
+// CLIENTE
+
+Route::controller(ClienteController:: class)->group(function () {
+    Route::get('/clientes','index');
+    Route::post('/cliente', 'store');
+    Route::get('/cliente/{id}', 'show');
+    Route::put('/cliente/{id}', 'update');
+    Route::delete('/cliente/{id}', 'destroy');
+
 });
