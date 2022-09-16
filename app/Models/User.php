@@ -29,4 +29,29 @@ class User extends Authenticatable
         'turno'
     ];
     public $timestamps = false;
+    
+    public function administradors()
+	{
+		return $this->hasMany(Administrador::class, 'id_usuario');
+	}
+
+	public function auditorias()
+	{
+		return $this->hasMany(Auditoria::class, 'id_usuario');
+	}
+
+	public function cajeros()
+	{
+		return $this->hasMany(Cajero::class, 'id_usuario');
+	}
+
+	public function camareros()
+	{
+		return $this->hasMany(Camarero::class, 'id_usuario');
+	}
+
+	public function chefs()
+	{
+		return $this->hasMany(Chef::class, 'id_usuario');
+	}
 }

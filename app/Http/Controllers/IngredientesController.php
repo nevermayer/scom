@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Ingredientes;
+use App\Models\Ingrediente;
 use Illuminate\Http\Request;
 
 
@@ -11,13 +11,13 @@ class IngredientesController extends Controller
 {
     
     public function index(){
-        $ingredientes = Ingredientes::all();
+        $ingredientes = Ingrediente::all();
         return $ingredientes;
     }
 
     //funcion para guardar/almacenar
     public function store( Request $request){
-        $ingrediente = new  Ingredientes();
+        $ingrediente = new  Ingrediente();
         $ingrediente->stock = $request->stock;
         $ingrediente->nombre = $request->nombre;
         $ingrediente-> fecha_vencimiento= $request->fecha_vencimiento;
@@ -28,13 +28,13 @@ class IngredientesController extends Controller
     // Para capturar por id cada ingrediente
     public function show( $id){
 
-       $ingrediente = Ingredientes::find($id);
+       $ingrediente = Ingrediente::find($id);
         return $ingrediente;
     }
 
     public function update( Request $request,$id){
 
-        $ingrediente = Ingredientes::findOrFail($id);
+        $ingrediente = Ingrediente::findOrFail($id);
         $ingrediente->stock = $request->stock;
         $ingrediente->nombre = $request->nombre;
         $ingrediente-> fecha_vencimiento= $request->fecha_vencimiento;
@@ -45,7 +45,7 @@ class IngredientesController extends Controller
      //Para eliminar
 
      public function destroy($id){
-        $ingrediente = Ingredientes::destroy($id);
+        $ingrediente = Ingrediente::destroy($id);
         return $ingrediente;
      }
 

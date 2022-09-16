@@ -7,8 +7,10 @@ import register from '@/pages/register.vue';
 import dashboard from '@/pages/admin/dashboard.vue'
 import categories from '@/pages/admin/Categories.vue'
 import Login from '@/pages/admin/Login.vue'
-import usuarios from '@/pages/admin/Usuarios.vue'
-import AddUser from '@/pages/admin/AddUser.vue'
+//usuarios
+import User from '@/pages/admin/Usuarios/index.vue'
+import AddUser from '@/pages/admin/Usuarios/Agregar.vue'
+import EditUser from '@/pages/admin/Usuarios/Editar.vue'
 import clientes from '@/pages/admin/Clientes.vue'
 import productos from '@/pages/admin/Productos.vue'
 import ordenes from '@/pages/admin/Ordenes.vue'
@@ -48,12 +50,18 @@ const routes = [
     {
         path: '/admin/usuarios',
         name: 'Usuarios',
-        component: usuarios
+        component: User
     },
     {
         path: '/admin/usuarios/add',
         name: 'AddUser',
         component: AddUser
+    }
+    ,
+    {
+        path: '/admin/usuarios/:id',
+        name: 'EditUser',
+        component: EditUser
     },
     {
         path: '/admin/clientes',

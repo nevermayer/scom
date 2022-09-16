@@ -21,6 +21,7 @@
                                         <th>Paterno</th>
                                         <th>Materno</th>
                                         <th>Turno</th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -31,6 +32,7 @@
                                         <td>{{user.apellido_pat}}</td>
                                         <td>{{user.apellido_mat}}</td>
                                         <td>{{user.turno}}</td>
+                                        <td><button class="btn" @click="editar(user.id)"><span class="ti-pencil-alt"></span></button></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -59,7 +61,7 @@ export default {
     },
     methods: {
         getUsers() {
-            this.$axios.get('/api/users/all', {
+            this.$axios.get('/api/users', {
                 headers: {
                     Authorization: `Bearer ${localStorage.token}`
                 }
@@ -70,6 +72,9 @@ export default {
             .catch(error => {
                 console.log(error.response)
             })
+        },
+        editar(id){
+            this.$router.push('/admin/usuarios/'+id)
         },
     }
 }

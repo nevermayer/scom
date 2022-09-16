@@ -7,16 +7,40 @@ use Illuminate\Database\Eloquent\Model;
 
 class Factura extends Model
 {
-    use HasFactory;
+	protected $table = 'factura';
+	public $timestamps = false;
 
-    public function cajeros(){
-        return $this->belongsTo(Cajero::class,'id_cajero');
-    }
+	protected $casts = [
+		'total' => 'float',
+		'cajero_id' => 'int',
+		'orden_id' => 'int',
+		'cliente_id' => 'int'
+	];
 
-    public function clientes(){
-        return $this->belongsTo(Cliente::class,'id_cliente');
-    }
-    public function ordens(){
-        return $this->hasMany(Orden::class,'id');
-    }
+	protected $dates = [
+		'fecha'
+	];
+
+	protected $fillable = [
+		'total',
+		'fecha',
+		'cajero_id',
+		'orden_id',
+		'cliente_id'
+	];
+
+	public function cajero()
+	{
+		return $this->belongsTo(Cajero::class);
+	}
+
+	public function cliente()
+	{
+		return $this->belongsTo(Cliente::class);
+	}
+
+	public function orden()
+	{
+		return $this->belongsTo(Orden::class);
+	}
 }

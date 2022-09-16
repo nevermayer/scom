@@ -7,14 +7,30 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cliente extends Model
 {
-    use HasFactory;
-    
-    public function facturas(){
-        return $this->hasMany(Factura::class,'id');
-    }
+	protected $table = 'cliente';
+	public $timestamps = false;
 
-    public function mesas(){
-        return $this->hasMany(Mesa::class,'id');
-    }
-   
+	protected $casts = [
+		'telefono' => 'int'
+	];
+
+	protected $fillable = [
+		'nombre',
+		'apellido_pat',
+		'apellido_mat',
+		'email',
+		'pasword',
+		'telefono',
+		'activo'
+	];
+
+	public function facturas()
+	{
+		return $this->hasMany(Factura::class);
+	}
+
+	public function mesas()
+	{
+		return $this->hasMany(Mesa::class);
+	}
 }

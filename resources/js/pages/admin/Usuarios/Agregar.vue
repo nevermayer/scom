@@ -83,7 +83,7 @@
 import DashboardLayout from '@/components/Layouts/DashboardLayout.vue'
 
 export default {
-    name: 'AddUser',
+    name: 'Agregar',
     components: {
         DashboardLayout,
     },
@@ -109,13 +109,12 @@ export default {
     },
     methods: {
         addUser() {
-            const { nombre_cuenta, nombre, apellido_pat, apellido_mat, password, password_confirmation, role, super_usuario, activo, turno } = this.user
 
-            if (!nombre_cuenta || !nombre || !role || !password) {
+            if (!this.user.nombre_cuenta || !this.user.nombre || !this.user.role || !this.user.password) {
                 return this.$alertify.error('Incomplete form data')
             }
 
-            this.$axios.post('/api/register', { nombre_cuenta, nombre, apellido_pat, apellido_mat, password, password_confirmation, role, super_usuario, activo, turno}, {
+            this.$axios.post('/api/register', this.user, {
                 headers: {
                     Authorization: `Bearer ${localStorage.token}`
                 }

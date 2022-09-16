@@ -27,7 +27,9 @@ Route::group(['middleware'=>["auth:sanctum"]],function(){
     Route::get('usuario-profile',[UsersController::class,'userprofile']);
     Route::get('logout',[UsersController::class,'logout']);
 });
-Route::get('users/all',[UsersController::class,'all']);
+Route::get('users',[UsersController::class,'index']);
+Route::get('user/{id}',[UsersController::class,'show']);
+Route::put('user/{id}',[UsersController::class,'update']);
 
 // PARTE INGREDIENTES
 Route::controller(IngredientesController::class)->group(function(){

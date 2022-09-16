@@ -8,8 +8,24 @@ use Illuminate\Database\Eloquent\Model;
 class Auditoria extends Model
 {
     use HasFactory;
+    protected $table = 'auditoria';
+	public $timestamps = false;
 
-    public function users(){
-        return $this->hasMany(User::class,'id');
-    }
+	protected $casts = [
+		'id_usuario' => 'int'
+	];
+
+	protected $dates = [
+		'fecha'
+	];
+
+	protected $fillable = [
+		'fecha',
+		'id_usuario'
+	];
+
+	public function user()
+	{
+		return $this->belongsTo(User::class, 'id_usuario');
+	}
 }

@@ -110,12 +110,46 @@ class UsersController extends Controller
             "message" => "cierre de session",
         ]);
     }
-    public function all()
+    public function index()
     {
         $usuario = User::all();
         return response()->json([
             "success" => true,
             "data" => $usuario
         ]);
+    }
+    public function show($id)
+    {
+
+        $usuario = User::find($id);
+        $cargo = '';
+        if (Administrador::find($usuario->id) != null)
+            $cargo = 'admin';
+        if (Camarero::find($usuario->id) != null)
+            $cargo = 'camarero';
+        if (Chef::find($usuario->id) != null)
+            $cargo = 'chef';
+        if (Cajero::find($usuario->id) != null)
+            $cargo = 'cajero';
+        return response()->json([
+            "success" => true,
+            "data" => $usuario,
+            "cargo" => $cargo
+        ]);
+    }
+    public function update(Request $request, $id)
+    {
+        $usuario = User::findOrFail($id);
+        $usuario->nombre_cuenta = $request->nombre_cuenta;
+        if (isset($request->password))
+            $usuario->password = Hash::make($request->password);
+        $usuario->nombre = $request->nombre;
+        $usuario->apellido_pat = $request->apellido_pat;
+        $usuario->apellido_mat = $request->apellido_mat;
+        $usuario->activo = $request->activo;
+        $usuario->super_usuario = $request->super_usuario;
+        $usuario->turno = $request->turno;
+        $usuario->save();
+        return $usuario;
     }
 }
