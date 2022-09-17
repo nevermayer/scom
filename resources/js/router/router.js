@@ -1,6 +1,7 @@
 import { createWebHistory, createRouter } from "vue-router";
 //importando paginas
 import home from '@/pages/home.vue';
+import carta from '@/pages/Carta.vue';
 import login from '@/pages/login.vue';
 import register from '@/pages/register.vue';
 //administracion
@@ -21,6 +22,11 @@ const routes = [
         path: '/',
         name: 'Home',
         component: home
+    },
+    {
+        path: '/menu',
+        name: 'Menu',
+        component: carta
     },
     {
         path: '/login',

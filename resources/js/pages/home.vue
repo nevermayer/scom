@@ -1,135 +1,246 @@
 <template>
-    <div class="front-wrapper">
-        <div class="front-sidebar">
-            <div class="brand">
-                <img src="../assets/img/logo.svg" alt="">
-            </div>
-            <div class="front-sidemenu">
-                <ul>
-                    <li>
-                        <div>
-                            <img src="../assets/img/platillo.svg" alt="">
-                            <h3 @click="getItems(category)">Platillos</h3>
+    <section id="hero-area">
+        <img class="img-responsive" src="../assets/header.jpg" alt="">
+    </section>
+    <nav id="navigation">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="block">
+                        <nav class="navbar navbar-default">
+                            <div class="container-fluid">
+                                <!-- Brand and toggle get grouped for better mobile display -->
+                                <div class="navbar-header">
+                                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                        data-target="#bs-example-navbar-collapse-1">
+                                        <span class="sr-only">Toggle navigation</span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                    </button>
+                                    <a class="navbar-brand" href="#">
+                                        <img src="images/logo.png" alt="Logo">
+                                    </a>
+                                </div>
+                                <!-- Collect the nav links, forms, and other content for toggling -->
+                                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                    <ul class="nav navbar-nav navbar-right" id="top-nav">
+                                        <li><a href="#hero-area">Inicio</a></li>
+                                        <li><a href="#about-us">Acerca de nosotros</a></li>
+                                        <li><a href="#price">menu</a></li>
+                                        <li><a href="#footer">contactos</a></li>
+                                        <li><a href="">Ingrese o registrese</a></li>
+                                    </ul>
+                                </div><!-- /.navbar-collapse -->
+                            </div><!-- /.container-fluid -->
+                        </nav>
+                    </div>
+                </div><!-- .col-md-12 close -->
+            </div><!-- .row close -->
+        </div><!-- .container close -->
+    </nav><!-- header close -->
+    <section id="slider">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="block wow fadeInUp" data-wow-duration="500ms" data-wow-delay="300ms">
+                        <div class="title">
+                            <h3>Nuestra <span>Especialidad</span></h3>
                         </div>
-                    </li>
-                    <li>
-                        <div>
-                            <img src="../assets/img/postre.svg" alt="">
-                            <h3 @click="getItems(category)">Postres</h3>
-                        </div>
-                    </li>
-                    <li>
-                        <div>
-                            <img src="../assets/img/bebida.svg" alt="">
-                            <h3 @click="getItems(category)">Bebidas</h3>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <Nav :cart="cart" :categories="categories" :user="user" />
-        <div class="front-main">
-            <div class="main-grid">
-                <div class="menu-section">
-                    <h3>{{selectedMenu? selectedMenu.name : ''}}</h3>
-
-                    <div class="menu-grid" v-if="selectedMenu">
-                        <div :style="`background-image: url(${item.image})`" class="menu-card"
-                            v-for="(item, index) in selectedMenu.menu_items" :key="index">
+                        <div id="owl-example" class="owl-carousel">
                             <div>
-                                <span class="bg-main-gradient item-price">
-                                    <span>&#8358;</span> {{item.price}}
-                                </span>
+                                <img class="img-responsive" src="../assets/img/slider/slider-img-1.jpg" alt="">
                             </div>
                             <div>
-                                <span class="item-name">{{item.name}}</span>
+                                <img class="img-responsive" src="../assets/img/slider/slider-img-2.jpg" alt="">
                             </div>
-
-                            <button class="btn btn-main-gradient" @click="updateCart(item)">
-                                Add to cart
-                            </button>
+                            <div>
+                                <img class="img-responsive" src="../assets/img/slider/slider-img-3.jpg" alt="">
+                            </div>
+                            <div>
+                                <img class="img-responsive" src="../assets/img/slider/slider-img-4.jpg" alt="">
+                            </div>
+                            <div>
+                                <img class="img-responsive" src="../assets/img/slider/slider-img-1.jpg" alt="">
+                            </div>
+                            <div>
+                                <img class="img-responsive" src="../assets/img/slider/slider-img-2.jpg" alt="">
+                            </div>
+                            <div>
+                                <img class="img-responsive" src="../assets/img/slider/slider-img-3.jpg" alt="">
+                            </div>
+                            <div>
+                                <img class="img-responsive" src="../assets/img/slider/slider-img-4.jpg" alt="">
+                            </div>
+                        
                         </div>
                     </div>
-
+                </div><!-- .col-md-12 close -->
+            </div><!-- .row close -->
+        </div><!-- .container close -->
+    </section><!-- slider close -->
+    <section id="about-us">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="block">
+                        <img class="wow fadeInUp" data-wow-duration="300ms" data-wow-delay="400ms" src="../assets/cooker-img.png" alt="cooker-img">
+                        <h1 class="heading wow fadeInUp" data-wow-duration="400ms" data-wow-delay="500ms" >Tu <span>Restaurant’s</span><br> Un poco de nosotros <span>Inicios</span>
+                        </h1>
+                        <p class="wow fadeInUp" data-wow-duration="300ms" data-wow-delay="600ms">El Huerto se caracteriza por su constante innovación de platos, creaciones nuevas y la utilización de los productos más finos y frescos del mercado como también en el uso de las últimas técnicas gastronómicas mundiales, todo ello gracias al espíritu emprendedor, que además somos apasionados de la cocina Boliviana mostrando nuestros comidas al país.</p>
+                    </div>
+                </div><!-- .col-md-12 close -->
+            </div><!-- .row close -->
+        </div><!-- .containe close -->
+    </section><!-- #call-to-action close -->
+    <section id="price">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="block">
+                        <h1 class="heading wow fadeInUp" data-wow-duration="300ms" data-wow-delay="300ms">Nuestros <span>MENU</span> Los <span>PRECIOS</span></h1>
+                        <p class="wow fadeInUp" data-wow-duration="300ms" data-wow-delay="400ms">tenemos un menu variado de los distintos platos bolivianos. </p>
+                        <div class="pricing-list">
+                            <div class="title">
+                                <h3>Lo que hay <span>en esta semana</span></h3>
+                            </div>
+                            <ul>
+                                <li class="wow fadeInUp" data-wow-duration="300ms" data-wow-delay="300ms">
+                                    <div class="item">
+                                        <div class="item-title">
+                                            <h2>Sajta</h2>
+                                            <div class="border-bottom"></div>
+                                            <span>Bs 25.00</span>
+                                        </div>
+                                        <p>Plato tradicional boliviano</p>
+                                    </div>
+                                </li>
+                                <li class="wow fadeInUp" data-wow-duration="300ms" data-wow-delay="300ms">
+                                    <div class="item">
+                                        <div class="item-title">
+                                            <h2>Sajta</h2>
+                                            <div class="border-bottom"></div>
+                                            <span>Bs 25.00</span>
+                                        </div>
+                                        <p>Plato tradicional boliviano</p>
+                                    </div>
+                                </li>
+                                <li class="wow fadeInUp" data-wow-duration="300ms" data-wow-delay="300ms">
+                                    <div class="item">
+                                        <div class="item-title">
+                                            <h2>Sajta</h2>
+                                            <div class="border-bottom"></div>
+                                            <span>Bs 25.00</span>
+                                        </div>
+                                        <p>Plato tradicional boliviano</p>
+                                    </div>
+                                </li>
+                                <li class="wow fadeInUp" data-wow-duration="300ms" data-wow-delay="300ms">
+                                    <div class="item">
+                                        <div class="item-title">
+                                            <h2>Sajta</h2>
+                                            <div class="border-bottom"></div>
+                                            <span>Bs 25.00</span>
+                                        </div>
+                                        <p>Plato tradicional boliviano</p>
+                                    </div>
+                                </li>
+                                <li class="wow fadeInUp" data-wow-duration="300ms" data-wow-delay="300ms">
+                                    <div class="item">
+                                        <div class="item-title">
+                                            <h2>Sajta</h2>
+                                            <div class="border-bottom"></div>
+                                            <span>Bs 25.00</span>
+                                        </div>
+                                        <p>Plato tradicional boliviano</p>
+                                    </div>
+                                </li>
+                                <li class="wow fadeInUp" data-wow-duration="300ms" data-wow-delay="300ms">
+                                    <div class="item">
+                                        <div class="item-title">
+                                            <h2>Sajta</h2>
+                                            <div class="border-bottom"></div>
+                                            <span>Bs 25.00</span>
+                                        </div>
+                                        <p>Plato tradicional boliviano</p>
+                                    </div>
+                                </li>
+                                <li class="wow fadeInUp" data-wow-duration="300ms" data-wow-delay="300ms">
+                                    <div class="item">
+                                        <div class="item-title">
+                                            <h2>Sajta</h2>
+                                            <div class="border-bottom"></div>
+                                            <span>Bs 25.00</span>
+                                        </div>
+                                        <p>Plato tradicional boliviano</p>
+                                    </div>
+                                </li>
+                            </ul>
+                            <a class="btn btn-default pull-right wow bounceIn" data-wow-duration="500ms" data-wow-delay="1200ms" href="#" role="button">mas detalles</a>
+                        </div>
+                    </div>
+                </div><!-- .col-md-12 close -->
+            </div><!-- .row close -->
+        </div><!-- .containe close -->
+    </section><!-- #price close -->
+    <section id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="block wow fadeInLeft"  data-wow-delay="200ms">
+                        <h3>INFORMACION de <span>CONTACTO</span></h3>
+                        <div class="info">
+                            <ul>
+                                <li>
+                                  <h4><i class="fa fa-phone"></i>Telefono</h4>
+                                  <p>(000) 123 456 78- (000) 123 4567 89</p>
+                                    
+                                </li>
+                                <li>
+                                  <h4><i class="fa fa-map-marker"></i>Direccion</h4>
+                                  <p>2046 calle falsa 123456</p>
+                                </li>
+                                <li>
+                                  <h4><i class="fa fa-envelope"></i>E mail</h4>
+                                  <p>rest@gmail.com - scomrest@mail.bo</p>
+                                  
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-                <div class="cart-section">
-                    <div class="cart-card">
-                        <div class="cart-header">
-                            <h3>Nueva Orden</h3>
-                            <small>Productos</small>
-                        </div>
-
-                        <div class="cart-body">
-                            <div class="cart-items">
-                                <div class="cart-item" v-for="(item, index) in cart" :key="index">
-                                    <div class="cart-info">
-                                        <span class="ti-trash" @click="dropItem(index)"></span>
-                                        <div>
-                                            <h5>{{item.name}}</h5>
-                                            <small>@ {{(Number(item.price) *
-                                            Number(item.qty)).toLocaleString()}}</small>
-                                        </div>
-                                    </div>
-                                    <div class="cart-controls">
-                                        <input type="text" readonly :value="item.qty">
-                                        <div>
-                                            <span class="ti-angle-up" @click="updateItemQty(index, item, 1)"></span>
-                                            <span class="ti-angle-down" @click="updateItemQty(index, item, 0)"></span>
-                                        </div>
-                                    </div>
-                                </div>
+                <div class="col-md-8">
+                    <div class="block block wow fadeInLeft">
+                        <h3>Opina <span>Sugerencias</span></h3>
+                        <form>
+                            <div class="form-group wow fadeInDown" data-wow-duration="500ms" data-wow-delay="600ms">
+                                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Nombre aqui....">
                             </div>
-
-                            <div class="cart-sum">
-                                <div class="cart-address">
-                                </div>
-
-                                <div>
-                                    <div class="price-flex">
-                                        <small>Subtotal</small>
-                                        <small></small>
-                                    </div>
-
-                                    <div class="price-flex">
-                                        <small>Total</small>
-                                        <h4></h4>
-                                    </div>
-                                </div>
-
-                                <div class="cart-pay-btn">
-                                    <paystack :amount="cartTotal * 100" :email="user !== null? user.email : ''"
-                                        :paystackkey="paystackkey" :reference="reference" :callback="createOrder"
-                                        :close="close" :embed="false" :disabled="validateCheckoutData || user === null"
-                                        class="btn btn-success" v-if="user !== null && address">
-                                        <span class="ti-credit-card"></span> Pay Now
-                                    </paystack>
-
-                                    <button v-else-if="!address" class="btn btn-success"
-                                        @click="showAddressModal = true">
-                                        Confirmar la Orden
-                                    </button>
-
-                                    <button v-else class="btn btn-success" @click="$router.push('/account')">
-                                        Login to continue
-                                    </button>
-                                </div>
+                            <div class="form-group wow fadeInDown" data-wow-duration="500ms" data-wow-delay="800ms">
+                                <input type="text" class="form-control" placeholder="email aqui...">
                             </div>
-                        </div>
+                            <div class="form-group wow fadeInDown" data-wow-duration="500ms" data-wow-delay="1000ms">
+                                <textarea class="form-control" rows="3" placeholder="tu mensaje o sugerencia aqui..."></textarea>
+                            </div>
+                        </form>
+                        <a class="btn btn-default wow bounceIn" data-wow-duration="500ms" data-wow-delay="1300ms" href="#" role="button">envia tu mensaje</a>
+                    </div>
+                </div><!-- .col-md-8 close -->
+               
+            </div><!-- .row close -->
+        </div><!-- .containe close -->
+    </section><!-- #footer close -->
+    <footer id="footer-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <div class="block">
+                        <p>Copyright &copy; 2022</p>
                     </div>
                 </div>
             </div>
         </div>
-        <modal v-if="showAddressModal" @close="showAddressModal = false">
-            <h4 slot="header">Provide your address</h4>
-
-            <div slot="body">
-                <div class="form-group">
-                    <label for="">Your address</label>
-                    <input type="text" class="form-control" v-model="address" placeholder="No 230, Abba road" />
-                </div>
-            </div>
-        </modal>
-    </div>
+    </footer>
 </template>
 <script>
 import Nav from '@/components/Nav.vue'
@@ -140,3 +251,722 @@ export default {
     }
 }
 </script>
+<style>
+    /* var text-decoration */
+@font-face {
+  font-family: myfont;
+  src: url("/resources/fonts/ufonts.com_tw-cen-mt.ttf");
+}
+/*--
+    Common Css
+--*/
+body {
+  font-family: myfont;
+  font-size: 14px;
+  font-weight: 400;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0px;
+  font-family: myfont;
+}
+h1 {
+  font-size: 36px;
+}
+h2 {
+  font-size: 24px;
+  font-weight: 500;
+}
+h3 {
+  font-size: 20px;
+  font-weight: 600;
+}
+p {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  margin: 0px;
+  font-family: myfont;
+}
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+a,
+a:active,
+a:focus,
+a:active {
+  text-decoration: none !important;
+  font-size: 15px;
+}
+/*============== Mixins style start ================*/
+.overlay-effect {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: url("../images/overlay-pattern.png") #000000;
+  opacity: 0.3;
+}
+/*--
+    custom heading Start
+--*/
+.heading {
+  text-align: center;
+  font-weight: 500;
+  color: #2E2E2E;
+  padding: 40px 0px;
+  position: relative;
+}
+.heading span {
+  font-size: 45px;
+  color: #ff530a;
+  font-weight: 600;
+}
+.heading:before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 140px;
+  height: 1px;
+  background: #C8C1B3;
+  margin-left: -70px;
+}
+/*--
+    custom heading Start
+--*/
+.title {
+  color: #2E2E2E;
+  text-transform: uppercase;
+  padding: 30px 0px;
+}
+.title span {
+  color: #FF5333;
+}
+.before-border {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 140px;
+  height: 1px;
+  background: #C8C1B3;
+  margin-left: -70px;
+}
+/*--
+    transition custom style
+--*/
+.transition {
+  -webkit-transition: .3s all;
+  -o-transition: .3s all;
+  transition: .3s all;
+}
+/*============== Mixins style close ================*/
+/*--
+    header-img start Start
+--*/
+#hero-area {
+  position: relative;
+}
+/*#hero-area:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: url("../images/overlay-pattern.png") #000000;
+  opacity: 0.3;
+}*/
+/*--
+    nav Start
+--*/
+nav {
+  z-index: 99999;
+  width: 100%;
+}
+nav .block {
+  margin-top: -85px;
+  background: #fff;
+  padding: 25px 40px;
+  background: rgba(255, 255, 255, 0.89);
+}
+nav .block .navbar-default {
+  border: none;
+  border-radius: 0px;
+  margin-bottom: 0;
+  background: none;
+}
+nav .block .navbar-default .navbar-brand {
+  padding-left: 0px;
+}
+nav .block .navbar-default .navbar-nav {
+  padding-top: 10px;
+}
+nav .block .navbar-default .navbar-nav > li > a {
+  color: #2E2E2E;
+  padding: 10px 0px;
+  margin: 0px 15px;
+  font-size: 15px;
+  text-transform: uppercase;
+}
+nav .block .navbar-default .navbar-nav > li > a:before {
+  background-color: transparent;
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  display: block;
+  height: 2px;
+  -webkit-transition: .3s all;
+  -o-transition: .3s all;
+  transition: .3s all;
+  width: 0;
+}
+nav .block .navbar-default .navbar-nav > li > a:hover:before {
+  background-color: #e94c3d;
+  content: "";
+  width: 100%;
+}
+nav .block .navbar-default .navbar-nav > li.current > a {
+  color: #2E2E2E;
+  padding: 10px 0px;
+  margin: 0px 15px;
+}
+nav .block .navbar-default .navbar-nav > li.current > a:before {
+  background-color: transparent;
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  display: block;
+  height: 2px;
+  -webkit-transition: .3s all;
+  -o-transition: .3s all;
+  transition: .3s all;
+  width: 100%;
+  background-color: #e94c3d;
+}
+nav .block .navbar-default .navbar-nav > .active > a,
+nav .block .navbar-default .navbar-nav > .active > a:focus,
+nav .block .navbar-default .navbar-nav > .active > a:hover {
+  background: none;
+}
+nav .block .navbar-default .navbar-nav > .active > a:before,
+nav .block .navbar-default .navbar-nav > .active > a:focus:before,
+nav .block .navbar-default .navbar-nav > .active > a:hover:before {
+  content: "";
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  height: 2px;
+  background: #FF5333;
+}
+/*--
+    slider Start
+--*/
+#slider {
+  padding: 50px 0px;
+}
+#slider .block {
+  padding: 0px 40px;
+}
+#slider .block .title {
+  padding: 0px ;
+}
+#slider .block .owl-carousel {
+  padding-top: 30px;
+  position: relative;
+  text-align: center;
+}
+#slider .block .owl-carousel img {
+  padding-right: 30px;
+  border-radius: 2px;
+  padding-bottom: 50px;
+}
+#slider .block .owl-carousel .owl-pagination .active {
+  background: #FF5333;
+}
+#slider .block .owl-carousel .owl-pagination div {
+  background: #DADADA;
+  border-radius: 100%;
+  display: inline-block;
+  height: 10px;
+  margin-right: 5px;
+  width: 10px;
+}
+#slider .block .owl-carousel .owl-buttons {
+  position: absolute;
+  right: 0;
+  top: -40px;
+  font-size: 40px;
+  color: #AA9D84;
+}
+/*--
+    about-us Start
+--*/
+#about-us {
+  padding: 100px 0px;
+  background: #F6F6F6;
+}
+#about-us .block {
+  text-align: center;
+}
+#about-us .block p {
+  color: #959595;
+  font-size: 16px;
+  line-height: 26px;
+  padding: 40px 0px;
+}
+/*--
+    blog Start
+--*/
+#blog {
+  padding-top: 75px;
+  padding-bottom: 100px;
+  background: url("../images/blog/blog-bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  position: relative;
+}
+#blog:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: url("../images/overlay-pattern.png") #000000;
+  opacity: 0.3;
+}
+#blog .block .heading {
+  color: #fff;
+}
+#blog .block ul {
+  padding-top: 40px;
+}
+#blog .block ul li {
+  overflow: hidden;
+  width: 50%;
+  float: left;
+  background: #fff;
+  text-align: center;
+  color: #959595;
+  transform: 1s;
+}
+#blog .block ul li:hover img {
+  transform: scale(1.2) rotate(10deg);
+}
+#blog .block ul li h3 {
+  color: #323232;
+  padding: 0px 40px 20px;
+  line-height: 26px;
+  position: relative;
+}
+#blog .block ul li h3:before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 90px;
+  height: 1px;
+  background: #CBC4B5;
+  margin-left: -45px;
+}
+#blog .block ul li p {
+  padding-top: 25px;
+}
+#blog .block ul li .blog-img {
+  float: left;
+  width: 50%;
+  height: 100%;
+  background: red;
+  overflow: hidden;
+}
+#blog .block ul li .blog-img img {
+  -webkit-transition: all 0.8s ease-out;
+  -o-transition: all 0.8s ease-out;
+  transition: all 0.8s ease-out;
+}
+#blog .block ul li .blog-img-2 {
+  width: 50%;
+  float: right;
+  overflow: hidden;
+}
+#blog .block ul li .blog-img-2 img {
+  -webkit-transition: all 0.8s ease-out;
+  -o-transition: all 0.8s ease-out;
+  transition: all 0.8s ease-out;
+  width: 100%;
+}
+#blog .block ul li .content-right {
+  padding: 40px 35px 23px;
+  font-size: 16px;
+  line-height: 26px;
+  float: right;
+  width: 50%;
+  height: 100%;
+  position: relative;
+}
+#blog .block ul li .content-right:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  top: 50%;
+  width: 30px;
+  height: 30px;
+  margin-top: -15px;
+  background: #fff;
+  transform: rotate(45deg);
+  margin-left: -15px;
+}
+#blog .block ul li .content-left {
+  padding: 40px 35px 23px;
+  width: 50%;
+  height: 100%;
+  float: left;
+  position: relative;
+  z-index: 999;
+}
+#blog .block ul li .content-left:after {
+  content: "";
+  position: absolute;
+  right: -15px;
+  top: 50%;
+  width: 30px;
+  height: 30px;
+  margin-top: 0px;
+  background: #fff;
+  transform: rotate(45deg);
+}
+#blog .block .btn-more-info {
+  float: right;
+  padding: 28px 102.5px;
+  border-radius: 0px;
+  background: #ff530a;
+  color: #fff;
+  border: 1px solid transparent ;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 16px;
+  -webkit-transition: .3s all;
+  -o-transition: .3s all;
+  transition: .3s all;
+}
+#blog .block .btn-more-info:hover {
+  background: transparent;
+  color: #ff530a;
+  border: 1px solid #ff530a;
+}
+/*--
+    price Start
+--*/
+#price {
+  padding: 70px 0px;
+}
+#price .block > p {
+  color: #9D9D9D;
+  font-size: 16px;
+  line-height: 26px;
+  padding: 40px 133px 0;
+  text-align: center;
+}
+#price .block .pricing-list {
+  padding-top: 85px;
+}
+#price .block .pricing-list ul {
+  padding: 0 0 30px;
+  margin: 0;
+}
+#price .block .pricing-list ul li {
+  padding: 21px 0px;
+}
+#price .block .pricing-list ul li .item .item-title {
+  position: relative;
+}
+#price .block .pricing-list ul li .item .item-title h2 {
+  display: inline-block;
+  position: relative;
+  z-index: 99;
+  background: #fff;
+}
+#price .block .pricing-list ul li .item .item-title .border-bottom {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 1px;
+  border: 1px dotted #C9C9C9;
+  margin-top: 20px;
+}
+#price .block .pricing-list ul li .item .item-title span {
+  float: right;
+  color: #938463;
+}
+#price .block .pricing-list ul li .item p {
+  padding: 12px 0 0px;
+  color: #949494;
+}
+#price .block .pricing-list .btn {
+  padding: 28px 105px;
+  border-radius: 0px;
+  background: none;
+  color: #FF4F02;
+  border: 1px solid #FF4F02;
+  font-size: 15px;
+  text-transform: uppercase;
+  font-weight: 600;
+  -webkit-transition: .3s all;
+  -o-transition: .3s all;
+  transition: .3s all;
+}
+#price .block .pricing-list .btn:hover {
+  background: #ff530a;
+  color: #fff;
+}
+/*--
+    subscribe Start
+--*/
+#subscribe {
+  padding: 100px 0px;
+  text-align: center;
+  background: url("../img/subscribe-bg.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  position: relative;
+}
+#subscribe:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: url("../images/overlay-pattern.png") #000000;
+  opacity: 0.3;
+}
+#subscribe .block h1.heading {
+  color: #fff;
+}
+#subscribe .block p {
+  padding: 25px 0px;
+  color: #fff;
+  font-size: 18px;
+}
+#subscribe .block form .form-control {
+  width: 450px;
+  background: #fff;
+  opacity: 0.9;
+  border: none;
+  height: 65px;
+  border-radius: 0px;
+  font-size: 15px;
+}
+#subscribe .block form .input-group-addon {
+  padding: 0px;
+  border: none;
+  background: none;
+}
+#subscribe .block form .input-group-addon button {
+  width: 212px;
+  height: 65px;
+  border: none;
+  border-radius: 0px;
+  background: #7EC3BB;
+  color: #fff;
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  -webkit-transition: .3s all;
+  -o-transition: .3s all;
+  transition: .3s all;
+}
+#subscribe .block form .input-group-addon button:hover {
+  background: #69a8a1;
+}
+/*--
+    contact-us Start
+--*/
+#contact-us {
+  padding: 70px 0px;
+}
+#contact-us .block .title {
+  padding: 20px 0;
+}
+#contact-us .block form {
+  padding-bottom: 20px;
+}
+#contact-us .block form input {
+  height: 48px;
+  border-radius: 0px;
+  box-shadow: none;
+  -webkit-transition: .3s all;
+  -o-transition: .3s all;
+  transition: .3s all;
+}
+#contact-us .block form input:focus {
+  border: 1px solid #7EC3BB;
+}
+#contact-us .block form textarea {
+  height: 140px;
+  border-radius: 0px;
+  box-shadow: none;
+  -webkit-transition: .3s all;
+  -o-transition: .3s all;
+  transition: .3s all;
+}
+#contact-us .block form textarea:focus {
+  border: 1px solid #7EC3BB;
+}
+#contact-us .block a {
+  background: #FF4F02;
+  float: right;
+  color: #fff;
+  font-weight: 600;
+  text-transform: uppercase;
+  border-radius: 0px;
+  border: 0px;
+  width: 512px;
+  height: 50px;
+  padding-top: 15px;
+  -webkit-transition: .3s all;
+  -o-transition: .3s all;
+  transition: .3s all;
+}
+/*--
+    footer Start
+--*/
+#footer {
+  padding: 70px 0px;
+}
+#footer .block a {
+  background: #FF4F02;
+  float: right;
+  color: #fff;
+  font-weight: 600;
+  text-transform: uppercase;
+  border-radius: 0px;
+  border: 0px;
+  width: 512px;
+  height: 50px;
+  padding-top: 15px;
+  -webkit-transition: .3s all;
+  -o-transition: .3s all;
+  transition: .3s all;
+}
+#footer .block h3 {
+  color: #2E2E2E;
+  padding-bottom: 25px;
+}
+#footer .block h3 span {
+  color: #FF4F02;
+}
+#footer .block .blog ul,
+#footer .block .info ul,
+#footer .block .gallary ul {
+  padding-top: 20px;
+}
+#footer .block .blog ul li,
+#footer .block .info ul li,
+#footer .block .gallary ul li {
+  margin-bottom: 25px;
+  display: inline-block;
+  margin-right: 20px;
+}
+#footer .block .blog ul li h4,
+#footer .block .info ul li h4,
+#footer .block .gallary ul li h4 {
+  padding-bottom: 10px;
+  display: block;
+  color: #FF4F02;
+}
+#footer .block .blog ul li h4 i,
+#footer .block .info ul li h4 i,
+#footer .block .gallary ul li h4 i {
+  color: #555;
+  margin-right: 30px;
+  font-size: 20px;
+}
+#footer .block .blog ul li h4 a,
+#footer .block .info ul li h4 a,
+#footer .block .gallary ul li h4 a {
+  color: #FF4F02;
+  font-size: 20px;
+  font-weight: 600;
+}
+#footer .block .blog ul li p,
+#footer .block .info ul li p,
+#footer .block .gallary ul li p {
+  color: #474747;
+  font-size: 14px;
+}
+#footer .block .social-media-link h3 {
+  font-size: 20px;
+  padding-bottom: 15px;
+  padding-top: 30px;
+}
+#footer .block .social-media-link h3 span {
+  color: #FF4F02;
+}
+#footer .block .social-media-link ul li {
+  display: inline-block;
+  margin-right: 20px;
+}
+#footer .block .social-media-link ul li a {
+  display: block;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  font-size: 20px;
+  padding-top: 8px;
+  border-radius: 100%;
+  background: #B0B0B0;
+  color: #FFFFFF;
+  -webkit-transition: .3s all;
+  -o-transition: .3s all;
+  transition: .3s all;
+}
+#footer .block .social-media-link ul li a:hover {
+  background: #FF4F02;
+  color: #fff;
+}
+/*--
+    footer-bottom Start
+--*/
+#footer-bottom {
+  background: #E9E9E9;
+  padding: 20px 0px;
+}
+#footer-bottom p {
+  text-align: center;
+  padding-top: 12px;
+  color: #454545;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+#footer-bottom p a {
+  color: #FF4F02;
+}
+@import "MainFile.css";
+</style>
