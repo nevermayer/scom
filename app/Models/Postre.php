@@ -5,17 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Postres extends Model
+class Postre extends Model
 {
 	protected $table = 'postres';
 	public $timestamps = false;
 
 	protected $casts = [
 		'producto_id' => 'int'
-	];
-
-	protected $dates = [
-		'tiempo_elaboracion'
 	];
 
 	protected $fillable = [

@@ -97,6 +97,14 @@ export default {
                 this.user.super_usuario = datos.data.data.super_usuario
                 this.user.activo = datos.data.data.activo
                 this.user.turno = datos.data.data.turno
+                if (typeof datos.data.data.administradors[0] !== 'undefined')
+                    this.user.role = 'admin'
+                if (typeof datos.data.data.camareros[0] !== 'undefined')
+                    this.user.role = 'camarero'
+                if (typeof datos.data.data.chefs[0] !== 'undefined')
+                    this.user.role = 'chef'
+                if (typeof datos.data.data.cajeros[0] !== 'undefined')
+                    this.user.role = 'cajero'
             })
     },
     data() {
@@ -117,14 +125,14 @@ export default {
         }
     }, methods: {
         editUser() {
-            this.$axios.put('/api/user/'+ this.userid,this.user,{
+            this.$axios.put('/api/user/' + this.userid, this.user, {
                 headers: {
                     Authorization: `Bearer ${localStorage.token}`
                 }
             })
-            .then(data=>{
-                this.$router.push('/admin/usuarios')
-            })
+                .then(data => {
+                    this.$router.push('/admin/usuarios')
+                })
         }
     }
 }

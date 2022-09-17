@@ -118,23 +118,16 @@ class UsersController extends Controller
             "data" => $usuario
         ]);
     }
-    public function show($id)
+    public function show($id) 
     {
-
         $usuario = User::find($id);
-        $cargo = '';
-        if (Administrador::find($usuario->id) != null)
-            $cargo = 'admin';
-        if (Camarero::find($usuario->id) != null)
-            $cargo = 'camarero';
-        if (Chef::find($usuario->id) != null)
-            $cargo = 'chef';
-        if (Cajero::find($usuario->id) != null)
-            $cargo = 'cajero';
+        isset($usuario->administradors->id);
+        isset($usuario->chefs->id);
+        isset($usuario->camareros->id);
+        isset($usuario->cajeros->id);
         return response()->json([
             "success" => true,
-            "data" => $usuario,
-            "cargo" => $cargo
+            "data" => $usuario
         ]);
     }
     public function update(Request $request, $id)

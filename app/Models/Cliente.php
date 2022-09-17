@@ -19,7 +19,7 @@ class Cliente extends Model
 		'apellido_pat',
 		'apellido_mat',
 		'email',
-		'pasword',
+		'password',
 		'telefono',
 		'activo'
 	];

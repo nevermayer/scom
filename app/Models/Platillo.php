@@ -14,10 +14,6 @@ class Platillo extends Model
 		'producto_id' => 'int'
 	];
 
-	protected $dates = [
-		'tiempo_elalboracion'
-	];
-
 	protected $fillable = [
 		'tiempo_elalboracion',
 		'producto_id'

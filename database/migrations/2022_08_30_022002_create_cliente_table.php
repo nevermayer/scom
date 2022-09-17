@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('apellido_pat');
             $table->string('apellido_mat');
             $table->string('email');
-            $table->string('pasword');
+            $table->string('password');
             $table->integer('telefono');
             $table->string('activo');
         });
