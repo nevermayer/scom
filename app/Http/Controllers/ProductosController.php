@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Productos;
+use App\Models\Bebidas;
+use App\Models\Platillos;
+use App\Models\Postres;
 
 
 class ProductosController extends Controller
@@ -23,6 +26,22 @@ class ProductosController extends Controller
         $produto->precio = $request->precio;
         $produto->cantidad = $request->cantidad;
 
+        $produto->producto = $request->producto;
+
+        $produto->save();
+
+        if($request->producto =="platillo"){
+            $producto = new Platillos();
+            $producto ->producto_id = $producto->id;
+        }
+        if($request->producto =="postre"){
+            $producto = new Postres();
+            $producto ->producto_id = $producto->id;
+        }
+        if($request->producto =="bebida"){
+            $producto = new Bebidas();
+            $producto ->producto_id = $producto->id;
+        }
         $produto->save();
 
     }
