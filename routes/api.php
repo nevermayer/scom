@@ -6,6 +6,9 @@ use App\Http\Controllers\Api\UsersController;
 use App\Http\Controllers\IngredientesController;
 use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\MesaController;
+use App\Http\Controllers\OrdenController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -40,6 +43,26 @@ Route::controller(IngredientesController::class)->group(function () {
     Route::put('/ingrediente/{id}', 'update');
     Route::delete('/ingrediente/{id}', 'destroy');
 });
+
+// PARTE MESA
+Route::controller(MesaController::class)->group(function () {
+    Route::get('/mesa', 'index');
+    Route::post('/mesa', 'store');
+    Route::get('/mesa/{id}', 'show');
+    Route::put('/mesa/{id}', 'update');
+    Route::delete('/mesa/{id}', 'destroy');
+});
+
+// PARTE ORDEN
+Route::controller(OrdenController::class)->group(function () {
+    Route::get('/orden', 'index');
+    Route::post('/orden', 'store');
+    Route::get('/orden/{id}', 'show');
+    Route::put('/orden/{id}', 'update');
+    Route::delete('/orden/{id}', 'destroy');
+});
+
+
 // PRODUCTOS...
 Route::controller(ProductosController::class)->group(function () {
     Route::get('/productos', 'index');
