@@ -44,11 +44,11 @@ export default {
     },
     mounted: function () {0
         this.productoid = this.$route.params.id
-        this.$axios.get('/api/Producto/' + this.productoid)
+        this.$axios.get('/api/producto/' + this.productoid)
             .then(datos => {
-                this.Producto.nombre = datos.data.data.nombre
-                this.Producto.descripcion = datos.data.data.descripcion
-                this.Producto.precio= datos.data.data.precio
+                this.Producto.nombre = datos.data.nombre
+                this.Producto.descripcion = datos.data.descripcion
+                this.Producto.precio= datos.data.precio
                 this.Producto.cantidad= datos.data.cantidad
                 
             })
@@ -65,7 +65,7 @@ export default {
         }
     }, methods: {
         editProducto() {
-            this.$axios.put('/api/Producto/' + this.productoid, this.Producto, {
+            this.$axios.put('/api/producto/' + this.productoid, this.Producto, {
                 headers: {
                     Authorization: `Bearer ${localStorage.token}`
                 }

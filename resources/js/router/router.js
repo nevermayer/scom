@@ -14,11 +14,10 @@ import AddUser from '@/pages/admin/Usuarios/Agregar.vue'
 import EditUser from '@/pages/admin/Usuarios/Editar.vue'
 //productos
 import Producto from '@/pages/admin/Productos/index.vue'
-import AddProducto from '@/pages/admin/productos/Agregar.vue'
-import EditProducto from '@/pages/admin/Producto/Editar.vue'
+import AddProducto from '@/pages/admin/Productos/Agregar.vue'
+import EditProducto from '@/pages/admin/Productos/Editar.vue'
 //
 import clientes from '@/pages/admin/Clientes.vue'
-import productos from '@/pages/admin/Productos.vue'
 import ordenes from '@/pages/admin/Ordenes.vue'
 import ingredientes from '@/pages/admin/Ingredientes.vue'
 //definiendo rutas
@@ -99,11 +98,6 @@ const routes = [
         path: '/admin/ordenes',
         name: 'Ordenes',
         component: ordenes
-    },
-    {
-        path: '/admin/productos',
-        name: 'Productos',
-        component: productos
     },
     {
         path: '/admin/ingredientes',
