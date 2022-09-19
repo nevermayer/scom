@@ -12,6 +12,11 @@ import Login from '@/pages/admin/Login.vue'
 import User from '@/pages/admin/Usuarios/index.vue'
 import AddUser from '@/pages/admin/Usuarios/Agregar.vue'
 import EditUser from '@/pages/admin/Usuarios/Editar.vue'
+//productos
+import Producto from '@/pages/admin/Productos/index.vue'
+import AddProducto from '@/pages/admin/productos/Agregar.vue'
+import EditProducto from '@/pages/admin/Producto/Editar.vue'
+//
 import clientes from '@/pages/admin/Clientes.vue'
 import productos from '@/pages/admin/Productos.vue'
 import ordenes from '@/pages/admin/Ordenes.vue'
@@ -68,6 +73,22 @@ const routes = [
         path: '/admin/usuarios/:id',
         name: 'EditUser',
         component: EditUser
+    },
+    {
+        path: '/admin/productos',
+        name: 'Productos',
+        component: Producto
+    },
+    {
+        path: '/admin/productos/add',
+        name: 'AddProducto',
+        component: AddProducto
+    }
+    ,
+    {
+        path: '/admin/productos/:id',
+        name: 'EditProducto',
+        component: EditProducto
     },
     {
         path: '/admin/clientes',
