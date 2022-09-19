@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UsersController;
 use App\Http\Controllers\IngredientesController;
+use App\Http\Controllers\ProductosController;
+use App\Http\Controllers\ClienteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,5 +40,26 @@ Route::controller(IngredientesController::class)->group(function(){
     Route::get('/Ingrediente/{id}','show');
     Route::put('/Ingrediente/{id}','update');
     Route::delete('/Ingrediente/{id}','destroy');
+});
+
+// PRODUCTOS...
+
+Route::controller(ProductosController:: class)->group(function () {
+    Route::get('/productos','index');
+    Route::post('/producto', 'store');
+    Route::get('/producto/{id}', 'show');
+    Route::put('/producto/{id}', 'update');
+    Route::delete('/producto/{id}', 'destroy');
+
+});
+// CLIENTE
+
+Route::controller(ClienteController:: class)->group(function () {
+ Route::get('/clientes','index');
+ Route::post('/cliente', 'store');
+ Route::get('/cliente/{id}', 'show');
+ Route::put('/cliente/{id}', 'update');
+ Route::delete('/cliente/{id}', 'destroy');
+
 });
 
