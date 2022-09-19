@@ -6,7 +6,8 @@
             </div>
             <div class="front-sidemenu">
                 <ul>
-                    <li class="active">
+
+                    <li>
                         <div>
                             <img src="../assets/img/platillo.svg" alt="">
                             <h3 @click="getItems(category)">Platillos</h3>
@@ -33,20 +34,20 @@
                 <div class="menu-section">
                     <h3>{{selectedMenu? selectedMenu.name : 'PRODUCTOS DISPONIBLES'}}</h3>
 
-                    <div class="menu-grid" v-if="selectedMenu">
+                    <div class="menu-grid" >
                         <div :style="`background-image: url(${item.image})`" class="menu-card"
-                            v-for="(item, index) in selectedMenu.menu_items" :key="index">
+                            v-for="(item, index) in productos" :key="index">
                             <div>
                                 <span class="bg-main-gradient item-price">
-                                    <span>&#8358;</span> {{item.price}}
+                                    <span>Bs</span> {{item.precio}}
                                 </span>
                             </div>
                             <div>
-                                <span class="item-name">{{item.name}}</span>
+                                <span class="item-name">{{item.nombre}}</span>
                             </div>
 
                             <button class="btn btn-main-gradient" @click="updateCart(item)">
-                                Add to cart
+                                Agregar
                             </button>
                         </div>
                     </div>
@@ -139,16 +140,27 @@ export default {
         Nav
     }, data() {
         return {
-            categories: [],
+            categories: [{ "name": "Platillo" }, { "name": "Postre" }, { "name": "Postre" }],
             active: 0,
             cart: [],
+            productos:[],
             address: '',
             showAddressModal: false
         }
     }, mounted() {
-        this.getCart()
+        this.getProductos()
+       // this.getCart()
     }, methods: {
-
+        getProductos() {
+            this.$axios.get('/api/productos')
+                .then(res => {
+                    console.log(res.data)
+                    this.productos = res.data
+                })
+                .catch(error => {
+                    console.log(error.response)
+                })
+        },
         getCart() {
             this.cart = JSON.parse(localStorage.cart) || [];
         },

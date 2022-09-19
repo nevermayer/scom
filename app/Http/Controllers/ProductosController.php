@@ -16,10 +16,7 @@ class ProductosController extends Controller
     public function index()
     {
         $productos= Producto::all();
-        return response()->json([
-            "success" => true,
-            "data" => $productos,
-        ]);
+        return $productos;
     }
     public function store(Request $request)
     {
