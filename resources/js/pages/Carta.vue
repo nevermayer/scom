@@ -34,9 +34,9 @@
                 <div class="menu-section">
                     <h3>{{selectedMenu? selectedMenu.name : 'PRODUCTOS DISPONIBLES'}}</h3>
 
-                    <div class="menu-grid" >
-                        <div :style="`background-image: url(${item.image})`" class="menu-card"
-                            v-for="(item, index) in productos" :key="index">
+                    <div class="menu-grid">
+                        <div :style="`background-image: url(https://www.caserita.com/productos/images/La_PAz/gastro/IMG_0592-2.jpg)`"
+                            class="menu-card" v-for="(item, index) in productos" :key="index">
                             <div>
                                 <span class="bg-main-gradient item-price">
                                     <span>Bs</span> {{item.precio}}
@@ -66,8 +66,8 @@
                                     <div class="cart-info">
                                         <span class="ti-trash" @click="dropItem(index)"></span>
                                         <div>
-                                            <h5>{{item.name}}</h5>
-                                            <small>@ {{(Number(item.price) *
+                                            <h5>{{item.nombre}}</h5>
+                                            <small>Bs. {{(Number(item.precio) *
                                             Number(item.qty)).toLocaleString()}}</small>
                                         </div>
                                     </div>
@@ -88,12 +88,12 @@
                                 <div>
                                     <div class="price-flex">
                                         <small>Subtotal</small>
-                                        <small></small>
+                                        <small>{{cartTotal.toLocaleString()}} Bs</small>
                                     </div>
 
                                     <div class="price-flex">
                                         <small>Total</small>
-                                        <h4></h4>
+                                        <h4>{{cartTotal.toLocaleString()}} Bs</h4>
                                     </div>
                                 </div>
 
@@ -143,13 +143,13 @@ export default {
             categories: [{ "name": "Platillo" }, { "name": "Postre" }, { "name": "Postre" }],
             active: 0,
             cart: [],
-            productos:[],
+            productos: [],
             address: '',
             showAddressModal: false
         }
     }, mounted() {
         this.getProductos()
-       // this.getCart()
+        this.getCart()
     }, methods: {
         getProductos() {
             this.$axios.get('/api/productos')
@@ -172,7 +172,7 @@ export default {
                 localStorage.setItem('cart', JSON.stringify(cart))
                 this.cart.push(menuitem)
 
-                this.$alertify.success('Item added to Cart')
+                //this.$alertify.success('Item added to Cart')
                 return
             }
 
@@ -257,7 +257,7 @@ export default {
         cartTotal() {
             let total = 0
             this.cart.map(item => {
-                total += Number(item.price) * Number(item.qty)
+                total += Number(item.precio) * Number(item.qty)
             })
 
             return total
