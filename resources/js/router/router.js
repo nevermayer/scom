@@ -12,8 +12,16 @@ import Login from '@/pages/admin/Login.vue'
 import User from '@/pages/admin/Usuarios/index.vue'
 import AddUser from '@/pages/admin/Usuarios/Agregar.vue'
 import EditUser from '@/pages/admin/Usuarios/Editar.vue'
+//productos
+import Producto from '@/pages/admin/Productos/index.vue'
+import AddProducto from '@/pages/admin/Productos/Agregar.vue'
+import EditProducto from '@/pages/admin/Productos/Editar.vue'
+//Ingredientes
+import Ingrediente from '@/pages/admin/Ingredientes/index.vue'
+import AddIngrediente from '@/pages/admin/ingredientes/Agregar.vue'
+import EditIngrediente from '@/pages/admin/Ingredientes/Editar.vue'
+//
 import clientes from '@/pages/admin/Clientes.vue'
-import productos from '@/pages/admin/Productos.vue'
 import ordenes from '@/pages/admin/Ordenes.vue'
 import ingredientes from '@/pages/admin/Ingredientes.vue'
 //definiendo rutas
@@ -70,6 +78,38 @@ const routes = [
         component: EditUser
     },
     {
+        path: '/admin/productos',
+        name: 'Productos',
+        component: Producto
+    },
+    {
+        path: '/admin/productos/add',
+        name: 'AddProducto',
+        component: AddProducto
+    }
+    ,
+    {
+        path: '/admin/productos/:id',
+        name: 'EditProducto',
+        component: EditProducto
+    },
+    {
+        path: '/admin/ingredientes',
+        name: 'Ingrediente',
+        component: Ingrediente
+    },
+    {
+        path: '/admin/ingredientes/add',
+        name: 'AddIngrediente',
+        component: AddIngrediente
+    }
+    ,
+    {
+        path: '/admin/ingrediente/:id',
+        name: 'EditIngrediente',
+        component: EditIngrediente
+    },
+    {
         path: '/admin/clientes',
         name: 'Clientes',
         component: clientes
@@ -78,11 +118,6 @@ const routes = [
         path: '/admin/ordenes',
         name: 'Ordenes',
         component: ordenes
-    },
-    {
-        path: '/admin/productos',
-        name: 'Productos',
-        component: productos
     },
     {
         path: '/admin/ingredientes',
