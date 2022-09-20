@@ -6,6 +6,7 @@
             </div>
             <div class="front-sidemenu">
                 <ul>
+
                     <li>
                         <div>
                             <img src="../assets/img/platillo.svg" alt="">
@@ -31,22 +32,22 @@
         <div class="front-main">
             <div class="main-grid">
                 <div class="menu-section">
-                    <h3>{{selectedMenu? selectedMenu.name : ''}}</h3>
+                    <h3>{{selectedMenu? selectedMenu.name : 'PRODUCTOS DISPONIBLES'}}</h3>
 
-                    <div class="menu-grid" v-if="selectedMenu">
-                        <div :style="`background-image: url(${item.image})`" class="menu-card"
-                            v-for="(item, index) in selectedMenu.menu_items" :key="index">
+                    <div class="menu-grid">
+                        <div :style="`background-image: url(https://www.caserita.com/productos/images/La_PAz/gastro/IMG_0592-2.jpg)`"
+                            class="menu-card" v-for="(item, index) in productos" :key="index">
                             <div>
                                 <span class="bg-main-gradient item-price">
-                                    <span>&#8358;</span> {{item.price}}
+                                    <span>Bs</span> {{item.precio}}
                                 </span>
                             </div>
                             <div>
-                                <span class="item-name">{{item.name}}</span>
+                                <span class="item-name">{{item.nombre}}</span>
                             </div>
 
                             <button class="btn btn-main-gradient" @click="updateCart(item)">
-                                Add to cart
+                                Agregar
                             </button>
                         </div>
                     </div>
@@ -65,8 +66,8 @@
                                     <div class="cart-info">
                                         <span class="ti-trash" @click="dropItem(index)"></span>
                                         <div>
-                                            <h5>{{item.name}}</h5>
-                                            <small>@ {{(Number(item.price) *
+                                            <h5>{{item.nombre}}</h5>
+                                            <small>Bs. {{(Number(item.precio) *
                                             Number(item.qty)).toLocaleString()}}</small>
                                         </div>
                                     </div>
@@ -87,12 +88,12 @@
                                 <div>
                                     <div class="price-flex">
                                         <small>Subtotal</small>
-                                        <small></small>
+                                        <small>{{cartTotal.toLocaleString()}} Bs</small>
                                     </div>
 
                                     <div class="price-flex">
                                         <small>Total</small>
-                                        <h4></h4>
+                                        <h4>{{cartTotal.toLocaleString()}} Bs</h4>
                                     </div>
                                 </div>
 
@@ -137,6 +138,145 @@ export default {
     name: 'carta',
     components: {
         Nav
+    }, data() {
+        return {
+            categories: [{ "name": "Platillo" }, { "name": "Postre" }, { "name": "Postre" }],
+            active: 0,
+            cart: [],
+            productos: [],
+            address: '',
+            showAddressModal: false
+        }
+    }, mounted() {
+        this.getProductos()
+        this.getCart()
+    }, methods: {
+        getProductos() {
+            this.$axios.get('/api/productos')
+                .then(res => {
+                    console.log(res.data)
+                    this.productos = res.data
+                })
+                .catch(error => {
+                    console.log(error.response)
+                })
+        },
+        getCart() {
+            this.cart = JSON.parse(localStorage.cart) || [];
+        },
+        updateCart(menuitem) {
+            let cartDB = localStorage.getItem('cart')
+            if (!cartDB || JSON.parse(cartDB).length < 1) {
+                menuitem.qty = 1
+                let cart = [menuitem]
+                localStorage.setItem('cart', JSON.stringify(cart))
+                this.cart.push(menuitem)
+
+                //this.$alertify.success('Item added to Cart')
+                return
+            }
+
+            let cart = JSON.parse(cartDB)
+
+            let isFound = false
+            cart.map(item => {
+                if (item.id === menuitem.id) {
+                    isFound = true
+                    item.qty += 1;
+                    return item;
+                }
+            })
+
+            if (!isFound) {
+                menuitem.qty = 1
+                cart.push(menuitem)
+            }
+
+            this.cart = cart
+            localStorage.setItem('cart', JSON.stringify(cart))
+
+            this.$alertify.success('Item added to Cart');
+        },
+        updateItemQty(index, item, flag) {
+            if (flag === 0 && Number(item.qty) > 1) {
+                item.qty = Number(item.qty) - 1
+            } else {
+                item.qty = Number(item.qty) + 1
+            }
+
+            this.cart[index] = item
+            localStorage.setItem('cart', JSON.stringify(this.cart))
+
+            this.$alertify.success('Cart successfully updated');
+        },
+        dropItem(index) {
+            this.cart.splice(index, 1)
+            localStorage.setItem('cart', JSON.stringify(this.cart))
+            this.$alertify.success('Item removed from Cart');
+        },
+        createOrder(response) {
+            console.log(response.reference)
+            const token = localStorage.token
+            const data = {
+                payment_ref: response.reference,
+                amount: this.cartTotal,
+                user_id: this.user.id,
+                items: JSON.stringify(this.cart),
+                address: this.address
+            }
+
+            this.$axios.post(`${this.$apiUrl}/create-order`, data, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+                .then(res => {
+                    localStorage.removeItem('cart')
+                    this.address = ''
+                    this.cart = []
+                    this.$alertify.success(res.data.message)
+                })
+                .catch(error => {
+                    if (error.response.data.message) {
+                        return this.$alertify.error(error.response.data.message)
+                    }
+                    this.$alertify.error(Object.values(error.response.data)[0][0])
+                })
+        },
+        close() {
+
+        },
+    },
+    computed: {
+        /*user() {
+            returnthis.$store.getters.getUser
+        },*/
+        selectedMenu() {
+            return this.categories[this.active]
+        },
+        cartTotal() {
+            let total = 0
+            this.cart.map(item => {
+                total += Number(item.precio) * Number(item.qty)
+            })
+
+            return total
+        }, reference() {
+            let text = "";
+            let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+
+            for (let i = 0; i < 10; i++) {
+                text += possible.charAt(Math.floor(Math.random() * possible.length))
+            }
+
+            return text;
+        },
+        validateCheckoutData() {
+            //const {name, email, city, address, phone, zip} = this.checkout
+
+            //return !name || !email || !city || !address || !phone || !zip
+            return false
+        }
     }
 }
 </script>
