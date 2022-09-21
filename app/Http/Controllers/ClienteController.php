@@ -10,10 +10,7 @@ class ClienteController extends Controller
     public function index()
     {
         $clientes = Cliente::all();
-        return response()->json([
-            "success" => true,
-            "data" => $clientes
-        ]);
+        return $clientes;
     }
     public function store(Request $request)
     {
@@ -26,18 +23,12 @@ class ClienteController extends Controller
         $cliente->telefono = $request->telefono;
         $cliente->activo = $request->activo;
         $cliente->save();
-        return response()->json([
-            "success" => true,
-            "data" => $cliente
-        ]);
+        return $cliente;
     }
     public function show($id)
     {
         $cliente = Cliente::find($id);
-        return response()->json([
-            "success" => true,
-            "data" => $cliente
-        ]);
+        return $cliente;
     }
     public function update(Request $request, $id)
     {
@@ -51,17 +42,11 @@ class ClienteController extends Controller
         $cliente->activo = $request->activo;
 
         $cliente->save();
-        return response()->json([
-            "success" => true,
-            "data" => $cliente
-        ]);
+        return $cliente;
     }
     public function destroy($id)
     {
         $cliente = Cliente::destroy($id);
-        return response()->json([
-            "success" => true,
-            "data" => $cliente
-        ]);
+        return $cliente;
     }
 }

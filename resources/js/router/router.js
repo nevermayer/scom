@@ -16,8 +16,14 @@ import EditUser from '@/pages/admin/Usuarios/Editar.vue'
 import Producto from '@/pages/admin/Productos/index.vue'
 import AddProducto from '@/pages/admin/Productos/Agregar.vue'
 import EditProducto from '@/pages/admin/Productos/Editar.vue'
-//
-import clientes from '@/pages/admin/Clientes.vue'
+//Clientes
+import Cliente from '@/pages/admin/Clientes/index.vue'
+import AddCliente from '@/pages/admin/Clientes/Agregar.vue'
+import EditCliente from '@/pages/admin/Clientes/Editar.vue'
+//Mesas
+import Mesa from '@/pages/admin/Mesas/index.vue'
+import AddMesa from '@/pages/admin/Mesas/Agregar.vue'
+import EditMesa from '@/pages/admin/Mesas/Editar.vue'
 import ordenes from '@/pages/admin/Ordenes.vue'
 import ingredientes from '@/pages/admin/Ingredientes.vue'
 //definiendo rutas
@@ -92,7 +98,34 @@ const routes = [
     {
         path: '/admin/clientes',
         name: 'Clientes',
-        component: clientes
+        component: Cliente
+    },
+    {
+        path: '/admin/clientes/add',
+        name: 'AddCliente',
+        component: AddCliente
+    }
+    ,
+    {
+        path: '/admin/clientes/:id',
+        name: 'EditCliente',
+        component: EditCliente
+    },//
+    {
+        path: '/admin/mesas',
+        name: 'Mesas',
+        component: Mesa
+    },
+    {
+        path: '/admin/mesas/add',
+        name: 'AddMesa',
+        component: AddMesa
+    }
+    ,
+    {
+        path: '/admin/mesas/:id',
+        name: 'EditMesa',
+        component: EditMesa
     },
     {
         path: '/admin/ordenes',

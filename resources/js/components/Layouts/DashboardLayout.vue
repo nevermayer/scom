@@ -29,12 +29,7 @@
                             <span>Productos</span>
                         </router-link>
                     </li>
-                    <li>
-                        <router-link to="/admin/ingredientes">
-                            <span class="ti-agenda"></span>
-                            <span>Ingredientes</span>
-                        </router-link>
-                    </li>
+
                     <li>
                         <router-link to="/admin/ordenes">
                             <span class="ti-clipboard"></span>
@@ -51,6 +46,18 @@
                         <router-link to="/admin/clientes">
                             <span class="ti-folder"></span>
                             <span>Clientes</span>
+                        </router-link>
+                    </li>
+                    <li>
+                        <router-link to="/admin/mesas">
+                            <span class="ti-agenda"></span>
+                            <span>Mesas</span>
+                        </router-link>
+                    </li>
+                    <li>
+                        <router-link to="/admin/ingredientes">
+                            <span class="ti-agenda"></span>
+                            <span>Ingredientes</span>
                         </router-link>
                     </li>
                 </ul>
