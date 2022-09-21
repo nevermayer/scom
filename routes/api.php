@@ -8,6 +8,7 @@ use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\MesaController;
 use App\Http\Controllers\OrdenController;
+use App\Http\Controllers\SolicitudChefController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,6 +63,15 @@ Route::controller(OrdenController::class)->group(function () {
     Route::delete('/orden/{id}', 'destroy');
 });
 
+
+// PARTE SOLICITUD CHEF
+Route::controller(SolicitudChefController::class)->group(function () {
+    Route::get('/solicitudChef', 'index');
+    Route::post('/solicitudChef', 'store');
+    Route::get('/solicitudChef/{id}', 'show');
+    Route::put('/solicitudChef/{id}', 'update');
+    Route::delete('/solicitudChef/{id}', 'destroy');
+});
 
 // PRODUCTOS...
 Route::controller(ProductosController::class)->group(function () {
