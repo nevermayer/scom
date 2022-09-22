@@ -22,8 +22,26 @@
                             </div>
                             <div class="form-group">
                                 <label for="">Cantidad</label>
-                                <input type="password" v-model="Producto.cantidad" class="form-control"
+                                <input type="number" v-model="Producto.cantidad" class="form-control"
                                     placeholder="cantidad">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Tipo</label>
+                                <select v-model="Producto.producto" class="form-control">
+                                    <option selected value="platillo">Platillo</option>
+                                    <option value="postre">Postre</option>
+                                    <option value="bebida">Bebida</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Tiempo de elaboracion</label>
+                                <input type="number" v-model="Producto.tiempo_elaboracion" class="form-control"
+                                    placeholder="tiempo en elaborar el platillo">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Grado de alcohol</label>
+                                <input type="number" v-model="Producto.grado_alcoholico" class="form-control"
+                                    placeholder="grado alcoholico">
                             </div>
                             <div class="form-group">
                                 <button type="button" @click="addProducto" class="btn btn-main">Submit</button>
@@ -52,6 +70,9 @@ export default {
                 descripcion: '',
                 precio: '',
                 cantidad: '',
+                producto: '',
+                tiempo_elaboracion:'',
+                grado_alcoholico:''
             }
         }
     },
@@ -61,11 +82,10 @@ export default {
     methods: {
         addProducto() {
 
-            if (!this.Producto.nombre || !this.Producto.descripcion || !this.Producto.precio || !this.cantidad) {
+            if (!this.Producto.nombre || !this.Producto.descripcion || !this.Producto.precio || !this.Producto.cantidad) {
                 return this.$alertify.error('Incomplete form data')
             }
-
-            this.$axios.post('/api/register', this.Producto, {
+            this.$axios.post('/api/producto', this.Producto, {
                 headers: {
                     Authorization: `Bearer ${localStorage.token}`
                 }

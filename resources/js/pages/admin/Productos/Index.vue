@@ -20,15 +20,16 @@
                                         <th>Descripcion</th>
                                         <th>Precio</th>
                                         <th>Cantidad</th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr v-for="(producto, index) in productos" :key="index" >
-                                        <td>{{Producto.id}}</td>
-                                        <td>{{Producto.nombre}}</td>
-                                        <td>{{Producto.descripcion}}</td>
-                                        <td>{{Producto.precio}}</td>
-                                        <td>{{Producto.cantidad}}</td>
+                                        <td>{{producto.id}}</td>
+                                        <td>{{producto.nombre}}</td>
+                                        <td>{{producto.descripcion}}</td>
+                                        <td>{{producto.precio}}</td>
+                                        <td>{{producto.cantidad}}</td>
                                         <td><button class="btn" @click="editar(producto.id)"><span class="ti-pencil-alt"></span></button></td>
                                     </tr>
                                 </tbody>
@@ -64,7 +65,8 @@ export default {
                 }
             })
             .then(res => {
-                this.productos = res.data.data
+                console.log(res.data)
+                this.productos = res.data
             })
             .catch(error => {
                 console.log(error.response)

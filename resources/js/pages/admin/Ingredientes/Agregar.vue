@@ -21,7 +21,7 @@
                                     placeholder="fecha_vencimiento">
                             </div>
                             <div class="form-group">
-                                <button type="button" @click="addIngrediente" class="btn btn-main">Submit</button>
+                                <button type="button" @click="addIngrediente" class="btn btn-main"> Submi</button>
                             </div>
                         </form>
                     </div>

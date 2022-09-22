@@ -12,7 +12,7 @@
                                     placeholder="Nombre">
                             </div>
                             <div class="form-group">
-                                <label for="">Stock</label>
+                                <label for="">Stoc</label>
                                 <input type="text" v-model="ingrediente.stock" class="form-control" placeholder="stock">
                             </div>
                             <div class="form-group">

@@ -17,7 +17,7 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Nombre</th>
-                                        <th>Stock</th>
+                                        <th>Stoc</th>
                                         <th>Fecha de Vencimiento</th>
                                     </tr>
                                 </thead>
