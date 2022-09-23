@@ -8,6 +8,7 @@ use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\MesaController;
 use App\Http\Controllers\OrdenController;
+use App\Http\Controllers\FacturaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -78,4 +79,12 @@ Route::controller(ClienteController::class)->group(function () {
     Route::get('/cliente/{id}', 'show');
     Route::put('/cliente/{id}', 'update');
     Route::delete('/cliente/{id}', 'destroy');
+});
+// FACTURA
+Route::controller(FacturaController::class)->group(function () {
+    Route::get('/facturas', 'index');
+    Route::post('/factura', 'store');
+    Route::get('/factura/{id}', 'show');
+    Route::put('/factura/{id}', 'update');
+    Route::delete('/factura/{id}', 'destroy');
 });
