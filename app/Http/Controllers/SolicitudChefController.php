@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Chef;
+use App\Models\Ingrediente;
 use App\Models\SolicitudChef;
 use Illuminate\Http\Request;
 
 class SolicitudChefController extends Controller
 {
+
+    /*
     public function index(){
         $solicitudChef = SolicitudChef::all();
         return $solicitudChef;
@@ -44,4 +48,19 @@ class SolicitudChefController extends Controller
         $solicitudChef = SolicitudChef::destroy($id);
         return $solicitudChef;
     }
+    
+    */
+
+    public function showc(Chef $chef){
+        $chef = Chef::find($chef->id);
+        $chef->ingredientes;
+        return json_encode($chef);
+    }
+
+    public function showi(Ingrediente $ingredientes){
+        $ingredientes = Ingrediente::find($ingredientes->id);
+        $ingredientes->chefs;
+        return json_encode($ingredientes);
+    }
+
 }

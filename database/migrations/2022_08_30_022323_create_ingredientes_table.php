@@ -19,6 +19,15 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('fecha_vencimiento');
         });
+
+
+        Schema::create('Solicitud_chef', function(Blueprint $table)){
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('chef_id')->nullable();
+            $table->foreign('chef_id')->references('id')->on('Chef')->onDelete('cascade');
+            $table->unsignedBigInteger('ingredientes_id')->nullable();
+            $table->foreign('ingredientes_id')->references('id')->on('Ingrediente')->onDelete('cascade');
+        }
     }
 
     /**
@@ -28,6 +37,9 @@ return new class extends Migration
      */
     public function down()
     {
+        
+        Schema::dropIfExists('Solicitud_chef');
         Schema::dropIfExists('ingredientes');
     }
 };
+

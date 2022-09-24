@@ -28,6 +28,6 @@ class Ingrediente extends Model
 					->withPivot('id');
 	}
     public function chefs(){
-        return $this->belongsToMany(Chef::class, 'solicitud_chef');
+        return $this->belongsToMany(Chef::class, 'solicitud_chef');  
     }
 }
