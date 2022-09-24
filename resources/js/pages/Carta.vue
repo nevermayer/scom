@@ -7,19 +7,19 @@
             <div class="front-sidemenu">
                 <ul>
 
-                    <li>
+                    <li :class="active === 0? 'active' : ''" @click="active = 0">
                         <div>
                             <img src="../assets/img/platillo.svg" alt="">
                             <h3 @click="getItems(category)">Platillos</h3>
                         </div>
                     </li>
-                    <li>
+                    <li :class="active === 1? 'active' : ''" @click="active = 1">
                         <div>
                             <img src="../assets/img/postre.svg" alt="">
                             <h3 @click="getItems(category)">Postres</h3>
                         </div>
                     </li>
-                    <li>
+                    <li :class="active === 2? 'active' : ''" @click="active = 2">
                         <div>
                             <img src="../assets/img/bebida.svg" alt="">
                             <h3 @click="getItems(category)">Bebidas</h3>
@@ -32,7 +32,7 @@
         <div class="front-main">
             <div class="main-grid">
                 <div class="menu-section">
-                    <h3>{{selectedMenu? selectedMenu.name : 'PRODUCTOS DISPONIBLES'}}</h3>
+                    <h3>{{selectedMenu? selectedMenu.name : 'PRODUCTOS DISPONIBLES'}}s</h3>
 
                     <div class="menu-grid">
                         <div :style="`background-image: url(https://www.caserita.com/productos/images/La_PAz/gastro/IMG_0592-2.jpg)`"
@@ -105,8 +105,7 @@
                                         <span class="ti-credit-card"></span> Pay Now
                                     </paystack>
 
-                                    <button v-else-if="!address" class="btn btn-success"
-                                        @click="showAddressModal = true">
+                                    <button v-else-if="!address" class="btn btn-success" @click=createOrder>
                                         Confirmar la Orden
                                     </button>
 
@@ -134,13 +133,15 @@
 </template>
 <script>
 import Nav from '@/components/Nav.vue'
+import modal from '@/components/Modal.vue'
 export default {
     name: 'carta',
     components: {
-        Nav
+        Nav,
+        modal
     }, data() {
         return {
-            categories: [{ "name": "Platillo" }, { "name": "Postre" }, { "name": "Postre" }],
+            categories: [{ "name": "Platillo" }, { "name": "Postre" }, { "name": "Bebida" }],
             active: 0,
             cart: [],
             productos: [],
@@ -151,10 +152,12 @@ export default {
         this.getProductos()
         this.getCart()
     }, methods: {
+        getItems() {
+            console.log("hola")
+        },
         getProductos() {
             this.$axios.get('/api/productos')
                 .then(res => {
-                    console.log(res.data)
                     this.productos = res.data
                 })
                 .catch(error => {
@@ -162,7 +165,9 @@ export default {
                 })
         },
         getCart() {
-            this.cart = JSON.parse(localStorage.cart) || [];
+            if (localStorage.getItem('cart') === null)
+                localStorage.setItem('cart', '[]')
+            this.cart = JSON.parse(localStorage.cart)
         },
         updateCart(menuitem) {
             let cartDB = localStorage.getItem('cart')
@@ -214,18 +219,17 @@ export default {
             localStorage.setItem('cart', JSON.stringify(this.cart))
             this.$alertify.success('Item removed from Cart');
         },
-        createOrder(response) {
-            console.log(response.reference)
+        createOrder() {
             const token = localStorage.token
             const data = {
-                payment_ref: response.reference,
-                amount: this.cartTotal,
-                user_id: this.user.id,
-                items: JSON.stringify(this.cart),
-                address: this.address
+                camarero_id:1,
+                hora:'2022-02-02',
+                estado: 'elaboracion',
+                total: this.cartTotal,
+                items: JSON.stringify(this.cart)
             }
 
-            this.$axios.post(`${this.$apiUrl}/create-order`, data, {
+            this.$axios.post('/api/ordenes', data, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -234,11 +238,12 @@ export default {
                     localStorage.removeItem('cart')
                     this.address = ''
                     this.cart = []
-                    this.$alertify.success(res.data.message)
+                  //  this.$alertify.success(res.data.message)
+
                 })
                 .catch(error => {
-                    if (error.response.data.message) {
-                        return this.$alertify.error(error.response.data.message)
+                    if (error) {
+                        return console.log(error.response.data.message)
                     }
                     this.$alertify.error(Object.values(error.response.data)[0][0])
                 })

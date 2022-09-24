@@ -2,7 +2,7 @@ import { createWebHistory, createRouter } from "vue-router";
 //importando paginas
 import home from '@/pages/home.vue';
 import carta from '@/pages/Carta.vue';
-import login from '@/pages/login.vue';
+import Account from '@/pages/Account.vue';
 import register from '@/pages/register.vue';
 //administracion
 import dashboard from '@/pages/admin/dashboard.vue'
@@ -24,7 +24,8 @@ import EditCliente from '@/pages/admin/Clientes/Editar.vue'
 import Mesa from '@/pages/admin/Mesas/index.vue'
 import AddMesa from '@/pages/admin/Mesas/Agregar.vue'
 import EditMesa from '@/pages/admin/Mesas/Editar.vue'
-import ordenes from '@/pages/admin/Ordenes.vue'
+//Ordenes
+import Orden from '@/pages/admin/Ordenes/index.vue'
 import ingredientes from '@/pages/admin/Ingredientes.vue'
 //definiendo rutas
 const routes = [
@@ -39,9 +40,9 @@ const routes = [
         component: carta
     },
     {
-        path: '/login',
-        name: 'Login',
-        component: login
+        path: '/account',
+        name: 'Account',
+        component: Account
     },
     {
         path: '/register',
@@ -129,8 +130,8 @@ const routes = [
     },
     {
         path: '/admin/ordenes',
-        name: 'Ordenes',
-        component: ordenes
+        name: 'Orden',
+        component: Orden
     },
     {
         path: '/admin/ingredientes',
