@@ -26,7 +26,10 @@ import AddMesa from '@/pages/admin/Mesas/Agregar.vue'
 import EditMesa from '@/pages/admin/Mesas/Editar.vue'
 //Ordenes
 import Orden from '@/pages/admin/Ordenes/index.vue'
-import ingredientes from '@/pages/admin/Ingredientes.vue'
+//Ingredientes
+import Ingrediente from '@/pages/admin/Ingredientes/index.vue'
+import AddIngrediente from '@/pages/admin/Ingredientes/Agregar.vue'
+import EditIngrediente from '@/pages/admin/Ingredientes/Editar.vue'
 //definiendo rutas
 const routes = [
     {
@@ -97,6 +100,22 @@ const routes = [
         component: EditProducto
     },
     {
+        path: '/admin/ingredientes',
+        name: 'Ingrediente',
+        component: Ingrediente
+    },
+    {
+        path: '/admin/ingredientes/add',
+        name: 'AddIngrediente',
+        component: AddIngrediente
+    }
+    ,
+    {
+        path: '/admin/ingrediente/:id',
+        name: 'EditIngrediente',
+        component: EditIngrediente
+    },
+    {
         path: '/admin/clientes',
         name: 'Clientes',
         component: Cliente
@@ -111,7 +130,7 @@ const routes = [
         path: '/admin/clientes/:id',
         name: 'EditCliente',
         component: EditCliente
-    },//
+    },
     {
         path: '/admin/mesas',
         name: 'Mesas',
@@ -132,11 +151,6 @@ const routes = [
         path: '/admin/ordenes',
         name: 'Orden',
         component: Orden
-    },
-    {
-        path: '/admin/ingredientes',
-        name: 'Ingredientes',
-        component: ingredientes
     }
 
 ];
