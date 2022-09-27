@@ -7,21 +7,23 @@
 
                 <strong>{{error}}</strong>
             </div>
-            
-                <div class="form-group">
-                    <label for="">Nombre de cuenta</label>
-                    <input type="text" v-model="creds.nombre_cuenta" class="form-control" autocomplete="username" placeholder="nombre de cuenta" />
-                </div>
 
-                <div class="form-group">
-                    <label for="">Password</label>
-                    <input type="password" v-model="creds.password" class="form-control" placeholder="**********" autocomplete="current-password"/>
-                </div>
+            <div class="form-group">
+                <label for="">Nombre de cuenta</label>
+                <input type="text" v-model="creds.nombre_cuenta" class="form-control" autocomplete="username"
+                    placeholder="nombre de cuenta" />
+            </div>
 
-                <div class="form-group">
-                    <button class="btn btn-main btn-block" @click="signin">Ingresar</button>
-                </div>
-            
+            <div class="form-group">
+                <label for="">Password</label>
+                <input type="password" v-model="creds.password" class="form-control" placeholder="**********"
+                    autocomplete="current-password" />
+            </div>
+
+            <div class="form-group">
+                <button class="btn btn-main btn-block" @click="signin">Ingresar</button>
+            </div>
+
             <div class="form-group form-link">
                 <router-link to="/">Volver a Inicio</router-link>
             </div>
@@ -47,8 +49,8 @@ export default {
         signin() {
             const { nombre_cuenta, password } = this.creds
             if (!nombre_cuenta || !password) {
-               
-               return   this.error = 'complete los campos';
+
+                return this.error = 'complete los campos';
             }
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
                 this.$axios.post('/api/login', {
@@ -57,7 +59,17 @@ export default {
                 })
                     .then(response => {
                         if (response.data.success) {
-                            localStorage.setItem('token', response.data.access_token);
+                            localStorage.setItem('token', response.data.access_token)
+                            localStorage.user = JSON.stringify(response.data.user)
+                            console.log(response.data.user.camareros[0])
+                            if (typeof response.data.user.camareros[0] !== 'undefined')
+                                localStorage.role = 'camarero'
+                            if (typeof response.data.user.chefs[0] !== 'undefined')
+                                localStorage.role = 'chef'
+                            if (typeof response.data.user.cajeros[0] !== 'undefined')
+                                localStorage.role = 'cajero'
+                            if (typeof response.data.user.administradors[0] !== 'undefined')
+                                localStorage.role = 'admin'
                             router.push('/admin/dashboard');
                             //this.$router.go('Home');
                         } else {
@@ -65,7 +77,7 @@ export default {
                         }
                     })
                     .catch(function (error) {
-                        this.error=error.response.data.message;
+                        this.error = error.response.data.message;
                     });
             })
 

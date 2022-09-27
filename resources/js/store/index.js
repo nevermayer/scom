@@ -14,7 +14,16 @@ const store = createStore({
             if(user && JSON.parse(user)) return JSON.parse(user)
 
             return null
+        },
+        getRole: (state) => {
+            const role = localStorage.getItem('role')
+            if(state.user != null) return state.role
+
+            if(role) return (role)
+
+            return null
         }
+
     },
     mutations: {
         setUser: (state, payload) => {

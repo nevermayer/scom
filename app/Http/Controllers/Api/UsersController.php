@@ -76,10 +76,15 @@ class UsersController extends Controller
             if (Hash::check($request->password, $usuario->password)) {
                 //creando token 
                 $token = $usuario->createToken("auth_token")->plainTextToken;
+                isset($usuario->chefs);
+                isset($usuario->camareros);
+                isset($usuario->cajeros);
+                isset($usuario->administradors);
                 return response()->json([
                     "success" => true,
                     "message" => "Usuario logueado exitosamente",
                     "access_token" => $token,
+                    "user"=>$usuario,
                 ]);
             } else {
                 return response()->json([

@@ -8,42 +8,27 @@
                         <form enctype="multipart/form-data">
                             <div class="form-group">
                                 <label for="">Nombre</label>
-                                <input type="text" v-model="cliente.nombre" class="form-control" placeholder="Nombre">
+                                <input type="text" v-model="mesa.nombre" class="form-control" placeholder="Nombre de mesa">
                             </div>
                             <div class="form-group">
-                                <label for="">Paterno</label>
-                                <input type="text" v-model="cliente.apellido_pat" class="form-control"
-                                    placeholder="apellido paterno">
+                                <label for="">Minima Capacidad</label>
+                                <input type="number" v-model="mesa.min_capacidad" class="form-control"
+                                    placeholder="Minima Capacidad">
                             </div>
                             <div class="form-group">
-                                <label for="">Materno</label>
-                                <input type="text" v-model="cliente.apellido_mat" class="form-control"
-                                    placeholder="apellido materno">
+                                <label for="">Maxima Capacidad</label>
+                                <input type="number" v-model="mesa.max_capacidad" class="form-control"
+                                    placeholder="Maxima Capacidad">
                             </div>
-                            <div class="form-group">
-                                <label for="">Email</label>
-                                <input type="email" v-model="cliente.email" class="form-control"
-                                    placeholder="email">
-                            </div>
-                            <div class="form-group">
-                                <label for="">Password</label>
-                                <input type="password" v-model="cliente.password" class="form-control"
-                                    placeholder="password">
-                            </div>
-                            <div class="form-group">
-                                <label for="">Telefono</label>
-                                <input type="number" v-model="cliente.telefono" class="form-control"
-                                    placeholder="Telefono">
-                            </div>
-                            <div class="form-group">
-                                <label for="">Tipo</label>
-                                <select v-model="cliente.activo" class="form-control">
-                                    <option value="1">Activo</option>
-                                    <option value="0">No Activo</option>
+                             <div class="form-group">
+                                <label for="">Status</label>
+                                <select v-model="mesa.status" class="form-control">
+                                    <option value="libre">libre</option>
+                                    <option value="ocupado">ocupado</option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <button type="button" @click="editcliente" class="btn btn-main">Submit</button>
+                                <button type="button" @click="editmesa" class="btn btn-main">Submit</button>
                             </div>
                         </form>
                     </div>
@@ -60,41 +45,34 @@ export default {
         DashboardLayout
     },
     mounted: function () {0
-        this.clienteid = this.$route.params.id
-        this.$axios.get('/api/cliente/' + this.clienteid)
+        this.mesaid = this.$route.params.id
+        this.$axios.get('/api/mesa/' + this.mesaid)
             .then(datos => {
-                this.cliente.nombre = datos.data.nombre
-                this.cliente.apellido_pat = datos.data.apellido_pat
-                this.cliente.apellido_mat= datos.data.apellido_mat
-                this.cliente.email= datos.data.email
-                this.cliente.password= datos.data.password
-                this.cliente.telefono= datos.data.telefono
-                this.cliente.activo= datos.data.activo
-                
+                this.mesa.nombre = datos.data.nombre
+                this.mesa.min_capacidad = datos.data.min_capacidad
+                this.mesa.max_capacidad= datos.data.max_capacidad
+                this.mesa.status= datos.data.status                
             })
     },
     data() {
         return {
-            clienteid: null,
-            cliente: {
+            mesaid: null,
+            mesa: {
                 nombre: '',
-                apellido_pat: '',
-                apellido_mat: '',
-                email: '',
-                password: '',
-                telefono:'',
-                activo:''
+                min_capacidad: '',
+                max_capacidad: '',
+                status: ''
             }
         }
     }, methods: {
-        editcliente() {
-            this.$axios.put('/api/cliente/' + this.clienteid, this.cliente, {
+        editmesa() {
+            this.$axios.put('/api/mesa/' + this.mesaid, this.mesa, {
                 headers: {
                     Authorization: `Bearer ${localStorage.token}`
                 }
             })
                 .then(data => {
-                    this.$router.push('/admin/clientes')
+                    this.$router.push('/admin/mesas')
                 })
         }
     }

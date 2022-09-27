@@ -11,13 +11,15 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Name</th>
+                                        <th>Total</th>
+                                        <th>Estado</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="(category, index) in categories" :key="index">
-                                        <td>#{{index + 1}}</td>
-                                        <td>{{category.name}}</td>
+                                    <tr v-for="(order, index) in orders" :key="index">
+                                        <td>#{{order.id}}</td>
+                                        <td>{{order.total}}</td>
+                                        <td>{{order.estado}}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -53,11 +55,8 @@ export default {
                 }
             })
                 .then(res => {
-                    this.orders = res.data.data
-                    this.orders.map(order => {
-                        order.items = JSON.parse(order.items)
-                        return order
-                    })
+                    console.log(res.data)
+                    this.orders = res.data
                 })
                 .catch(error => {
                     console.log(error.response)

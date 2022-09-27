@@ -65,7 +65,6 @@ export default {
                 }
             })
             .then(res => {
-                console.log(res.data)
                 this.productos = res.data
             })
             .catch(error => {
