@@ -111,7 +111,7 @@ const routes = [
     }
     ,
     {
-        path: '/admin/ingrediente/:id',
+        path: '/admin/ingredientes/:id',
         name: 'EditIngrediente',
         component: EditIngrediente
     },

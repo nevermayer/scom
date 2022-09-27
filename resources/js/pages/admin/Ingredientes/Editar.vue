@@ -17,8 +17,11 @@
                             </div>
                             <div class="form-group">
                                 <label for="">Fecha de Vencimiento</label>
-                                <input type="text" v-model="ingrediente.fecha_vencimiento" class="form-control"
+                                <input type="date" v-model="ingrediente.fecha_vencimiento" class="form-control"
                                     placeholder="fecha_vencimiento">
+                            </div>
+                            <div class="form-group">
+                                <button type="button" @click="editIngrediente" class="btn btn-main"> Editar</button>
                             </div>
                         </form>
                     </div>
@@ -35,12 +38,12 @@ export default {
         DashboardLayout
     },
     mounted: function () {
-        this.userid = this.$route.params.id
+        this.ingredienteid = this.$route.params.id
         this.$axios.get('/api/ingrediente/' + this.ingredienteid)
             .then(datos => {
-                this.ingrediente.nombre = datos.data.data.nombre
-                this.ingrediente.stock = datos.data.data.stock
-                this.ingrediente.fecha_vencimiento = datos.data.data.fecha_vencimiento
+                this.ingrediente.nombre = datos.data.nombre
+                this.ingrediente.stock = datos.data.stock
+                this.ingrediente.fecha_vencimiento = datos.data.fecha_vencimiento
                 
             })
     },

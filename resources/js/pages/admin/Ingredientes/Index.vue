@@ -19,6 +19,7 @@
                                         <th>Nombre</th>
                                         <th>Stoc</th>
                                         <th>Fecha de Vencimiento</th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -48,7 +49,7 @@ export default {
     },
     data() {
         return {
-            ingrediente: []
+            ingredientes: []
         }
     },
     mounted() {
@@ -62,7 +63,7 @@ export default {
                 }
             })
             .then(res => {
-                this.ingredientes = res.data.data
+                this.ingredientes = res.data
             })
             .catch(error => {
                 console.log(error.response)

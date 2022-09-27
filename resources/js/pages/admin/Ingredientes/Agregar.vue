@@ -21,7 +21,7 @@
                                     placeholder="fecha_vencimiento">
                             </div>
                             <div class="form-group">
-                                <button type="button" @click="addIngrediente" class="btn btn-main"> Submi</button>
+                                <button type="button" @click="addIngrediente" class="btn btn-main"> Agregar</button>
                             </div>
                         </form>
                     </div>
@@ -41,7 +41,6 @@ export default {
     },
     data() {
         return {
-            categories: [],
             ingrediente: {
                 nombre: '',
                 stock: '',
@@ -59,7 +58,7 @@ export default {
                 return this.$alertify.error('Incomplete form data')
             }
 
-            this.$axios.post('/api/register', this.ingrediente, {
+            this.$axios.post('/api/ingrediente', this.ingrediente, {
                 headers: {
                     Authorization: `Bearer ${localStorage.token}`
                 }
