@@ -70,4 +70,19 @@ class ProductosController extends Controller
          return $producto;
     }
 
+    public function getplatillos(){
+        $platillos=Platillo::all();
+        return $platillos;
+    }
+
+    public function getpostres(){
+        $postres=Postre::all();
+        return $postres;
+    }
+
+    public function getbebidas(){
+        $bebidas=Bebida::all();
+        return $bebidas;
+    }
+
 }
