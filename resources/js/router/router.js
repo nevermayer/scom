@@ -26,6 +26,7 @@ import AddMesa from '@/pages/admin/Mesas/Agregar.vue'
 import EditMesa from '@/pages/admin/Mesas/Editar.vue'
 //Ordenes
 import Orden from '@/pages/admin/Ordenes/index.vue'
+import ViewOrden from '@/pages/admin/Ordenes/view.vue'
 //Ingredientes
 import Ingrediente from '@/pages/admin/Ingredientes/index.vue'
 import AddIngrediente from '@/pages/admin/Ingredientes/Agregar.vue'
@@ -140,8 +141,7 @@ const routes = [
         path: '/admin/mesas/add',
         name: 'AddMesa',
         component: AddMesa
-    }
-    ,
+    },
     {
         path: '/admin/mesas/:id',
         name: 'EditMesa',
@@ -151,6 +151,11 @@ const routes = [
         path: '/admin/ordenes',
         name: 'Orden',
         component: Orden
+    },
+    {
+        path: '/admin/ordenes/:id',
+        name: 'ViewOrden',
+        component: ViewOrden
     }
 
 ];

@@ -54,6 +54,6 @@ class Orden extends Model
 		return $this->hasMany(Mesa::class);
 	}
     public function productos(){
-        return $this->belongsToMany(Producto::class,'consume');
+        return $this->belongsToMany(Producto::class,'consume')->withPivot('cantidad');
     }
 }

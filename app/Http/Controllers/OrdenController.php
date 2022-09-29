@@ -35,6 +35,7 @@ class OrdenController extends Controller
     {
 
         $orden = Orden::find($id);
+        isset($orden->productos);
         return $orden;
     }
 
@@ -72,7 +73,7 @@ class OrdenController extends Controller
         $productos = Producto::select('id', 'cantidad')->whereIn('id', $all_ids)->pluck('cantidad', 'id');
         foreach ($data as $res) {
             if (!isset($productos[$res['id']]) || $productos[$res['id']] < $res['qty']) {
-                $msg= 'sin existencias de: ' . $res['nombre'];
+                $msg = 'sin existencias de: ' . $res['nombre'];
                 return response()->json([
                     "message" => $msg
                 ]);
@@ -84,13 +85,13 @@ class OrdenController extends Controller
             'hora' => $request->hora,
             'camarero_id' => $request->camarero_id
         ]);
-        foreach($data as $res){
-            $orden->productos()->attach($res['id'],[
-                'cantidad'=>$res['qty']
+        foreach ($data as $res) {
+            $orden->productos()->attach($res['id'], [
+                'cantidad' => $res['qty']
             ]);
-            Producto::find($res['id'])->decrement('cantidad',$res['qty']);
+            Producto::find($res['id'])->decrement('cantidad', $res['qty']);
         }
-        $msg="se creo la orden";
+        $msg = "se creo la orden";
         return response()->json([
             "message" => $msg
         ]);
