@@ -69,6 +69,9 @@ Route::controller(OrdenController::class)->group(function () {
 // PRODUCTOS...
 Route::controller(ProductosController::class)->group(function () {
     Route::get('/productos', 'index');
+    Route::get('/platillos', 'getplatillos');
+    Route::get('/postres', 'getpostres');
+    Route::get('/bebidas', 'getbebidas');
     Route::post('/producto', 'store');
     Route::get('/producto/{id}', 'show');
     Route::put('/producto/{id}', 'update');

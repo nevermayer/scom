@@ -12,10 +12,10 @@ use App\Models\Postre;
 
 class ProductosController extends Controller
 {
-    
+
     public function index()
     {
-        $productos= Producto::all();
+        $productos = Producto::all();
         return $productos;
     }
     public function store(Request $request)
@@ -27,27 +27,26 @@ class ProductosController extends Controller
         $producto->cantidad = $request->cantidad;
         $producto->save();
 
-        if($request->producto =="platillo"){
+        if ($request->producto == "platillo") {
             $temp = new Platillo();
-            $temp ->producto_id = $producto->id;
-            $temp->tiempo_elaboracion=$request->tiempo_elaboracion;
+            $temp->producto_id = $producto->id;
+            $temp->tiempo_elaboracion = $request->tiempo_elaboracion;
         }
-        if($request->producto =="postre"){
+        if ($request->producto == "postre") {
             $temp = new Postre();
-            $temp ->producto_id = $producto->id;
-            $temp->tiempo_elaboracion=$request->tiempo_elaboracion;
+            $temp->producto_id = $producto->id;
+            $temp->tiempo_elaboracion = $request->tiempo_elaboracion;
         }
-        if($request->producto =="bebida"){
+        if ($request->producto == "bebida") {
             $temp = new Bebida();
-            $temp ->producto_id = $producto->id;
-            $temp ->grado_alcoholico = $request->grado_alcoholico;
+            $temp->producto_id = $producto->id;
+            $temp->grado_alcoholico = $request->grado_alcoholico;
         }
         $temp->save();
-
     }
     public function show($id)
     {
-        $producto=Producto::find($id);
+        $producto = Producto::find($id);
         isset($producto->platillos);
         isset($producto->postres);
         isset($producto->bebidas);
@@ -55,19 +54,39 @@ class ProductosController extends Controller
     }
     public function update(Request $request, $id)
     {
-         $producto = Producto::findOrFail($request->id);
-         $producto->nombre = $request->nombre;
-         $producto->descripcion = $request->descripcion;
-         $producto->precio = $request->precio;
-         $producto->cantidad = $request->cantidad;
+        $producto = Producto::findOrFail($request->id);
+        $producto->nombre = $request->nombre;
+        $producto->descripcion = $request->descripcion;
+        $producto->precio = $request->precio;
+        $producto->cantidad = $request->cantidad;
 
-         $producto->save();
-         return $producto;
+        $producto->save();
+        return $producto;
     }
     public function destroy($id)
     {
-         $producto = Producto::destroy($id);
-         return $producto;
+        $producto = Producto::destroy($id);
+        return $producto;
     }
 
+    public function getplatillos()
+    {
+        $platillos = Platillo::join('productos', 'productos.id', '=', 'platillos.producto_id')
+            ->get(['productos.*', 'tiempo_elaboracion']);
+        return $platillos;
+    }
+
+    public function getpostres()
+    {
+        $postres = Postre::join('productos', 'productos.id', '=', 'postres.producto_id')
+        ->get(['productos.*', 'tiempo_elaboracion']);
+        return $postres;
+    }
+
+    public function getbebidas()
+    {
+        $bebidas = Bebida::join('productos', 'productos.id', '=', 'bebidas.producto_id')
+        ->get(['productos.*', 'grado_alcoholico']);
+        return $bebidas;
+    }
 }
