@@ -13,17 +13,12 @@ class SolicitudChefController extends Controller
     public function Solicitud(Request $request)
     {
         $data = json_decode($request->items, true);
-
-        $ingrediente = Ingrediente::findOrFail($request);
-
-        $chef = Chef::findOrFail($request);
-
+        $chef = Chef::findOrFail($request->chef_id);
         foreach ($data as $res) {
-
             $chef->ingredientes()->attach($res['id'], [
-                'cantidad' => $res['qty'],
-                'status' => $res['status'],
-                'fecha' => date('j/n/Y')
+                'cantidad' => $request->cantidad,
+                'status' =>  $request->status,
+                'fecha' =>  $request->fecha
             ]);
             $chef->save();
         }
