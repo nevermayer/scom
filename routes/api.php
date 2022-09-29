@@ -9,6 +9,7 @@ use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\MesaController;
 use App\Http\Controllers\OrdenController;
 use App\Http\Controllers\FacturaController;
+use App\Http\Controllers\SolicitudChefController;
 
 /*
 |--------------------------------------------------------------------------
@@ -81,6 +82,7 @@ Route::controller(ClienteController::class)->group(function () {
     Route::put('/cliente/{id}', 'update');
     Route::delete('/cliente/{id}', 'destroy');
 });
+
 // FACTURA
 Route::controller(FacturaController::class)->group(function () {
     Route::get('/facturas', 'index');
@@ -88,4 +90,7 @@ Route::controller(FacturaController::class)->group(function () {
     Route::get('/factura/{id}', 'show');
     Route::put('/factura/{id}', 'update');
     Route::delete('/factura/{id}', 'destroy');
+});
+Route::controller(SolicitudChefController::class)->group(function () {
+    Route::post('solicitud-chef','Solicitud');
 });
