@@ -61,7 +61,6 @@ export default {
                         if (response.data.success) {
                             localStorage.setItem('token', response.data.access_token)
                             localStorage.user = JSON.stringify(response.data.user)
-                            console.log(response.data.user.camareros[0])
                             if (typeof response.data.user.camareros[0] !== 'undefined')
                                 localStorage.role = 'camarero'
                             if (typeof response.data.user.chefs[0] !== 'undefined')

@@ -26,10 +26,34 @@
                                     placeholder="cantidad">
                             </div>
                             <div class="form-group">
+                                <label for="">Tipo</label>
+                                <select v-model="Producto.producto" class="form-control">
+                                    <option selected value="platillo">Platillo</option>
+                                    <option value="postre">Postre</option>
+                                    <option value="bebida">Bebida</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Tiempo de elaboracion</label>
+                                <input type="number" v-model="Producto.tiempo_elaboracion" class="form-control"
+                                    placeholder="tiempo en elaborar el platillo">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Grado de alcohol</label>
+                                <input type="number" v-model="Producto.grado_alcoholico" class="form-control"
+                                    placeholder="grado alcoholico">
+                            </div>
+                            <div class="form-group">
                                 <button type="button" @click="editProducto" class="btn btn-main">Submit</button>
                             </div>
                         </form>
+                        <h2>Ingredientes</h2>
+                        <div v-for="ingrediente in Ingredientes" :key="index">
+                            
+                            {{ingrediente.nombre}}
+                        </div>
                     </div>
+                    {{Ingredientes}}
                 </div>
             </section>
         </div>
@@ -42,15 +66,33 @@ export default {
     components: {
         DashboardLayout
     },
-    mounted: function () {0
+    mounted: function () {
         this.productoid = this.$route.params.id
         this.$axios.get('/api/producto/' + this.productoid)
             .then(datos => {
                 this.Producto.nombre = datos.data.nombre
                 this.Producto.descripcion = datos.data.descripcion
-                this.Producto.precio= datos.data.precio
-                this.Producto.cantidad= datos.data.cantidad
-                
+                this.Producto.precio = datos.data.precio
+                this.Producto.cantidad = datos.data.cantidad
+                if (datos.data.platillos.length > 0) {
+                    this.Producto.platillo_id = datos.data.platillos[0].id
+                    this.Producto.tiempo_elaboracion = datos.data.platillos[0].tiempo_elaboracion
+                    this.Producto.producto = 'platillo'
+                }
+                if (datos.data.postres.length > 0) {
+                    this.Producto.postre_id = datos.data.postres[0].id
+                    this.Producto.tiempo_elaboracion = datos.data.postres[0].tiempo_elaboracion
+                    this.Producto.producto = 'postre'
+                }
+                if (datos.data.bebidas.length > 0) {
+                    this.Producto.bebida_id = datos.data.bebidas[0].id
+                    this.Producto.grado_alcoholico = datos.data.bebidas[0].grado_alcoholico
+                    this.Producto.producto = 'bebida'
+                }
+            })
+        this.$axios.get('/api/ingredientes/')
+            .then(datos => {
+                this.Ingredientes = datos.data
             })
     },
     data() {
@@ -61,7 +103,15 @@ export default {
                 descripcion: '',
                 precio: '',
                 cantidad: '',
-            }
+                producto: '',
+                tiempo_elaboracion: 0,
+                grado_alcoholico: 0,
+                platillo_id: 0,
+                bebida_id: 0,
+                postre_id: 0
+            },
+            items: [],
+            Ingredientes: []
         }
     }, methods: {
         editProducto() {

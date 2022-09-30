@@ -65,7 +65,6 @@ export default {
                 }
             })
             .then(res => {
-                console.log(res.data)
                 this.mesas = res.data
             })
             .catch(error => {

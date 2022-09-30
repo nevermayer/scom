@@ -54,13 +54,25 @@ class ProductosController extends Controller
     }
     public function update(Request $request, $id)
     {
-        $producto = Producto::findOrFail($request->id);
+        $producto = Producto::findOrFail($id);
         $producto->nombre = $request->nombre;
         $producto->descripcion = $request->descripcion;
         $producto->precio = $request->precio;
         $producto->cantidad = $request->cantidad;
-
         $producto->save();
+        if($request->platillo_id>0){
+            $temp = Platillo::findOrFail($request->platillo_id);
+            $temp->tiempo_elaboracion = $request->tiempo_elaboracion;
+        }
+        if($request->postre_id>0){
+            $temp = Postre::findOrFail($request->postre_id);
+            $temp->tiempo_elaboracion = $request->tiempo_elaboracion;
+        }
+        if($request->bebida_id>0){
+            $temp = Bebida::findOrFail($request->bebida_id);
+            $temp->grado_alcoholico = $request->grado_alcoholico;
+        }
+        $temp->save();
         return $producto;
     }
     public function destroy($id)
