@@ -8,21 +8,21 @@
                 <ul>
 
                     <li :class="active === 0? 'active' : ''" @click="active = 0">
-                        <div>
+                        <div @click="getPlatillos()">
                             <img src="../assets/img/platillo.svg" alt="">
-                            <h3 @click="getItems(category)">Platillos</h3>
+                            <h3>Platillos</h3>
                         </div>
                     </li>
                     <li :class="active === 1? 'active' : ''" @click="active = 1">
-                        <div>
+                        <div @click="getPostres()">
                             <img src="../assets/img/postre.svg" alt="">
-                            <h3 @click="getItems(category)">Postres</h3>
+                            <h3>Postres</h3>
                         </div>
                     </li>
                     <li :class="active === 2? 'active' : ''" @click="active = 2">
-                        <div>
+                        <div @click="getBebidas()">
                             <img src="../assets/img/bebida.svg" alt="">
-                            <h3 @click="getItems(category)">Bebidas</h3>
+                            <h3>Bebidas</h3>
                         </div>
                     </li>
                 </ul>
@@ -98,12 +98,8 @@
                                 </div>
 
                                 <div class="cart-pay-btn">
-                                    <paystack :amount="cartTotal * 100" :email="user !== null? user.email : ''"
-                                        :paystackkey="paystackkey" :reference="reference" :callback="createOrder"
-                                        :close="close" :embed="false" :disabled="validateCheckoutData || user === null"
-                                        class="btn btn-success" v-if="user !== null && address">
-                                        <span class="ti-credit-card"></span> Pay Now
-                                    </paystack>
+
+                                    <div v-if="user !== null && address"></div>
 
                                     <button v-else-if="!address" class="btn btn-success" @click=createOrder>
                                         Confirmar la Orden
@@ -146,17 +142,33 @@ export default {
             cart: [],
             productos: [],
             address: '',
-            showAddressModal: false
+            showAddressModal: false,
         }
     }, mounted() {
-        this.getProductos()
+        this.getPlatillos()
         this.getCart()
+        
     }, methods: {
-        getItems() {
-            console.log("hola")
+        getPlatillos() {
+            this.$axios.get('/api/platillos')
+                .then(res => {
+                    this.productos = res.data
+                })
+                .catch(error => {
+                    console.log(error.response)
+                })
         },
-        getProductos() {
-            this.$axios.get('/api/productos')
+        getPostres() {
+            this.$axios.get('/api/postres')
+                .then(res => {
+                    this.productos = res.data
+                })
+                .catch(error => {
+                    console.log(error.response)
+                })
+        },
+        getBebidas() {
+            this.$axios.get('/api/bebidas')
                 .then(res => {
                     this.productos = res.data
                 })
@@ -222,13 +234,12 @@ export default {
         createOrder() {
             const token = localStorage.token
             const data = {
-                camarero_id:1,
-                hora:'2022-02-02',
+                camarero_id: 1,
+                hora: '2022-02-02',
                 estado: 'elaboracion',
                 total: this.cartTotal,
                 items: JSON.stringify(this.cart)
             }
-
             this.$axios.post('/api/ordenes', data, {
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -238,7 +249,7 @@ export default {
                     localStorage.removeItem('cart')
                     this.address = ''
                     this.cart = []
-                  //  this.$alertify.success(res.data.message)
+                    //  this.$alertify.success(res.data.message)
 
                 })
                 .catch(error => {
@@ -253,9 +264,9 @@ export default {
         },
     },
     computed: {
-        /*user() {
-            returnthis.$store.getters.getUser
-        },*/
+        user() {
+            return this.$store.getters.getUser
+        },
         selectedMenu() {
             return this.categories[this.active]
         },

@@ -29,7 +29,8 @@
                                         <td>{{mesa.min_capacidad}}</td>
                                         <td>{{mesa.max_capacidad}}</td>
                                         <td>{{mesa.status}}</td>
-                                        <td><button class="btn" @click="editar(mesa.id)"><span class="ti-pencil-alt"></span></button></td>
+                                        <td><button class="btn btn-main" @click="tomarOrden(mesa.id)"><span class="ti-pencil-alt"></span></button>
+                                            <button class="btn" @click="editar(mesa.id)"><span class="ti-pencil-alt"></span></button></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -73,6 +74,9 @@ export default {
         },
         editar(id){
             this.$router.push('/admin/mesas/'+id)
+        },
+        tomarOrden(id){
+            this.$router.push('/menu/'+id)
         },
     }
 }

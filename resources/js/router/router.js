@@ -44,6 +44,11 @@ const routes = [
         component: carta
     },
     {
+        path: '/menu/:id',
+        name: 'TomaOrden',
+        component: carta
+    },
+    {
         path: '/account',
         name: 'Account',
         component: Account
