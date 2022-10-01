@@ -43,17 +43,18 @@
                                 <input type="number" v-model="Producto.grado_alcoholico" class="form-control"
                                     placeholder="grado alcoholico">
                             </div>
+                            <h2>Ingredientes</h2>
+                            <div id="flex">
+                                <div v-for="ingrediente in Ingredientes" style="flex">
+                                    <label for="">{{ingrediente.nombre}}:</label>
+                                    <input type="checkbox" :value="`${ingrediente.id}`" v-model="Producto.items">
+                                </div>
+                            </div>
                             <div class="form-group">
-                                <button type="button" @click="editProducto" class="btn btn-main">Submit</button>
+                                <button type="button" @click="editProducto" class="btn btn-main">Actualizar</button>
                             </div>
                         </form>
-                        <h2>Ingredientes</h2>
-                        <div v-for="ingrediente in Ingredientes" :key="index">
-                            
-                            {{ingrediente.nombre}}
-                        </div>
                     </div>
-                    {{Ingredientes}}
                 </div>
             </section>
         </div>
@@ -78,22 +79,41 @@ export default {
                     this.Producto.platillo_id = datos.data.platillos[0].id
                     this.Producto.tiempo_elaboracion = datos.data.platillos[0].tiempo_elaboracion
                     this.Producto.producto = 'platillo'
+                    this.$axios.get('/api/platillo/' + datos.data.platillos[0].id)
+                        .then(datos => {
+                            this.Producto.items = datos.data.map(function (a) {
+                                return a.id;
+                            })
+                        });
                 }
                 if (datos.data.postres.length > 0) {
                     this.Producto.postre_id = datos.data.postres[0].id
                     this.Producto.tiempo_elaboracion = datos.data.postres[0].tiempo_elaboracion
                     this.Producto.producto = 'postre'
+                    this.$axios.get('/api/postre/' + datos.data.platillos[0].id)
+                        .then(datos => {
+                            this.Producto.items = datos.data.map(function (a) {
+                                return a.id;
+                            })
+                        });
                 }
                 if (datos.data.bebidas.length > 0) {
                     this.Producto.bebida_id = datos.data.bebidas[0].id
                     this.Producto.grado_alcoholico = datos.data.bebidas[0].grado_alcoholico
                     this.Producto.producto = 'bebida'
+                    this.$axios.get('/api/bebida/' + datos.data.platillos[0].id)
+                        .then(datos => {
+                            this.Producto.items = datos.data.map(function (a) {
+                                return a.id;
+                            })
+                        });
                 }
             })
         this.$axios.get('/api/ingredientes/')
             .then(datos => {
                 this.Ingredientes = datos.data
             })
+
     },
     data() {
         return {
@@ -108,9 +128,9 @@ export default {
                 grado_alcoholico: 0,
                 platillo_id: 0,
                 bebida_id: 0,
+                items: [],
                 postre_id: 0
             },
-            items: [],
             Ingredientes: []
         }
     }, methods: {
@@ -127,3 +147,9 @@ export default {
     }
 }
 </script>
+<style scoped>
+div#flex {
+    display: flex;
+    justify-content: space-around;
+}
+</style>

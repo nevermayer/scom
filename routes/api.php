@@ -72,6 +72,9 @@ Route::controller(ProductosController::class)->group(function () {
     Route::get('/platillos', 'getplatillos');
     Route::get('/postres', 'getpostres');
     Route::get('/bebidas', 'getbebidas');
+    Route::get('/platillo/{id}', 'getplatillo');
+    Route::get('/postre/{id}', 'getpostre');
+    Route::get('/bebida/{id}', 'getbebida');
     Route::post('/producto', 'store');
     Route::get('/producto/{id}', 'show');
     Route::put('/producto/{id}', 'update');

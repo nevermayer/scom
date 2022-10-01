@@ -54,6 +54,7 @@ class ProductosController extends Controller
     }
     public function update(Request $request, $id)
     {
+        
         $producto = Producto::findOrFail($id);
         $producto->nombre = $request->nombre;
         $producto->descripcion = $request->descripcion;
@@ -63,14 +64,17 @@ class ProductosController extends Controller
         if($request->platillo_id>0){
             $temp = Platillo::findOrFail($request->platillo_id);
             $temp->tiempo_elaboracion = $request->tiempo_elaboracion;
+            $temp->ingredientes()->sync($request->items);
         }
         if($request->postre_id>0){
             $temp = Postre::findOrFail($request->postre_id);
             $temp->tiempo_elaboracion = $request->tiempo_elaboracion;
+            $temp->ingredientes()->sync($request->items);
         }
         if($request->bebida_id>0){
             $temp = Bebida::findOrFail($request->bebida_id);
             $temp->grado_alcoholico = $request->grado_alcoholico;
+            $temp->ingredientes()->sync($request->items);
         }
         $temp->save();
         return $producto;
@@ -100,5 +104,17 @@ class ProductosController extends Controller
         $bebidas = Bebida::join('productos', 'productos.id', '=', 'bebidas.producto_id')
         ->get(['productos.*', 'grado_alcoholico']);
         return $bebidas;
+    }
+    public function getplatillo($id){
+        $temp = Platillo::findOrFail($id);
+        return $temp->ingredientes;
+    }
+    public function getpostre($id){
+        $temp = Postre::findOrFail($id);
+        return $temp->ingredientes;
+    }
+    public function getbebida($id){
+        $temp = Bebida::findOrFail($id);
+        return $temp->ingredientes;
     }
 }
