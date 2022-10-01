@@ -1,31 +1,27 @@
 <template>
     <dashboard-layout>
-        <h2>Orden #{{ordenid}}</h2>
-        <hr />
-        <div class="mainText">
+        <section id="print">
+            <strong>Orden #{{ordenid}}</strong>
+            <div class="mainText">
+                <div>
+                    <strong>Camarero :</strong>
+                    <h5>Chef:</h5>
+                </div>
+                <div>
+                    null
+                    null
+                </div>
+                <div>
+                    <strong>Total :</strong>
+                    <br><strong>Fecha :</strong>
+                </div>
+                <div>
+                    <p>{{Orden.total}}Bs</p>
+                    <p>{{Orden.fecha}}</p>
+                </div>
+            </div>
 
-            <div>
-                <h5>Camarero:</h5>
-                <h5>Chef:</h5>
-               
-            </div>
-            <div>
-                <h5>null</h5>
-                <h5>null</h5>
-            </div>
-            <div>
-                <h5>Estado:</h5>
-                <h5>Total:</h5>
-                <h5>Fecha:</h5>
-            </div>
-            <div>
-                <h5>{{Orden.estado}}</h5>
-                <p>{{Orden.total}}Bs</p>
-                <p>{{Orden.fecha}}</p>
-            </div>
-        </div>
 
-        <div>
             <table class="table table-borderless factura">
                 <thead>
                     <tr>
@@ -52,12 +48,14 @@
                     </tr>
                 </tfoot>
             </table>
-        </div>
+            <p class="centered">Gracias por su pedido!
+            </p>
+        </section>
 
         <div>
             <div style="flex">
-<button class="btn btn-primary">generar Factura</button>
-<button class="btn btn-main">Imprimir Orden</button>
+                <button class="btn btn-primary">generar Factura</button>
+                <button class="btn btn-main" @click="print()">Imprimir Orden</button>
             </div>
         </div>
     </dashboard-layout>
@@ -88,12 +86,15 @@ export default {
                 this.Orden.nombre = datos.data.nombre
                 this.Orden.estado = datos.data.estado
                 this.Orden.total = datos.data.total
-                this.Orden.fecha=datos.data.fecha
+                this.Orden.fecha = datos.data.fecha
                 this.items = datos.data.productos
                 console.log(datos.data.productos)
             })
         // this.getOrders()
     }, methods: {
+        print() {
+            window.print()
+        },
         getOrders() {
             this.$axios.get('/api/orden', {
                 headers: {
@@ -110,50 +111,30 @@ export default {
         }, editar(id) {
             this.$router.push('/admin/ordenes/' + id)
         }
-        }
+    }
 }
 </script>
 <style scoped>
 @import "@/assets/css/bootstrap.min.css";
+
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    #print,
+    #print * {
+        visibility: visible;
+    }
+
+}
 
 .mainText {
     display: flex;
     justify-content: space-evenly;
 }
 
-.factura {
-    table-layout: fixed;
-}
-
-.fact-info>div>h5 {
-    font-weight: bold;
-}
-
-.factura>thead {
-    border-top: solid 3px #000;
-    border-bottom: 3px solid #000;
-}
-
-.factura>thead>tr>th:nth-child(2),
-.factura>tbod>tr>td:nth-child(2) {
-    width: 300px;
-}
-
-.factura>thead>tr>th:nth-child(n+3) {
-    text-align: right;
-}
-
-.factura>tbody>tr>td:nth-child(n+3) {
-    text-align: right;
-}
-
-.factura>tfoot>tr>th,
-.factura>tfoot>tr>th:nth-child(n+3) {
-    font-size: 24px;
-    text-align: right;
-}
-
-.cond {
-    border-top: solid 2px #000;
+.centered {
+    text-align: center;
+    align-content: center;
 }
 </style>

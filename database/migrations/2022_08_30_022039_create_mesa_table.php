@@ -21,11 +21,20 @@ return new class extends Migration
             $table->string('max_capacidad');
             $table->string('status');
             $table->foreignId('orden_id')
-            ->constrained('orden');
+                ->nullable()
+                ->constrained('orden')
+                ->cascadeOnUpdate()
+                ->nullOnDelete();
             $table->foreignId('camarero_id')
-            ->constrained('camarero');
+                ->nullable()
+                ->constrained('camarero')
+                ->cascadeOnUpdate()
+                ->nullOnDelete();
             $table->foreignId('cliente_id')
-            ->constrained('cliente');
+                ->nullable()
+                ->constrained('cliente')
+                ->cascadeOnUpdate()
+                ->nullOnDelete();
         });
     }
 

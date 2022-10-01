@@ -17,7 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('grado_alcoholico');
             $table->foreignId('producto_id')
-            ->constrained('productos');
+                ->constrained('productos')
+                ->cascadeOnDelete();
         });
     }
 

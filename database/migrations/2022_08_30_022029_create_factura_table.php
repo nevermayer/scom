@@ -18,11 +18,20 @@ return new class extends Migration
             $table->double('total');
             $table->date('fecha');
             $table->foreignId('cajero_id')
-            ->constrained('cajero');
+                ->nullable()
+                ->constrained('cajero')
+                ->cascadeOnUpdate()
+                ->nullOnDelete();
             $table->foreignId('orden_id')
-            ->constrained('orden');
+                ->nullable()
+                ->constrained('orden')
+                ->cascadeOnUpdate()
+                ->nullOnDelete();
             $table->foreignId('cliente_id')
-            ->constrained('cliente');
+                ->nullable()
+                ->constrained('cliente')
+                ->cascadeOnUpdate()
+                ->nullOnDelete();
         });
     }
 

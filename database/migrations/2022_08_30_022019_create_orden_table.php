@@ -23,9 +23,15 @@ return new class extends Migration
             $table->dateTime('hora');
             $table->integer('telefono');
             $table->foreignId('chef_id')
-            ->constrained('chef');
+                ->nullable()
+                ->constrained('chef')
+                ->cascadeOnUpdate()
+                ->nullOnDelete();
             $table->foreignId('camarero_id')
-            ->constrained('camarero');
+                ->nullable()
+                ->constrained('camarero')
+                ->cascadeOnUpdate()
+                ->nullOnDelete();
         });
     }
 

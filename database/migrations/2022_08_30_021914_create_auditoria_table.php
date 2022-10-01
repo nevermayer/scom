@@ -17,7 +17,8 @@ return new class extends Migration
             $table->id();
             $table->date('fecha', $precision = 0);
             $table->foreignId('id_usuario')
-            ->constrained('users');
+                ->constrained('users')
+                ->cascadeOnDelete();
         });
     }
 

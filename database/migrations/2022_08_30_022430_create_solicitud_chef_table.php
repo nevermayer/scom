@@ -19,9 +19,11 @@ return new class extends Migration
             $table->string('status');
             $table->date('fecha');
             $table->foreignId('chef_id')
-            ->constrained('chef');
+                ->constrained('chef')
+                ->cascadeOnDelete();
             $table->foreignId('ingredientes_id')
-            ->constrained('ingredientes');
+                ->constrained('ingredientes')
+                ->cascadeOnDelete();
         });
     }
 

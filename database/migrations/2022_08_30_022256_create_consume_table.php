@@ -17,9 +17,11 @@ return new class extends Migration
             $table->id();
             $table->integer('cantidad');
             $table->foreignId('orden_id')
-            ->constrained('orden');
+                ->constrained('orden')
+                ->cascadeOnDelete();
             $table->foreignId('producto_id')
-            ->constrained('productos');
+                ->constrained('productos')
+                ->cascadeOnDelete();
         });
     }
 

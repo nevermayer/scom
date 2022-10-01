@@ -16,9 +16,11 @@ return new class extends Migration
         Schema::create('ingrediente_platillo', function (Blueprint $table) {
             $table->id();
             $table->foreignId('platillo_id')
-            ->constrained('platillos');
+                ->constrained('platillos')
+                ->cascadeOnDelete();
             $table->foreignId('ingredientes_id')
-            ->constrained('ingredientes');
+                ->constrained('ingredientes')
+                ->cascadeOnDelete();
         });
     }
 
