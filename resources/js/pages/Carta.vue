@@ -6,7 +6,6 @@
             </div>
             <div class="front-sidemenu">
                 <ul>
-
                     <li :class="active === 0? 'active' : ''" @click="active = 0">
                         <div @click="getPlatillos()">
                             <img src="../assets/img/platillo.svg" alt="">
@@ -35,8 +34,8 @@
                     <h3>{{selectedMenu? selectedMenu.name : 'PRODUCTOS DISPONIBLES'}}s</h3>
 
                     <div class="menu-grid">
-                        <div :style="`background-image: url(${item.imagen})`"
-                            class="menu-card" v-for="(item, index) in productos" :key="index">
+                        <div :style="`background-image: url(${item.imagen})`" class="menu-card"
+                            v-for="(item, index) in productos" :key="index">
                             <div>
                                 <span class="bg-main-gradient item-price">
                                     <span>Bs</span> {{item.precio}}
@@ -51,7 +50,6 @@
                             </button>
                         </div>
                     </div>
-
                 </div>
                 <div class="cart-section">
                     <div class="cart-card">
@@ -59,7 +57,6 @@
                             <h3>Nueva Orden</h3>
                             <small>Productos</small>
                         </div>
-
                         <div class="cart-body">
                             <div class="cart-items">
                                 <div class="cart-item" v-for="(item, index) in cart" :key="index">
@@ -80,33 +77,26 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="cart-sum">
                                 <div class="cart-address">
                                 </div>
-
                                 <div>
                                     <div class="price-flex">
                                         <small>Subtotal</small>
                                         <small>{{cartTotal.toLocaleString()}} Bs</small>
                                     </div>
-
                                     <div class="price-flex">
                                         <small>Total</small>
                                         <h4>{{cartTotal.toLocaleString()}} Bs</h4>
                                     </div>
                                 </div>
-
                                 <div class="cart-pay-btn">
-
-                                    <div v-if="user !== null && address"></div>
-
-                                    <button v-else-if="!address" class="btn btn-success" @click=createOrder>
+                                    <button v-if="role=='camarero' && user !== null" class="btn btn-success"
+                                        @click=createOrder>
                                         Confirmar la Orden
                                     </button>
-
                                     <button v-else class="btn btn-success" @click="$router.push('/account')">
-                                        Login to continue
+                                        Llame a un camarero...
                                     </button>
                                 </div>
                             </div>
@@ -117,7 +107,6 @@
         </div>
         <modal v-if="showAddressModal" @close="showAddressModal = false">
             <h4 slot="header">Provide your address</h4>
-
             <div slot="body">
                 <div class="form-group">
                     <label for="">Your address</label>
@@ -143,11 +132,14 @@ export default {
             productos: [],
             address: '',
             showAddressModal: false,
+            usuario: '',
+            mesa_id:0
         }
     }, mounted() {
         this.getPlatillos()
         this.getCart()
-        
+        if (localStorage.user)
+            this.usuario = JSON.parse(localStorage.user)
     }, methods: {
         getPlatillos() {
             this.$axios.get('/api/platillos')
@@ -192,9 +184,7 @@ export default {
                 //this.$alertify.success('Item added to Cart')
                 return
             }
-
             let cart = JSON.parse(cartDB)
-
             let isFound = false
             cart.map(item => {
                 if (item.id === menuitem.id) {
@@ -203,15 +193,12 @@ export default {
                     return item;
                 }
             })
-
             if (!isFound) {
                 menuitem.qty = 1
                 cart.push(menuitem)
             }
-
             this.cart = cart
             localStorage.setItem('cart', JSON.stringify(cart))
-
             this.$alertify.success('Item added to Cart');
         },
         updateItemQty(index, item, flag) {
@@ -220,10 +207,8 @@ export default {
             } else {
                 item.qty = Number(item.qty) + 1
             }
-
             this.cart[index] = item
             localStorage.setItem('cart', JSON.stringify(this.cart))
-
             this.$alertify.success('Cart successfully updated');
         },
         dropItem(index) {
@@ -234,9 +219,7 @@ export default {
         createOrder() {
             const token = localStorage.token
             const data = {
-                camarero_id: 1,
-                hora: '2022-02-02',
-                estado: 'elaboracion',
+                camarero_id: this.usuario.camareros[0].id,
                 total: this.cartTotal,
                 items: JSON.stringify(this.cart)
             }
@@ -244,20 +227,18 @@ export default {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
-            })
-                .then(res => {
-                    localStorage.removeItem('cart')
-                    this.address = ''
-                    this.cart = []
-                    //  this.$alertify.success(res.data.message)
+            }).then(res => {
+                localStorage.removeItem('cart')
+                this.address = ''
+                this.cart = []
+                //  this.$alertify.success(res.data.message)
 
-                })
-                .catch(error => {
-                    if (error) {
-                        return console.log(error.response.data.message)
-                    }
-                    this.$alertify.error(Object.values(error.response.data)[0][0])
-                })
+            }).catch(error => {
+                if (error) {
+                    return console.log(error.response.data.message)
+                }
+                this.$alertify.error(Object.values(error.response.data)[0][0])
+            })
         },
         close() {
 
@@ -267,6 +248,9 @@ export default {
         user() {
             return this.$store.getters.getUser
         },
+        role() {
+            return this.$store.getters.getRole
+        },
         selectedMenu() {
             return this.categories[this.active]
         },
@@ -275,7 +259,6 @@ export default {
             this.cart.map(item => {
                 total += Number(item.precio) * Number(item.qty)
             })
-
             return total
         }, reference() {
             let text = "";
@@ -284,7 +267,6 @@ export default {
             for (let i = 0; i < 10; i++) {
                 text += possible.charAt(Math.floor(Math.random() * possible.length))
             }
-
             return text;
         },
         validateCheckoutData() {

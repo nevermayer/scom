@@ -79,10 +79,11 @@ class OrdenController extends Controller
                 ]);
             }
         }
+        $fecha = date('Y-m-d');
         $orden = Orden::create([
             'total' => $request->total,
-            'estado' => $request->estado,
-            'hora' => $request->hora,
+            'estado' => 'Elaboracion',
+            'fecha' => $fecha,
             'camarero_id' => $request->camarero_id
         ]);
         foreach ($data as $res) {

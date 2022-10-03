@@ -49,35 +49,32 @@ export default {
         signin() {
             const { nombre_cuenta, password } = this.creds
             if (!nombre_cuenta || !password) {
-
                 return this.error = 'complete los campos';
             }
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
                 this.$axios.post('/api/login', {
                     nombre_cuenta,
                     password
-                })
-                    .then(response => {
-                        if (response.data.success) {
-                            localStorage.setItem('token', response.data.access_token)
-                            localStorage.user = JSON.stringify(response.data.user)
-                            if (typeof response.data.user.camareros[0] !== 'undefined')
-                                localStorage.role = 'camarero'
-                            if (typeof response.data.user.chefs[0] !== 'undefined')
-                                localStorage.role = 'chef'
-                            if (typeof response.data.user.cajeros[0] !== 'undefined')
-                                localStorage.role = 'cajero'
-                            if (typeof response.data.user.administradors[0] !== 'undefined')
-                                localStorage.role = 'admin'
-                            router.push('/admin/dashboard');
-                            //this.$router.go('Home');
-                        } else {
-                            this.error = response.data.message
-                        }
-                    })
-                    .catch(function (error) {
-                        this.error = error.response.data.message;
-                    });
+                }).then(response => {
+                    if (response.data.success) {
+                        localStorage.setItem('token', response.data.access_token)
+                        localStorage.user = JSON.stringify(response.data.user)
+                        if (typeof response.data.user.camareros[0] !== 'undefined')
+                            localStorage.role = 'camarero'
+                        if (typeof response.data.user.chefs[0] !== 'undefined')
+                            localStorage.role = 'chef'
+                        if (typeof response.data.user.cajeros[0] !== 'undefined')
+                            localStorage.role = 'cajero'
+                        if (typeof response.data.user.administradors[0] !== 'undefined')
+                            localStorage.role = 'admin'
+                        router.push('/admin/dashboard');
+                        //this.$router.go('Home');
+                    } else {
+                        this.error = response.data.message
+                    }
+                }).catch(function (error) {
+                    this.error = error.response.data.message;
+                });
             })
 
         },

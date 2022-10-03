@@ -54,7 +54,7 @@
 
         <div>
             <div style="flex">
-                <button class="btn btn-primary">generar Factura</button>
+                <button class="btn btn-primary" @click="generarFactura()">generar Factura</button>
                 <button class="btn btn-main" @click="print()">Imprimir Orden</button>
             </div>
         </div>
@@ -92,6 +92,25 @@ export default {
             })
         // this.getOrders()
     }, methods: {
+        generarFactura() {
+            const data = {
+                orden_id: this.ordenid,
+                total: this.Orden.total
+            }
+            this.$axios.post('/api/factura', data, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.token}`
+                }
+            }).then(res => {
+                console.log(res.data.data)
+                this.$router.push('/admin/factura/'+res.data.data)
+            }).catch(error => {
+                if (error) {
+                    return console.log(error)
+                }
+                this.$alertify.error(Object.values(error.response.data)[0][0])
+            })
+        },
         print() {
             window.print()
         },

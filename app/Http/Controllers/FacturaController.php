@@ -17,17 +17,17 @@ class FacturaController extends Controller
     }
     public function store(Request $request)
     {
-        $factura = new Factura();
-        $factura->total = $request->total;
-        $factura->fecha = $request->fecha;
-        $factura->cajero_id = $request->cajero_id;
-        $factura->orden_id = $request->orden_id;
-        $factura->cliente_id = $request->cliente_id;
-        $factura->save();
+        $fecha = date('Y-m-d');
+        $factura = Factura::where('orden_id', '=', $request->orden_id)->first();
+        if (!isset($factura->id)) {
+            $factura = Factura::create([
+                'total' => $request->total,
+                'fecha' => $fecha,
+                'orden_id' => $request->orden_id,
+            ]);
+        }
         return response()->json([
-            "success" => true,
-            "data" => $factura
-        ]);
+            "data" => $factura->id]);
     }
     public function show($id)
     {
