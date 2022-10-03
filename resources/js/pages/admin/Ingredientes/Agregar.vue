@@ -11,6 +11,10 @@
                                 <input type="text" v-model="ingrediente.nombre" class="form-control" placeholder="Nombre">
                             </div>
                             <div class="form-group">
+                                <label for="">Imagen</label>
+                                <input type="text" v-model="ingrediente.imagen" class="form-control" placeholder="URL imagen">
+                            </div>
+                            <div class="form-group">
                                 <label for="">Stock</label>
                                 <input type="number" v-model="ingrediente.stock" class="form-control"
                                     placeholder="stock">
@@ -44,6 +48,7 @@ export default {
             ingrediente: {
                 nombre: '',
                 stock: '',
+                imagen: '',
                 fecha_vencimiento: '',
             }
         }

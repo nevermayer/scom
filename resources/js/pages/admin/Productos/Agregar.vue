@@ -16,6 +16,11 @@
                                     placeholder="descripcion">
                             </div>
                             <div class="form-group">
+                                <label for="">Imagen url</label>
+                                <input type="text" v-model="Producto.imagen" class="form-control"
+                                    placeholder="URL Imagen">
+                            </div>
+                            <div class="form-group">
                                 <label for="">Precio</label>
                                 <input type="number" v-model="Producto.precio" class="form-control"
                                     placeholder="precio">
@@ -68,6 +73,7 @@ export default {
             Producto: {
                 nombre: '',
                 descripcion: '',
+                imagen:'',
                 precio: '',
                 cantidad: '',
                 producto: '',

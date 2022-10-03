@@ -16,6 +16,11 @@
                                     placeholder="descripcion">
                             </div>
                             <div class="form-group">
+                                <label for="">Imagen url</label>
+                                <input type="text" v-model="Producto.imagen" class="form-control"
+                                    placeholder="URL Imagen">
+                            </div>
+                            <div class="form-group">
                                 <label for="">Precio</label>
                                 <input type="number" v-model="Producto.precio" class="form-control"
                                     placeholder="precio">
@@ -74,6 +79,7 @@ export default {
                 this.Producto.nombre = datos.data.nombre
                 this.Producto.descripcion = datos.data.descripcion
                 this.Producto.precio = datos.data.precio
+                this.Producto.imagen = datos.data.imagen
                 this.Producto.cantidad = datos.data.cantidad
                 if (datos.data.platillos.length > 0) {
                     this.Producto.platillo_id = datos.data.platillos[0].id
@@ -123,6 +129,7 @@ export default {
                 descripcion: '',
                 precio: '',
                 cantidad: '',
+                imagen:'',
                 producto: '',
                 tiempo_elaboracion: 0,
                 grado_alcoholico: 0,

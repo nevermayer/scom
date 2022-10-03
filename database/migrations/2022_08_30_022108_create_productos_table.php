@@ -18,8 +18,9 @@ return new class extends Migration
             $table->id();
             $table->string('nombre');
             $table->string('descripcion');
-            $table->string('precio');
-            $table->string('cantidad');
+            $table->string('imagen');
+            $table->double('precio');
+            $table->integer('cantidad');
         });
     }
 

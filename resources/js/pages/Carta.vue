@@ -35,7 +35,7 @@
                     <h3>{{selectedMenu? selectedMenu.name : 'PRODUCTOS DISPONIBLES'}}s</h3>
 
                     <div class="menu-grid">
-                        <div :style="`background-image: url(http://127.0.0.1:5173/resources/images/${item.nombre}.png)`"
+                        <div :style="`background-image: url(${item.imagen})`"
                             class="menu-card" v-for="(item, index) in productos" :key="index">
                             <div>
                                 <span class="bg-main-gradient item-price">

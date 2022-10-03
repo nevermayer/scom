@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('stock');
             $table->string('nombre');
+            $table->string('imagen');
             $table->string('fecha_vencimiento');
         });
     }

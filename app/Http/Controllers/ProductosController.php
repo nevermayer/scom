@@ -23,6 +23,7 @@ class ProductosController extends Controller
         $producto = new Producto();
         $producto->nombre = $request->nombre;
         $producto->descripcion = $request->descripcion;
+        $producto->imagen = $request->imagen;
         $producto->precio = $request->precio;
         $producto->cantidad = $request->cantidad;
         $producto->save();
@@ -58,6 +59,7 @@ class ProductosController extends Controller
         $producto = Producto::findOrFail($id);
         $producto->nombre = $request->nombre;
         $producto->descripcion = $request->descripcion;
+        $producto->imagen = $request->imagen;
         $producto->precio = $request->precio;
         $producto->cantidad = $request->cantidad;
         $producto->save();
@@ -87,10 +89,8 @@ class ProductosController extends Controller
 
     public function getplatillos()
     {
-        // $platillos = Platillo::join('productos', 'productos.id', '=', 'platillos.producto_id')->with('ingredientes')->get();
-          $platillos = Platillo::with(['producto'])->with(['ingredientes'=> function ($query) {
-            $query->select('nombre');
-        }])->get();
+         $platillos = Platillo::join('productos', 'productos.id', '=', 'platillos.producto_id')->with('ingredientes')->get();
+        // $platillos = Platillo::with(['producto'])->with(['ingredientes'=> function ($query) {$query->select('nombre','imagen');}])->get();
         return $platillos;
     }
 

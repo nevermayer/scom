@@ -12,6 +12,11 @@
                                     placeholder="Nombre">
                             </div>
                             <div class="form-group">
+                                <label for="">Imagen</label>
+                                <input type="text" v-model="ingrediente.imagen" class="form-control"
+                                    placeholder="URL imagen">
+                            </div>
+                            <div class="form-group">
                                 <label for="">Stoc</label>
                                 <input type="text" v-model="ingrediente.stock" class="form-control" placeholder="stock">
                             </div>
@@ -43,8 +48,9 @@ export default {
             .then(datos => {
                 this.ingrediente.nombre = datos.data.nombre
                 this.ingrediente.stock = datos.data.stock
+                this.ingrediente.imagen = datos.data.imagen
                 this.ingrediente.fecha_vencimiento = datos.data.fecha_vencimiento
-                
+
             })
     },
     data() {
@@ -53,6 +59,7 @@ export default {
             ingrediente: {
                 nombre: '',
                 stock: '',
+                imagen: '',
                 fecha_vencimiento: '',
             }
         }

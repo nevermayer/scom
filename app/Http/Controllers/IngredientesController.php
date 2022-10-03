@@ -20,6 +20,7 @@ class IngredientesController extends Controller
         $ingrediente = new  Ingrediente();
         $ingrediente->stock = $request->stock;
         $ingrediente->nombre = $request->nombre;
+        $ingrediente->imagen = $request->imagen;
         $ingrediente-> fecha_vencimiento= $request->fecha_vencimiento;
         
         $ingrediente->save();
@@ -37,6 +38,7 @@ class IngredientesController extends Controller
         $ingrediente = Ingrediente::findOrFail($id);
         $ingrediente->stock = $request->stock;
         $ingrediente->nombre = $request->nombre;
+        $ingrediente->imagen = $request->imagen;
         $ingrediente-> fecha_vencimiento= $request->fecha_vencimiento;
         $ingrediente->save();
         return $ingrediente;
