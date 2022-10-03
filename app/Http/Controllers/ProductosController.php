@@ -54,24 +54,24 @@ class ProductosController extends Controller
     }
     public function update(Request $request, $id)
     {
-        
+
         $producto = Producto::findOrFail($id);
         $producto->nombre = $request->nombre;
         $producto->descripcion = $request->descripcion;
         $producto->precio = $request->precio;
         $producto->cantidad = $request->cantidad;
         $producto->save();
-        if($request->platillo_id>0){
+        if ($request->platillo_id > 0) {
             $temp = Platillo::findOrFail($request->platillo_id);
             $temp->tiempo_elaboracion = $request->tiempo_elaboracion;
             $temp->ingredientes()->sync($request->items);
         }
-        if($request->postre_id>0){
+        if ($request->postre_id > 0) {
             $temp = Postre::findOrFail($request->postre_id);
             $temp->tiempo_elaboracion = $request->tiempo_elaboracion;
             $temp->ingredientes()->sync($request->items);
         }
-        if($request->bebida_id>0){
+        if ($request->bebida_id > 0) {
             $temp = Bebida::findOrFail($request->bebida_id);
             $temp->grado_alcoholico = $request->grado_alcoholico;
             $temp->ingredientes()->sync($request->items);
@@ -87,33 +87,38 @@ class ProductosController extends Controller
 
     public function getplatillos()
     {
-        $platillos = Platillo::join('productos', 'productos.id', '=', 'platillos.producto_id')
-            ->get(['productos.*', 'tiempo_elaboracion']);
+        // $platillos = Platillo::join('productos', 'productos.id', '=', 'platillos.producto_id')->with('ingredientes')->get();
+          $platillos = Platillo::with(['producto'])->with(['ingredientes'=> function ($query) {
+            $query->select('nombre');
+        }])->get();
         return $platillos;
     }
 
     public function getpostres()
     {
         $postres = Postre::join('productos', 'productos.id', '=', 'postres.producto_id')
-        ->get(['productos.*', 'tiempo_elaboracion']);
+            ->get(['productos.*', 'tiempo_elaboracion']);
         return $postres;
     }
 
     public function getbebidas()
     {
         $bebidas = Bebida::join('productos', 'productos.id', '=', 'bebidas.producto_id')
-        ->get(['productos.*', 'grado_alcoholico']);
+            ->get(['productos.*', 'grado_alcoholico']);
         return $bebidas;
     }
-    public function getplatillo($id){
+    public function getplatillo($id)
+    {
         $temp = Platillo::findOrFail($id);
         return $temp->ingredientes;
     }
-    public function getpostre($id){
+    public function getpostre($id)
+    {
         $temp = Postre::findOrFail($id);
         return $temp->ingredientes;
     }
-    public function getbebida($id){
+    public function getbebida($id)
+    {
         $temp = Bebida::findOrFail($id);
         return $temp->ingredientes;
     }
