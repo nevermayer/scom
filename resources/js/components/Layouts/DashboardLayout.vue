@@ -17,12 +17,6 @@
                             <span>Principal</span>
                         </router-link>
                     </li>
-                    <li v-if="user !== null && role=='admin'">
-                        <router-link to="/admin/categories">
-                            <span class="ti-face-smile"></span>
-                            <span>Categorias</span>
-                        </router-link>
-                    </li>
                     <li v-if="user !== null && (role=='admin' || role=='chef')">
                         <router-link to="/admin/productos">
                             <span class="ti-agenda"></span>
@@ -30,10 +24,16 @@
                         </router-link>
                     </li>
 
-                    <li v-if="user !== null && (role=='admin' || role=='chef')">
+                    <li v-if="user !== null">
                         <router-link to="/admin/ordenes">
                             <span class="ti-clipboard"></span>
                             <span>Ordenes</span>
+                        </router-link>
+                    </li>
+                    <li v-if="user !== null && (role=='admin' || role=='cajero')">
+                        <router-link to="/admin/facturas">
+                            <span class="ti-folder"></span>
+                            <span>Facturas</span>
                         </router-link>
                     </li>
                     <li v-if="user !== null && role=='admin'">

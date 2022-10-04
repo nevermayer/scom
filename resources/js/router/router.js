@@ -16,6 +16,14 @@ import EditUser from '@/pages/admin/Usuarios/Editar.vue'
 import Producto from '@/pages/admin/Productos/index.vue'
 import AddProducto from '@/pages/admin/Productos/Agregar.vue'
 import EditProducto from '@/pages/admin/Productos/Editar.vue'
+//SolicitudChef
+import SolicitudChef from '@/pages/admin/SolicitudChefs/index.vue'
+import AddSolicitudChef from '@/pages/admin/SolicitudChefs/Agregar.vue'
+import EditSolicitudChef from '@/pages/admin/SolicitudChefs/Editar.vue'
+//Facturas
+import Factura from '@/pages/admin/Facturas/index.vue'
+import AddFactura from '@/pages/admin/Facturas/Agregar.vue'
+import ViewFactura from '@/pages/admin/Facturas/View.vue'
 //Clientes
 import Cliente from '@/pages/admin/Clientes/index.vue'
 import AddCliente from '@/pages/admin/Clientes/Agregar.vue'
@@ -98,8 +106,7 @@ const routes = [
         path: '/admin/productos/add',
         name: 'AddProducto',
         component: AddProducto
-    }
-    ,
+    },
     {
         path: '/admin/productos/:id',
         name: 'EditProducto',
@@ -114,12 +121,43 @@ const routes = [
         path: '/admin/ingredientes/add',
         name: 'AddIngrediente',
         component: AddIngrediente
-    }
-    ,
+    },
     {
         path: '/admin/ingredientes/:id',
         name: 'EditIngrediente',
         component: EditIngrediente
+    },
+    {
+        path: '/admin/solicitudchefs',
+        name: 'SolicitudChefs',
+        component: SolicitudChef
+    },
+    {
+        path: '/admin/solicitudchefs/add',
+        name: 'AddSolicitudChef',
+        component: AddSolicitudChef
+    }
+    ,
+    {
+        path: '/admin/solicitudchefs/:id',
+        name: 'EditSolicitudChef',
+        component: EditSolicitudChef
+    },
+    {
+        path: '/admin/facturas',
+        name: 'Facturas',
+        component: Factura
+    },
+    {
+        path: '/admin/facturas/add',
+        name: 'AddFactura',
+        component: AddFactura
+    }
+    ,
+    {
+        path: '/admin/facturas/:id',
+        name: 'ViewFactura',
+        component: ViewFactura
     },
     {
         path: '/admin/clientes',

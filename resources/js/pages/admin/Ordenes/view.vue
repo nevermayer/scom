@@ -4,12 +4,10 @@
             <strong>Orden #{{ordenid}}</strong>
             <div class="mainText">
                 <div>
-                    <strong>Camarero :</strong>
-                    <h5>Chef:</h5>
+
                 </div>
                 <div>
-                    null
-                    null
+
                 </div>
                 <div>
                     <strong>Total :</strong>
@@ -54,7 +52,7 @@
 
         <div>
             <div style="flex">
-                <button class="btn btn-primary" @click="generarFactura()">generar Factura</button>
+                <button v-if="user !== null && (role=='admin' || role=='cajero')" class="btn btn-primary" @click="generarFactura()">generar Factura</button>
                 <button class="btn btn-main" @click="print()">Imprimir Orden</button>
             </div>
         </div>
@@ -76,7 +74,8 @@ export default {
                 total: 0,
                 fecha: 0
             },
-            items: []
+            items: [],
+            usuario: ''
         }
     },
     mounted() {
@@ -86,14 +85,16 @@ export default {
                 this.Orden.nombre = datos.data.nombre
                 this.Orden.estado = datos.data.estado
                 this.Orden.total = datos.data.total
-                this.Orden.fecha = datos.data.fecha
+                this.Orden.fecha = datos.data.fecha.split("T", 1)
                 this.items = datos.data.productos
                 console.log(datos.data.productos)
             })
-        // this.getOrders()
+        if (localStorage.user)
+            this.usuario = JSON.parse(localStorage.user)
     }, methods: {
         generarFactura() {
             const data = {
+                cajero_id: this.usuario.cajeros[0].id,
                 orden_id: this.ordenid,
                 total: this.Orden.total
             }
@@ -103,7 +104,7 @@ export default {
                 }
             }).then(res => {
                 console.log(res.data.data)
-                this.$router.push('/admin/factura/'+res.data.data)
+                this.$router.push('/admin/facturas/' + res.data.data)
             }).catch(error => {
                 if (error) {
                     return console.log(error)
@@ -130,6 +131,13 @@ export default {
         }, editar(id) {
             this.$router.push('/admin/ordenes/' + id)
         }
+    }, computed: {
+        user() {
+            return this.$store.getters.getUser
+        },
+        role(){
+            return this.$store.getters.getRole
+        }
     }
 }
 </script>
@@ -140,6 +148,7 @@ export default {
     body * {
         visibility: hidden;
     }
+
     #print,
     #print * {
         visibility: visible;

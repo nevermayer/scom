@@ -3,17 +3,14 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Factura;
-
+use App\Models\Orden;
 class FacturaController extends Controller
 {
 
     public function index()
     {
         $facturas = Factura::all();
-        return response()->json([
-            "success" => true,
-            "data" => $facturas
-        ]);
+        return $facturas;
     }
     public function store(Request $request)
     {
@@ -24,6 +21,7 @@ class FacturaController extends Controller
                 'total' => $request->total,
                 'fecha' => $fecha,
                 'orden_id' => $request->orden_id,
+                'cajero_id' => $request->cajero_id,
             ]);
         }
         return response()->json([
@@ -32,9 +30,10 @@ class FacturaController extends Controller
     public function show($id)
     {
         $factura = Factura::find($id);
+        $orden=Orden::find($factura->orden_id);
         return response()->json([
-            "success" => true,
-            "data" => $factura
+            "factura" => $factura,
+            "consumo" => $orden->productos
         ]);
     }
     public function update(Request $request, $id)

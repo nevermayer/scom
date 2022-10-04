@@ -9,6 +9,7 @@ class Factura extends Model
 {
 	protected $table = 'factura';
 	public $timestamps = false;
+	protected $dateFormat = 'Y-m-d';
 
 	protected $casts = [
 		'total' => 'float',

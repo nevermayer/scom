@@ -76,7 +76,6 @@ class ProductosController extends Controller
         if ($request->bebida_id > 0) {
             $temp = Bebida::findOrFail($request->bebida_id);
             $temp->grado_alcoholico = $request->grado_alcoholico;
-            $temp->ingredientes()->sync($request->items);
         }
         $temp->save();
         return $producto;

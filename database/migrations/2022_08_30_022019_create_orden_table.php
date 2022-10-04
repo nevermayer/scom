@@ -15,13 +15,13 @@ return new class extends Migration
     {
         Schema::create('orden', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
-            $table->string('apellido_pat');
+            $table->string('nombre')->nullable();
+            $table->string('apellido_pat')->nullable();
             $table->double('total');
             $table->string('estado');
             $table->date('fecha');
-            $table->dateTime('hora');
-            $table->integer('telefono');
+            $table->dateTime('hora')->nullable();
+            $table->integer('telefono')->nullable();
             $table->foreignId('chef_id')
                 ->nullable()
                 ->constrained('chef')

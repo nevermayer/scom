@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Orden;
 use App\Models\Producto;
+use App\Models\Mesa;
 use Illuminate\Http\Request;
 
 class OrdenController extends Controller
@@ -92,6 +93,11 @@ class OrdenController extends Controller
             ]);
             Producto::find($res['id'])->decrement('cantidad', $res['qty']);
         }
+        $mesa=Mesa::findOrFail($request->mesa_id);
+        $mesa->orden_id=$orden->id;
+        $mesa->camarero_id=$request->camarero_id;
+        $mesa->status='Ocupado';
+        $mesa->save();
         $msg = "se creo la orden";
         return response()->json([
             "message" => $msg

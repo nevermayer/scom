@@ -219,6 +219,7 @@ export default {
         createOrder() {
             const token = localStorage.token
             const data = {
+                mesa_id: this.$route.params.id,
                 camarero_id: this.usuario.camareros[0].id,
                 total: this.cartTotal,
                 items: JSON.stringify(this.cart)
