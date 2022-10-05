@@ -17,7 +17,7 @@ import Producto from '@/pages/admin/Productos/index.vue'
 import AddProducto from '@/pages/admin/Productos/Agregar.vue'
 import EditProducto from '@/pages/admin/Productos/Editar.vue'
 //SolicitudChef
-import SolicitudChef from '@/pages/admin/SolicitudChefs/index.vue'
+import SolicitudChef from '@/pages/admin/SolicitudChefs/view.vue'
 import AddSolicitudChef from '@/pages/admin/SolicitudChefs/Agregar.vue'
 import EditSolicitudChef from '@/pages/admin/SolicitudChefs/Editar.vue'
 //Facturas

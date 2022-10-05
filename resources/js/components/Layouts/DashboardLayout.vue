@@ -60,6 +60,12 @@
                             <span>Ingredientes</span>
                         </router-link>
                     </li>
+                    <li v-if="user !== null && (role=='admin' || role=='chef')">
+                        <router-link to="/admin/solicitudchefs">
+                            <span class="ti-agenda"></span>
+                            <span>Solicitud Ingredientes</span>
+                        </router-link>
+                    </li>
                 </ul>
             </div>
         </div>

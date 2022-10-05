@@ -40,6 +40,6 @@ class Chef extends Model
 	}
 
 	public function ingredientes(){
-        return $this->belongsToMany(Ingrediente::class, 'solicitud_chef');
+        return $this->belongsToMany(Ingrediente::class, 'solicitud_chef', 'chef_id', 'ingredientes_id');
     }
 }

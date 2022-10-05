@@ -1,70 +1,157 @@
 <template>
     <dashboard-layout>
-        <div>
-            <h2 class="dash-title">Nueva Solicitud</h2>
-            <section class="recent">
-                <div class="">
-                    <div class="activity-card pad-1">
-                        <form enctype="multipart/form-data">
-                            <div class="form-group">
-                                <label for="">Cantidad</label>
-                                <input type="number" v-model="SolicitudChef.cantidad" class="form-control"
-                                    placeholder="cantidad">
-                            </div>
-                            <div class="form-group">
-                                <label for="">Status</label>
-                                <select v-model="SolicitudChef.status" class="form-control">
-                                    <option selected value="Status">Status</option>
-                                    <option value="completada">Completado</option>
-                                    <option value="sin completar">Sin Completar</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="">Fecha</label>
-                                <input type="date" v-model="SolicitudChef.fecha" class="form-control"
-                                    placeholder="fecha de solicitud">
-                            </div>
-                            <div class="form-group">
-                                <button type="button" @click="addSolicitudChef" class="btn btn-main">Submit</button>
-                            </div>
-                        </form>
+        <form enctype="multipart/form-data">
+            <div id="print-area">
+                <div class="row ">
+                    <hr />
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <h2>Solicitud de ingredientes :</h2>
                     </div>
                 </div>
-            </section>
-        </div>
+                <div class="row activity-card">
+                    <hr />
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="table-responsive">
+                            <table class="table table-striped  table-hover">
+                                <thead>
+                                    <tr>
+                                        <th class='text-center'>ID</th>
+                                        <th>Ingrediente</th>
+                                        <th class='text-center'>Cantidad</th>
+                                        <th class='text-right'></th>
+                                    </tr>
+                                </thead>
+                                <tbody class='items'>
+                                    <tr v-for="(item, index) in SolicitudChef.items" :key="index">
+                                        <td class='text-center'>{{item.id}}</td>
+                                        <td>{{item.nombre}}</td>
+                                        <td class='text-center'>{{item.cantidad}}</td>
+                                        <td class='text-right'><button type="button" class="btn btn-main-gradient"
+                                                @click="dropItem(index)"><span class="ti-trash"></span></button></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="6">
+                                            <button type="button" class="btn btn-info btn-sm" @click="addIngrediente()">
+                                                Agregar Ingrediente</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <hr />
+            </div>
+            <div class="row pad-bottom  pull-right">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <button type="button" class="btn btn-success" @click="addSolicitudChef()">Generar solicitud</button>
+                </div>
+            </div>
+        </form>
     </dashboard-layout>
+    <modal v-if="additemModal" @close="additemModal = false">
+        <template #header>
+            <h4 class="modal-title" id="myModalLabel">Agregar ingrediente</h4>
+        </template>
+        <template #body>
+            <div class="col-md-12">
+                <label>Ingrediente</label>
+                <input class="form-control" v-model="item.nombre">
+                <input type="hidden" class="form-control" v-model="item.id">
+                <ul v-if="item.id==0">
+                    <li v-for="(ingrediente, index) in ingredientes" :key="index"
+                        @click="selectIngrediente(ingrediente)">{{ingrediente.nombre}}</li>
+                </ul>
+            </div>
+            <div class="col-md-12">
+                <label>Cantidad</label>
+                <input type="number" class="form-control" v-model="item.cantidad" required>
+
+            </div>
+        </template>
+        <template #footer>
+            <div class="modal-footer">
+                <button class="btn btn-main-gradient" @click="clean()">
+                    Cerrar
+                </button>
+                <button class="btn btn-main" @click="addTable(item)">
+                    Agregar
+                </button>
+            </div>
+        </template>
+    </modal>
 </template>
 
 <script>
 import DashboardLayout from '@/components/Layouts/DashboardLayout.vue'
-
+import modal from '@/components/Modal.vue'
 export default {
     name: 'Agregar',
     components: {
         DashboardLayout,
+        modal
     },
     data() {
         return {
+            additemModal: false,
+            item: {
+                id: 0,
+                nombre: '',
+                cantidad: 1
+            },
             categories: [],
+            ingredientes: '',
             SolicitudChef: {
                 items: [],
-                id_chef: '',
-                cantidad: '',
-                status: '',
-                fecha:'',
-            }
+                id_chef: ''
+            },
+            usuario:''
         }
     },
     mounted() {
+        if (localStorage.user){
+            this.usuario = JSON.parse(localStorage.user)
+        }
+        this.$axios.get('/api/ingredientes')
+            .then(res => {
+                this.ingredientes = res.data
+            })
+            .catch(error => {
+                console.log(error.response)
+            })
 
     },
     methods: {
-        addSolicitudChef() {
-
-            if (!this.SolicitudChef.id_ingrediente || !this.SolicitudChef.id_chef || !this.SolicitudChef.cantidad || !this.SolicitudChef.status || this.SolicitudChef.fecha) {
-                return this.$alertify.error('Incomplete form data')
+        clean() {
+            this.item = {
+                id: 0,
+                nombre: '',
+                cantidad: 1
             }
-            this.$axios.post('/api/solicitud-chef', this.SolicitudChef, {
+            this.additemModal = false
+        },
+        addIngrediente() {
+            this.additemModal = true
+        },
+        addTable(item) {
+            this.SolicitudChef.items.push(item)
+            this.clean()
+        },
+        selectIngrediente(item) {
+            this.item.id = item.id
+            this.item.nombre = item.nombre
+        },
+        dropItem(index) {
+            this.SolicitudChef.items.splice(index, 1)
+        },
+        addSolicitudChef() {
+            const data = {
+                chef_id: this.usuario.camareros[0].id,
+                items: JSON.stringify(this.SolicitudChef.items)
+            }
+            this.$axios.post('/api/solicitud-chef', data, {
                 headers: {
                     Authorization: `Bearer ${localStorage.token}`
                 }
@@ -79,12 +166,16 @@ export default {
                     this.$alertify.error(Object.values(error.response.data)[0][0])
                 })
         }
+    }, computed: {
+        search() {
+
+        }
+
     }
 }
+
 </script>
 
-<style lang="css">
-.pad-1 {
-    padding: 1rem
-}
+<style scoped>
+@import "@/assets/css/bootstrap.min.css";
 </style>

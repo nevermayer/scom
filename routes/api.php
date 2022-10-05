@@ -98,5 +98,6 @@ Route::controller(FacturaController::class)->group(function () {
     Route::delete('/factura/{id}', 'destroy');
 });
 Route::controller(SolicitudChefController::class)->group(function () {
+    Route::get('solicitud-chef','index');
     Route::post('solicitud-chef','Solicitud');
 });
