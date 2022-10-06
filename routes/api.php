@@ -10,6 +10,7 @@ use App\Http\Controllers\MesaController;
 use App\Http\Controllers\OrdenController;
 use App\Http\Controllers\FacturaController;
 use App\Http\Controllers\SolicitudChefController;
+use App\Http\Controllers\AuditoriaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -100,4 +101,10 @@ Route::controller(FacturaController::class)->group(function () {
 Route::controller(SolicitudChefController::class)->group(function () {
     Route::get('solicitud-chef','index');
     Route::post('solicitud-chef','Solicitud');
+});
+
+//AUDITORIA
+Route::controller(AuditoriaController::class)->group(function () {
+    Route::get('auditoria','index');
+    Route::post('auditoria','store');
 });
