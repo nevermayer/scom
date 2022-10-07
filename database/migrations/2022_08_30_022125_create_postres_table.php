@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('postres', function (Blueprint $table) {
             $table->id();
-            $table->time('tiempo_elaboracion');
+            $table->integer('tiempo_elaboracion');
             $table->foreignId('producto_id')
                 ->constrained('productos')
                 ->cascadeOnDelete();
