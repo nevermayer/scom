@@ -18,7 +18,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="(user, auditoria, index) in users" :key="index" >
+                                    <tr v-for="(user, auditoria, index) in auditorias" :key="index" >
                                         <td>{{user.id}}</td>
                                         <td>{{user.nombre_cuenta}}</td>
                                         <td>{{auditoria.id}}</td>
@@ -52,13 +52,14 @@ export default {
     },
     methods: {
         getAuditorias() {
-            this.$axios.get('/api/auditorias', {
+            this.$axios.get('/api/auditoria', {
                 headers: {
                     Authorization: `Bearer ${localStorage.token}`
                 }
             })
             .then(res => {
-                this.users = res.data.data
+                this.auditorias = res.data
+                
             })
             .catch(error => {
                 console.log(error.response)
