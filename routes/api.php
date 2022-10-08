@@ -11,6 +11,7 @@ use App\Http\Controllers\OrdenController;
 use App\Http\Controllers\FacturaController;
 use App\Http\Controllers\SolicitudChefController;
 use App\Http\Controllers\AuditoriaController;
+use App\Http\Controllers\ReportesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -107,4 +108,8 @@ Route::controller(SolicitudChefController::class)->group(function () {
 Route::controller(AuditoriaController::class)->group(function () {
     Route::get('auditoria','index');
     Route::post('auditoria','store');
+});
+//REPORTES
+Route::controller(ReportesController::class)->group(function () {
+    Route::get('reportes','index');
 });
