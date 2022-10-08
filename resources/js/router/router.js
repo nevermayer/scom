@@ -39,6 +39,8 @@ import ViewOrden from '@/pages/admin/Ordenes/view.vue'
 import Ingrediente from '@/pages/admin/Ingredientes/index.vue'
 import AddIngrediente from '@/pages/admin/Ingredientes/Agregar.vue'
 import EditIngrediente from '@/pages/admin/Ingredientes/Editar.vue'
+//Auditoria
+import Auditoria from '@/pages/admin/Auditorias/index.vue'
 //definiendo rutas
 const routes = [
     {
@@ -199,7 +201,12 @@ const routes = [
         path: '/admin/ordenes/:id',
         name: 'ViewOrden',
         component: ViewOrden
-    }
+    },
+    {
+        path: '/admin/auditorias',
+        name: 'Auditoria',
+        component: Auditoria
+    },
 
 ];
 const router = createRouter({
