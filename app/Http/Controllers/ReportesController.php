@@ -9,6 +9,6 @@ class ReportesController extends Controller
 {
     public function index(Request $request){
         $fecha = date('Y-m-d');
-        $factura = Factura::whereMonth("fecha",'10')->get()->sum('total');
+        $factura = Factura::where('fecha','=', $fecha)->sum('total');
     }
 }
