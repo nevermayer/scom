@@ -53,29 +53,99 @@
             </div>
         </form>
     </dashboard-layout>
+    <modal v-if="additemModal" @close="additemModal = false">
+        <template #header>
+            <h4 class="modal-title" id="myModalLabel">Agregar Pedido</h4>
+        </template>
+        <template #body>
+            <div class="col-md-12">
+                <label>Pedido</label>
+                <input class="form-control" v-model="item.nombre">
+                <input type="hidden" class="form-control" v-model="item.id">
+                <ul v-if="item.id==0">
+                    <li v-for="(Orden, index) in Orden" :key="index"
+                        @click="selecOrden(Orden)">{{Orden.nombre}}</li>
+                </ul>
+            </div>
+            <div class="col-md-12">
+                <label>Cantidad</label>
+                <input type="number" class="form-control" v-model="item.cantidad" required>
+
+            </div>
+        </template>
+        <template #footer>
+            <div class="modal-footer">
+                <button class="btn btn-main-gradient" @click="clean()">
+                    Cerrar
+                </button>
+                <button class="btn btn-main" @click="addTable(item)">
+                    Agregar
+                </button>
+            </div>
+        </template>
+    </modal>
 </template>
 
 <script>
 import DashboardLayout from '@/components/Layouts/DashboardLayout.vue'
-
+import modal from '@/components/Modal.vue'
 export default {
     name: 'Agregar',
     components: {
         DashboardLayout,
+        modal
     },
     data() {
         return {
+            additemModal: false,
+            item: {
+                id: 0,
+                nombre: '',
+                cantidad: 1
+            },
             categories: [],
             Factura: {
                 total:'',
                 fecha:'',
-            }
+            },
+            usuario:''
         }
     },
     mounted() {
-
+        if (localStorage.user){
+            this.usuario = JSON.parse(localStorage.user)
+        }
+        this.$axios.get('/api/facturas')
+            .then(res => {
+                this.facturas = res.data
+            })
+            .catch(error => {
+                console.log(error.response)
+            })
     },
     methods: {
+        clean() {
+            this.item = {
+                id: 0,
+                nombre: '',
+                cantidad: 1
+            }
+            this.additemModal = false
+        },
+        addOrden() {
+            this.additemModal = true
+        },
+        addTable(item) {
+            this.Factura.items.push(item)
+            this.clean()
+        },
+        selectOrden(item) {
+            this.item.id = item.id
+            this.item.nombre = item.nombre
+        },
+        dropItem(index) {
+            this.Factura.items.splice(index, 1)
+        },
         addFactura() {
 
             if (!this.Factura.total || !this.Factura.fecha ) {
