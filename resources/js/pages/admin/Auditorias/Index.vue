@@ -66,7 +66,7 @@ export default {
             })
         },
         editar(id){
-            this.$router.push('/admin/auditoria/'+id)
+            this.$router.push('/admin/auditorias/'+id)
         },
     }
 }

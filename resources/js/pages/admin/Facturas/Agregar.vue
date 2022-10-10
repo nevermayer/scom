@@ -1,28 +1,57 @@
 <template>
     <dashboard-layout>
-        <div>
-            <h2 class="dash-title">Nueva Factura</h2>
-            <section class="recent">
-                <div class="">
-                    <div class="activity-card pad-1">
-                        <form enctype="multipart/form-data">
-                            <div class="form-group">
-                                <label for="">Total</label>
-                                <input type="number" v-model="Factura.total" class="form-control" placeholder="Total de la Factura">
-                            </div>
-                            <div class="form-group">
-                                <label for="">Fecha</label>
-                                <input type="date" v-model="Factura.fecha" class="form-control"
-                                    placeholder="Fecha de emision">
-                            </div>
-                            <div class="form-group">
-                                <button type="button" @click="addFactura" class="btn btn-main">Submit</button>
-                            </div>
-                        </form>
+        <form enctype="multipart/form-data">
+            <div id="print-area">
+                <div class="row ">
+                    <hr />
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <h2>Solicitud de Factura :</h2>
                     </div>
                 </div>
-            </section>
-        </div>
+                <div class="row activity-card">
+                    <hr />
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="table-responsive">
+                            <table class="table table-striped  table-hover">
+                                <thead>
+                                    <tr>
+                                        <th class='text-center'>ID</th>
+                                        <th>Total</th>
+                                        <th class='text-center'>Fecha</th>
+                                        <th class='text-center'>Cajero Id</th>
+                                        <th class='text-center'>Orden Id</th>
+                                        <th class='text-right'></th>
+                                    </tr>
+                                </thead>
+                                <tbody class='items'>
+                                    <tr v-for="(item, index) in Factura.items" :key="index">
+                                        <td class='text-center'>{{item.id}}</td>
+                                        <td>{{item.nombre}}</td>
+                                        <td class='text-center'>{{item.cantidad}}</td>
+                                        <td class='text-right'><button type="button" class="btn btn-main-gradient"
+                                                @click="dropItem(index)"><span class="ti-trash"></span></button></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="6">
+                                            <button type="button" class="btn btn-info btn-sm" @click="addFactura()">
+                                                Agregar Pedido</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <hr />
+            </div>
+            <div class="row pad-bottom  pull-right">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <button type="button" class="btn btn-success" @click="addFactura()">Generar Factura</button>
+                </div>
+            </div>
+        </form>
     </dashboard-layout>
 </template>
 

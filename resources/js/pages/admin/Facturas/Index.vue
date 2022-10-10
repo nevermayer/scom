@@ -2,6 +2,10 @@
     <dashboard-layout>
         <div slot="main-content">
             <h2 class="dash-title">Facturas</h2>
+            <div class="page-action">
+                <button class="btn btn-main" @click="$router.push('/admin/facturas/add')"><span
+                        class="ti-plus"></span> Nueva Factura</button>
+            </div>
             <section class="recent">
                 <div class="">
                     <div class="activity-card">
