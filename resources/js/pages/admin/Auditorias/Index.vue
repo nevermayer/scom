@@ -18,12 +18,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="(user, auditoria, index) in auditorias" :key="index" >
-                                        <td>{{user.id}}</td>
-                                        <td>{{user.nombre_cuenta}}</td>
+                                    <tr v-for="(auditoria, index) in auditoria" :key="index" >
+                                        <td>{{auditoria.id}}</td>
+                                        <td>{{auditoria.nombre_cuenta}}</td>
                                         <td>{{auditoria.id}}</td>
                                         <td>{{auditoria.fecha}}</td>
-                                        <td><button class="btn" @click="editar(user.id)"><span class="ti-pencil-alt"></span></button></td>
+                                        <td><button class="btn" @click="editar(auditoria.id)"><span class="ti-pencil-alt"></span></button></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -44,21 +44,21 @@ export default {
     },
     data() {
         return {
-            auditorias: []
+            auditoria: []
         }
     },
     mounted() {
-        this.getAuditorias()
+        this.getAuditoria()
     },
     methods: {
-        getAuditorias() {
+        getAuditoria() {
             this.$axios.get('/api/auditoria', {
                 headers: {
                     Authorization: `Bearer ${localStorage.token}`
                 }
             })
             .then(res => {
-                this.auditorias = res.data
+                this.auditoria = res.data
                 
             })
             .catch(error => {
@@ -66,7 +66,7 @@ export default {
             })
         },
         editar(id){
-            this.$router.push('/admin/usuarios/'+id)
+            this.$router.push('/admin/auditoria/'+id)
         },
     }
 }
