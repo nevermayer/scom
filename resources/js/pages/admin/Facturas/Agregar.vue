@@ -55,7 +55,7 @@
     </dashboard-layout>
     <modal v-if="additemModal" @close="additemModal = false">
         <template #header>
-            <h4 class="modal-title" id="myModalLabel">Agregar Pedido</h4>
+            <h4 class="modal-title" id="myModalLabel">Agregar Pedidop1</h4>
         </template>
         <template #body>
             <div class="col-md-12">
