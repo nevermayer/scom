@@ -1,17 +1,18 @@
 <template>
     <dashboard-layout>
         <section id="print">
-
+            <strong>FACTURA #{{Factura.id}}</strong>
             <div class="mainText">
-                <strong>FACTURA #{{Factura.id}}</strong>
-                <div>
 
+                <div>
+                    <strong>CI o NIT:</strong> {{Cliente.id}}
+                    <strong>Nombre:</strong>{{Cliente.apellido_pat}} {{Cliente.nombre}}
                 </div>
                 <div>
 
                 </div>
                 <div>
-                    
+
                     <strong>Total :</strong>{{Factura.total}}Bs
                     <br><strong>Fecha :</strong>{{Factura.fecha}}
                 </div>
@@ -25,8 +26,6 @@
             <table class="table table-borderless factura">
                 <thead>
                     <tr>
-                        <th>Nit/C.I</th>
-                        <th>NIT</th>
                         <th>Cant.</th>
                         <th>Nombre</th>
                         <th>Precio Unitario</th>
@@ -75,6 +74,7 @@ export default {
             .then(datos => {
                 this.Factura = datos.data.factura
                 this.Detalle = datos.data.consumo
+                this.Cliente = datos.data.cliente
                 this.Factura.fecha = this.Factura.fecha.split("T", 1)
             })
     },
@@ -83,6 +83,7 @@ export default {
             facturaid: null,
             Factura: [],
             Detalle: [],
+            Cliente: []
         }
     }, methods: {
         print() {

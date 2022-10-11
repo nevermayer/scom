@@ -32,10 +32,10 @@
                                 <thead>
                                     <tr>
                                         <th class='text-center'>ID</th>
-                                        <th>Total</th>
-                                        <th class='text-center'>Fecha</th>
-                                        <th class='text-center'>Cajero Id</th>
-                                        <th class='text-center'>Orden Id</th>
+                                        <th>Producto</th>
+                                        <th class='text-center'>Cantidad</th>
+                                        <th class='text-center'>Precio unitario</th>
+                                        <th class='text-center'>Importe</th>
                                         <th class='text-right'></th>
                                     </tr>
                                 </thead>
@@ -43,7 +43,9 @@
                                     <tr v-for="(item, index) in Factura.items" :key="index">
                                         <td class='text-center'>{{item.id}}</td>
                                         <td>{{item.nombre}}</td>
-                                        <td class='text-center'>{{item.cantidad}}</td>
+                                        <td class='text-center'>{{item.pivot.cantidad}}</td>
+                                        <td class='text-center'>{{item.precio}}</td>
+                                        <td class='text-center'>{{item.pivot.cantidad*item.precio}}</td>
                                         <td class='text-right'><button type="button" class="btn btn-main-gradient"
                                                 @click="dropItem(index)"><span class="ti-trash"></span></button></td>
                                     </tr>
@@ -114,11 +116,12 @@ export default {
                 telefono: '',
                 activo: ''
             },
-            ordenid:0,
+            ordenid: 0,
             categories: [],
             Factura: {
                 total: '',
                 fecha: '',
+                items: []
             },
             usuario: '',
 
@@ -147,12 +150,12 @@ export default {
                     console.log(error.response)
                 })
         },
-        additemsOrder(){
+        additemsOrder() {
             console.log(this.ordenid)
             this.$axios.get('/api/orden/' + this.ordenid)
                 .then(res => {
-                    console.log(res.data)
-                    this.cliente = res.data
+                    console.log(res.data.productos)
+                    this.Factura.items = res.data.productos
                 })
                 .catch(error => {
                     console.log(error.response)
@@ -181,9 +184,17 @@ export default {
             this.Factura.items.splice(index, 1)
         },
         addFactura() {
+            console.log(this.usuario.cajeros[0].id)
+            let total=0
+            this.Factura.items.map(item => {
+                total += Number(item.precio) * Number(item.pivot.cantidad)
+            })
             const data = {
-                cajero_id: this.usuario.camareros[0].id,
-                items: JSON.stringify(this.Factura.items)
+                cajero_id: this.usuario.cajeros[0].id,
+                items: JSON.stringify(this.Factura.items),
+                orden_id: this.ordenid,
+                cliente_id:this.cliente.id,
+                total:        total    
             }
             this.$axios.post('/api/factura', data, {
                 headers: {

@@ -15,7 +15,7 @@ class FacturaController extends Controller
     public function store(Request $request)
     {
         $fecha = date('Y-m-d');
-        $factura = Factura::where('orden_id', '=', $request->orden_id)->first();
+       /* $factura = Factura::where('orden_id', '=', $request->orden_id)->first();
         if (!isset($factura->id)) {
             $factura = Factura::create([
                 'total' => $request->total,
@@ -23,7 +23,14 @@ class FacturaController extends Controller
                 'orden_id' => $request->orden_id,
                 'cajero_id' => $request->cajero_id,
             ]);
-        }
+        }*/
+        $factura = Factura::create([
+            'total' => $request->total,
+            'fecha' => $fecha,
+            'orden_id' => $request->orden_id,
+            'cliente_id'=>$request->cliente_id,
+            'cajero_id' => $request->cajero_id,
+        ]);
         return response()->json([
             "data" => $factura->id]);
     }
@@ -33,7 +40,8 @@ class FacturaController extends Controller
         $orden=Orden::find($factura->orden_id);
         return response()->json([
             "factura" => $factura,
-            "consumo" => $orden->productos
+            "consumo" => $orden->productos,
+            "cliente"=>$factura->cliente
         ]);
     }
     public function update(Request $request, $id)
