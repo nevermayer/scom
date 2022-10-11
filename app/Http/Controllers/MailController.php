@@ -13,14 +13,10 @@ class MailController extends Controller
     {
         
        $mailData = [
-          'title' => 'Mail from TtSolutionStuff.com',
-          'body'  => 'This is for testing email using smtp.'
+         'nombre'=>$request->nombre,
+          'email' => $request->email,
+          'mensaje'  => $request->mensaje,
        ];
-
-    Mail::to('samueldxa@gmail.com')->send(new DemoMail($mailData));
-    dd("Email is sent successfully.");
-    }
-    
-   
-    
+    Mail::to('pruebacontrolador@gmail.com')->send(new DemoMail($mailData));
+    }  
 }

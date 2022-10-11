@@ -7,6 +7,11 @@
                     <div class="activity-card pad-1">
                         <form enctype="multipart/form-data">
                             <div class="form-group">
+                                <label for="">CI o NIT</label>
+                                <input type="text" v-model="cliente.ci" class="form-control"
+                                    placeholder=" Introduce CI o NIT">
+                            </div>
+                            <div class="form-group">
                                 <label for="">Nombre</label>
                                 <input type="text" v-model="cliente.nombre" class="form-control" placeholder="Nombre">
                             </div>
@@ -65,6 +70,7 @@ export default {
         return {
             categories: [],
             cliente: {
+                ci:'',
                 nombre: '',
                 apellido_pat: '',
                 apellido_mat: '',

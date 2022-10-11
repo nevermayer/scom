@@ -30,6 +30,8 @@ class DemoMail extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this
+        ->subject('Thank you for subscribing to our newsletter')
+        ->markdown('emails.subscribers');
     }
 }

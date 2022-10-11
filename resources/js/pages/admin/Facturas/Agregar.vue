@@ -9,20 +9,21 @@
                     </div>
                 </div>
                 <div class="form-group">
-                                <label for="">NIT</label>
-                                <input type="number" v-model="Factura.cliente_id" class="form-control" placeholder="NIT/ID Cliente">
-                            </div>
-                            <div class="form-group">
-                                <label for="">Nombre</label>
-                                <input type="number" v-model="Factura.nombre" class="form-control" placeholder="Nombre Cliente">
-                            </div>
-                            <div class="form-group">
-                                <label for="">Total</label>
-                                <input type="number" v-model="Factura.total" class="form-control" placeholder="Total">
-                            </div>
-                            <div class="form-group">
-                                <button type="button" @click="addFactura" class="btn btn-main"> Submit</button>
-                            </div>
+                    <label for="">NIT</label>
+                    <input type="number" v-model="cliente.id" class="form-control" placeholder="NIT/ID Cliente">
+                </div>
+                <div class="form-group">
+                    <button type="button" @click="buscarCliente()" class="btn btn-main"> Buscar Cliente</button>
+                </div>
+                <div class="form-group">
+                    <label for="">Nombre</label>
+                    <input type="text" v-model="cliente.nombre" class="form-control" placeholder="Nombre Cliente">
+                </div>
+                <div class="form-group">
+                    <label for="">Total</label>
+                    <input type="number" v-model="Factura.total" class="form-control" placeholder="Total">
+                </div>
+
                 <div class="row activity-card">
                     <hr />
                     <div class="col-lg-12 col-md-12 col-sm-12">
@@ -48,7 +49,7 @@
                                     </tr>
                                     <tr>
                                         <td colspan="6">
-                                            <button type="button" class="btn btn-info btn-sm" @click="addFactura()">
+                                            <button type="button" class="btn btn-info btn-sm" @click="addOrden()">
                                                 Agregar Orden</button>
                                         </td>
                                     </tr>
@@ -75,17 +76,7 @@
         <template #body>
             <div class="col-md-12">
                 <label>Orden</label>
-                <input class="form-control" v-model="item.nombre">
-                <input type="hidden" class="form-control" v-model="item.id">
-                <ul v-if="item.id==0">
-                    <li v-for="(Orden, index) in Orden" :key="index"
-                        @click="selectOrden(Orden)">{{Orden.nombre}}</li>
-                </ul>
-            </div>
-            <div class="col-md-12">
-                <label>Cantidad</label>
-                <input type="number" class="form-control" v-model="item.cantidad" required>
-
+                <input class="form-control" v-model="ordenid">
             </div>
         </template>
         <template #footer>
@@ -93,7 +84,7 @@
                 <button class="btn btn-main-gradient" @click="clean()">
                     Cerrar
                 </button>
-                <button class="btn btn-main" @click="addTable(item)">
+                <button class="btn btn-main" @click="additemsOrder()">
                     Agregar
                 </button>
             </div>
@@ -113,21 +104,28 @@ export default {
     data() {
         return {
             additemModal: false,
-            item: {
-                id: 0,
+            cliente: {
+                id: '',
                 nombre: '',
-                cantidad: 1
+                apellido_pat: '',
+                apellido_mat: '',
+                email: '',
+                password: '',
+                telefono: '',
+                activo: ''
             },
+            ordenid:0,
             categories: [],
             Factura: {
-                total:'',
-                fecha:'',
+                total: '',
+                fecha: '',
             },
-            usuario:''
+            usuario: '',
+
         }
     },
     mounted() {
-        if (localStorage.user){
+        if (localStorage.user) {
             this.usuario = JSON.parse(localStorage.user)
         }
         this.$axios.get('/api/facturas')
@@ -139,6 +137,27 @@ export default {
             })
     },
     methods: {
+        buscarCliente() {
+            this.$axios.get('/api/cliente/' + this.cliente.id)
+                .then(res => {
+                    console.log(res.data)
+                    this.cliente = res.data
+                })
+                .catch(error => {
+                    console.log(error.response)
+                })
+        },
+        additemsOrder(){
+            console.log(this.ordenid)
+            this.$axios.get('/api/orden/' + this.ordenid)
+                .then(res => {
+                    console.log(res.data)
+                    this.cliente = res.data
+                })
+                .catch(error => {
+                    console.log(error.response)
+                })
+        },
         clean() {
             this.item = {
                 id: 0,
@@ -191,5 +210,5 @@ export default {
 </script>
 
 <style scoped>
-    @import "@/assets/css/bootstrap.min.css";
-    </style>
+@import "@/assets/css/bootstrap.min.css";
+</style>

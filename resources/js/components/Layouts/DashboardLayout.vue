@@ -42,6 +42,12 @@
                             <span>Usuarios</span>
                         </router-link>
                     </li>
+                    <li v-if="user !== null && role=='admin'">
+                        <router-link to="/admin/auditorias" >
+                            <span class="ti-folder"></span>
+                            <span>Auditorias</span>
+                        </router-link>
+                    </li>
                     <li v-if="user !== null && (role=='admin' || role=='cajero')">
                         <router-link to="/admin/clientes">
                             <span class="ti-folder"></span>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Administrador;
+use App\Models\Auditoria;
 use App\Models\Cajero;
 use App\Models\Camarero;
 use App\Models\Chef;
@@ -76,6 +77,10 @@ class UsersController extends Controller
             if (Hash::check($request->password, $usuario->password)) {
                 //creando token 
                 $token = $usuario->createToken("auth_token")->plainTextToken;
+                Auditoria::create([
+                    'fecha' => date('Y-m-d'),
+                    'id_usuario' => $usuario->id
+                ]);
                 isset($usuario->chefs);
                 isset($usuario->camareros);
                 isset($usuario->cajeros);
