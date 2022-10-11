@@ -8,6 +8,21 @@
                         <h2>Solicitud de Factura :</h2>
                     </div>
                 </div>
+                <div class="form-group">
+                                <label for="">NIT</label>
+                                <input type="number" v-model="Factura.cliente_id" class="form-control" placeholder="NIT/ID Cliente">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Nombre</label>
+                                <input type="number" v-model="Factura.nombre" class="form-control" placeholder="Nombre Cliente">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Total</label>
+                                <input type="number" v-model="Factura.total" class="form-control" placeholder="Total">
+                            </div>
+                            <div class="form-group">
+                                <button type="button" @click="addFactura" class="btn btn-main"> Submit</button>
+                            </div>
                 <div class="row activity-card">
                     <hr />
                     <div class="col-lg-12 col-md-12 col-sm-12">
