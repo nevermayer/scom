@@ -13,6 +13,8 @@ use App\Http\Controllers\SolicitudChefController;
 use App\Http\Controllers\AuditoriaController;
 use App\Http\Controllers\ReportesController;
 
+use App\Http\Controllers\MailController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -112,4 +114,8 @@ Route::controller(AuditoriaController::class)->group(function () {
 //REPORTES
 Route::controller(ReportesController::class)->group(function () {
     Route::get('reportes','index');
+});
+//MAIL....
+Route::controller(MailController::class)->group(function () {
+    Route::post('send-mail','index'); 
 });
