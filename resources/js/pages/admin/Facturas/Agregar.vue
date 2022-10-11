@@ -34,7 +34,7 @@
                                     <tr>
                                         <td colspan="6">
                                             <button type="button" class="btn btn-info btn-sm" @click="addFactura()">
-                                                Agregar Pedido</button>
+                                                Agregar Orden</button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -55,16 +55,16 @@
     </dashboard-layout>
     <modal v-if="additemModal" @close="additemModal = false">
         <template #header>
-            <h4 class="modal-title" id="myModalLabel">Agregar Pedidop1</h4>
+            <h4 class="modal-title" id="myModalLabel">Agregar Orden</h4>
         </template>
         <template #body>
             <div class="col-md-12">
-                <label>Pedido</label>
+                <label>Orden</label>
                 <input class="form-control" v-model="item.nombre">
                 <input type="hidden" class="form-control" v-model="item.id">
                 <ul v-if="item.id==0">
                     <li v-for="(Orden, index) in Orden" :key="index"
-                        @click="selecOrden(Orden)">{{Orden.nombre}}</li>
+                        @click="selectOrden(Orden)">{{Orden.nombre}}</li>
                 </ul>
             </div>
             <div class="col-md-12">
@@ -117,7 +117,7 @@ export default {
         }
         this.$axios.get('/api/facturas')
             .then(res => {
-                this.facturas = res.data
+                this.Factura = res.data
             })
             .catch(error => {
                 console.log(error.response)
@@ -147,11 +147,11 @@ export default {
             this.Factura.items.splice(index, 1)
         },
         addFactura() {
-
-            if (!this.Factura.total || !this.Factura.fecha ) {
-                return this.$alertify.error('Incomplete form data')
+            const data = {
+                cajero_id: this.usuario.camareros[0].id,
+                items: JSON.stringify(this.Factura.items)
             }
-            this.$axios.post('/api/factura', this.Factura, {
+            this.$axios.post('/api/factura', data, {
                 headers: {
                     Authorization: `Bearer ${localStorage.token}`
                 }
@@ -166,12 +166,15 @@ export default {
                     this.$alertify.error(Object.values(error.response.data)[0][0])
                 })
         }
+    }, computed: {
+        search() {
+
+        }
+
     }
 }
 </script>
 
-<style lang="css">
-.pad-1 {
-    padding: 1rem
-}
-</style>
+<style scoped>
+    @import "@/assets/css/bootstrap.min.css";
+    </style>

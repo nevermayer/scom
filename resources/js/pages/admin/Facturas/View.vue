@@ -11,6 +11,7 @@
 
                 </div>
                 <div>
+                    
                     <strong>Total :</strong>{{Factura.total}}Bs
                     <br><strong>Fecha :</strong>{{Factura.fecha}}
                 </div>
@@ -24,6 +25,8 @@
             <table class="table table-borderless factura">
                 <thead>
                     <tr>
+                        <th>Nit/C.I</th>
+                        <th>NIT</th>
                         <th>Cant.</th>
                         <th>Nombre</th>
                         <th>Precio Unitario</th>

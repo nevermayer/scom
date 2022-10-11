@@ -38,7 +38,7 @@
 import DashboardLayout from '@/components/Layouts/DashboardLayout.vue'
 
 export default {
-    name: 'Auditorias',
+    name: 'Auditoria',
     components: {
         DashboardLayout,
     },
