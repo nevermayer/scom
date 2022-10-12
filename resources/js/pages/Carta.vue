@@ -95,9 +95,6 @@
                                         @click=createOrder>
                                         Confirmar la Orden
                                     </button>
-                                    <button v-else class="btn btn-success" @click="$router.push('/account')">
-                                        Llame a un camarero...
-                                    </button>
                                 </div>
                             </div>
                         </div>

@@ -32,6 +32,16 @@ return new class extends Migration
                 ->constrained('camarero')
                 ->cascadeOnUpdate()
                 ->nullOnDelete();
+            $table->foreignId('mesa_id')
+                ->nullable()
+                ->constrained('mesa')
+                ->cascadeOnUpdate()
+                ->nullOnDelete();
+                $table->foreignId('factura_id')
+                ->nullable()
+                ->constrained('factura')
+                ->cascadeOnUpdate()
+                ->nullOnDelete();
         });
     }
 
