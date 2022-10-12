@@ -17,10 +17,6 @@ class Factura extends Model
 		'cliente_id' => 'int'
 	];
 
-	protected $dates = [
-		'fecha'
-	];
-
 	protected $fillable = [
 		'total',
 		'fecha',

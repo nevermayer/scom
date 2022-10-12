@@ -19,11 +19,6 @@ class Orden extends Model
 		'factura_id'=>'int'
 	];
 
-	protected $dates = [
-		'fecha',
-		'hora'
-	];
-
 	protected $fillable = [
 		'nombre',
 		'apellido_pat',
