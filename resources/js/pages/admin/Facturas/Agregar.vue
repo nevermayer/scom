@@ -19,11 +19,6 @@
                     <label for="">Nombre</label>
                     <input type="text" v-model="cliente.nombre" class="form-control" placeholder="Nombre Cliente">
                 </div>
-                <div class="form-group">
-                    <label for="">Total</label>
-                    <input type="number" v-model="Factura.total" class="form-control" placeholder="Total">
-                </div>
-
                 <div class="row activity-card">
                     <hr />
                     <div class="col-lg-12 col-md-12 col-sm-12">

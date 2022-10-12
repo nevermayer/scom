@@ -52,7 +52,6 @@
 
         <div>
             <div style="flex">
-                <button v-if="user !== null && (role=='admin' || role=='cajero')" class="btn btn-primary" @click="generarFactura()">generar Factura</button>
                 <button class="btn btn-main" @click="print()">Imprimir Orden</button>
             </div>
         </div>
