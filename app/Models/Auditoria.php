@@ -15,10 +15,6 @@ class Auditoria extends Model
 		'id_usuario' => 'int'
 	];
 
-	protected $dates = [
-		'fecha'
-	];
-
 	protected $fillable = [
 		'fecha',
 		'id_usuario'

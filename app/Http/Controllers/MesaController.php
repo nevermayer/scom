@@ -20,7 +20,6 @@ class MesaController extends Controller
         $mesa->min_capacidad = $request->min_capacidad;
         $mesa->max_capacidad = $request->max_capacidad;
         $mesa->status = $request->status;
-        $mesa->orden_id = $request->orden_id;
         $mesa->camarero_id = $request->camarero_id;
         $mesa->cliente_id = $request->cliente_id;
         $mesa->save();
@@ -40,7 +39,6 @@ class MesaController extends Controller
         $mesa->min_capacidad = $request->min_capacidad;
         $mesa->max_capacidad = $request->max_capacidad;
         $mesa->status = $request->status;
-        $mesa->orden_id = $request->orden_id;
         $mesa->camarero_id = $request->camarero_id;
         $mesa->cliente_id = $request->cliente_id;
         $mesa->save();

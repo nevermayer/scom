@@ -20,11 +20,6 @@ return new class extends Migration
             $table->string('min_capacidad');
             $table->string('max_capacidad');
             $table->string('status');
-            $table->foreignId('orden_id')
-                ->nullable()
-                ->constrained('orden')
-                ->cascadeOnUpdate()
-                ->nullOnDelete();
             $table->foreignId('camarero_id')
                 ->nullable()
                 ->constrained('camarero')

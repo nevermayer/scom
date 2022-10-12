@@ -85,7 +85,8 @@ class OrdenController extends Controller
             'total' => $request->total,
             'estado' => 'Elaboracion',
             'fecha' => $fecha,
-            'camarero_id' => $request->camarero_id
+            'camarero_id' => $request->camarero_id,
+            'mesa_id'=>$request->mesa_id
         ]);
         foreach ($data as $res) {
             $orden->productos()->attach($res['id'], [
@@ -94,9 +95,8 @@ class OrdenController extends Controller
             Producto::find($res['id'])->decrement('cantidad', $res['qty']);
         }
         $mesa=Mesa::findOrFail($request->mesa_id);
-        $mesa->orden_id=$orden->id;
         $mesa->camarero_id=$request->camarero_id;
-        $mesa->status='Ocupado';
+        $mesa->status='ocupado';
         $mesa->save();
         $msg = "se creo la orden";
         return response()->json([

@@ -14,12 +14,9 @@ class Orden extends Model
 		'total' => 'float',
 		'telefono' => 'int',
 		'chef_id' => 'int',
-		'camarero_id' => 'int'
-	];
-
-	protected $dates = [
-		'fecha',
-		'hora'
+		'mesa_id'=>'int',
+		'camarero_id' => 'int',
+		'factura_id'=>'int'
 	];
 
 	protected $fillable = [
@@ -31,7 +28,9 @@ class Orden extends Model
 		'hora',
 		'telefono',
 		'chef_id',
-		'camarero_id'
+		'mesa_id',
+		'camarero_id',
+		'factura_id'
 	];
 
 	public function camarero()
@@ -44,14 +43,13 @@ class Orden extends Model
 		return $this->belongsTo(Chef::class);
 	}
 
-	public function facturas()
+	public function factura()
 	{
-		return $this->hasMany(Factura::class);
+		return $this->belongsTo(Factura::class);
 	}
-
-	public function mesas()
+	public function mesa()
 	{
-		return $this->hasMany(Mesa::class);
+		return $this->belongsTo(Mesa::class);
 	}
     public function productos(){
         return $this->belongsToMany(Producto::class,'consume')->withPivot('cantidad');

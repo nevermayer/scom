@@ -11,7 +11,6 @@ class Mesa extends Model
 	public $timestamps = false;
 
 	protected $casts = [
-		'orden_id' => 'int',
 		'camarero_id' => 'int',
 		'cliente_id' => 'int'
 	];
@@ -21,7 +20,6 @@ class Mesa extends Model
 		'min_capacidad',
 		'max_capacidad',
 		'status',
-		'orden_id',
 		'camarero_id',
 		'cliente_id'
 	];
@@ -36,8 +34,8 @@ class Mesa extends Model
 		return $this->belongsTo(Cliente::class);
 	}
 
-	public function orden()
+	public function ordenes()
 	{
-		return $this->belongsTo(Orden::class);
+		return $this->hasMany(Orden::class);
 	}
 }

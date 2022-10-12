@@ -22,11 +22,6 @@ return new class extends Migration
                 ->constrained('cajero')
                 ->cascadeOnUpdate()
                 ->nullOnDelete();
-            $table->foreignId('orden_id')
-                ->nullable()
-                ->constrained('orden')
-                ->cascadeOnUpdate()
-                ->nullOnDelete();
             $table->foreignId('cliente_id')
                 ->nullable()
                 ->constrained('cliente')

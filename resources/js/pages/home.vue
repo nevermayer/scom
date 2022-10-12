@@ -19,7 +19,7 @@
                     <span class="icon-bar"></span>
                   </button>
                   <a class="navbar-brand" href="#">
-                    <img src="images/logo.png" alt="Logo">
+                    <img src="../assets/logo.png" alt="Logo">
                   </a>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -29,7 +29,6 @@
                     <li><a href="#about-us">Acerca de nosotros</a></li>
                     <li><a href="#price">menu</a></li>
                     <li><a href="#footer">contactos</a></li>
-                    <li><a href="">Ingrese o registrese</a></li>
                   </ul>
                 </div><!-- /.navbar-collapse -->
               </div><!-- /.container-fluid -->
@@ -224,19 +223,17 @@
             <h3>Opina <span>Sugerencias</span></h3>
             <form>
               <div class="form-group wow fadeInDown" data-wow-duration="500ms" data-wow-delay="600ms">
-                <input type="text" required class="form-control" v-model="contacto.nombre" id="exampleInputEmail1"
-                  placeholder="Nombre aqui....">
+                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Nombre aqui....">
               </div>
               <div class="form-group wow fadeInDown" data-wow-duration="500ms" data-wow-delay="800ms">
-                <input type="email" required class="form-control" v-model="contacto.email" placeholder="email aqui...">
+                <input type="text" class="form-control" placeholder="email aqui...">
               </div>
               <div class="form-group wow fadeInDown" data-wow-duration="500ms" data-wow-delay="1000ms">
-                <textarea class="form-control" required rows="3" v-model="contacto.mensaje"
-                  placeholder="tu mensaje o sugerencia aqui..."></textarea>
+                <textarea class="form-control" rows="3" placeholder="tu mensaje o sugerencia aqui..."></textarea>
               </div>
             </form>
-            <a type="button" class="btn btn-default wow bounceIn" data-wow-duration="500ms" data-wow-delay="1300ms"
-              @click="enviar()" role="button">envia tu mensaje</a>
+            <a class="btn btn-default wow bounceIn" data-wow-duration="500ms" data-wow-delay="1300ms" href="#"
+              role="button">envia tu mensaje</a>
           </div>
         </div><!-- .col-md-8 close -->
 
@@ -261,38 +258,12 @@ export default {
   name: 'home',
   components: {
     Nav
-  }, data() {
-    return {
-      contacto: { nombre: '', email: '', mensaje: '' },
-    }
-  }, methods: {
-    enviar() {
-      //alert(this.contacto.nombre + " " + this.contacto.email + " " + this.contacto.mensaje)
-      this.$axios.post('/api/send-mail', this.contacto, {
-        headers: {
-          Authorization: `Bearer ${localStorage.token}`
-        }
-      })
-        .then(() => {
-          alert('su sugerencia o comentario sera revisada....')
-        })
-        .catch(error => {
-          if (error.response.data.message) {
-            return this.$alertify.error(error.response.data.message)
-          }
-          this.$alertify.error(Object.values(error.response.data)[0][0])
-        })
-        this.contacto.nombre=''
-        this.contacto.email=''
-        this.contacto.mensaje=''
-    }
   }
 }
 </script>
 <style scoped>
 @import "@/assets/css/bootstrap.min.css";
 @import "@/assets/css/main.css";
-
 .carrousel {
   width: 100%;
 }
@@ -303,60 +274,61 @@ export default {
   display: flex;
 }
 
-.itemCarrousel {
-  position: relative;
-  width: 100%;
-  height: 100%;
+.itemCarrousel{
+    position: relative;
+    width: 100%;
+    height: 100%;
 }
 
-.itemCarrouselTarjeta {
-  width: 100%;
-  height: 100%;
+.itemCarrouselTarjeta{
+    width: 100%;
+    height: 100%;
 }
 
-.itemCarrouselArrows {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 20px;
+.itemCarrouselArrows{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%; 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px; 
 }
 
-.itemCarrouselArrows>i:hover {
-  cursor: pointer;
+.itemCarrouselArrows > i:hover {
+    cursor: pointer;
 }
 
-#itemCarrousel-1 {
-  background-color: rgb(226, 50, 50);
+#itemCarrousel-1{
+    background-color: rgb(226, 50, 50);
 }
 
-#itemCarrousel-2 {
-  background-color: rgb(50, 200, 226);
+#itemCarrousel-2{
+    background-color: rgb(50, 200, 226);
 }
 
-#itemCarrousel-3 {
-  background-color: rgb(200, 226, 50);
+#itemCarrousel-3{
+    background-color: rgb(200, 226, 50);
 }
 
-.conteCarrouselController {
-  width: 100%;
-  display: flex;
-  justify-content: space-evenly;
+.conteCarrouselController{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
 }
 
-.conteCarrouselController>a {
-  text-decoration: none;
-  font-size: 2em;
-  color: grey;
+.conteCarrouselController > a{
+    text-decoration: none;
+    font-size: 2em;
+    color: grey;
 }
 
-.itemCarrouselArrows>a>i {
-  color: white;
+.itemCarrouselArrows > a > i{
+    color: white;
 }
+
 </style>

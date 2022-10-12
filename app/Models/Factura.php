@@ -14,19 +14,13 @@ class Factura extends Model
 	protected $casts = [
 		'total' => 'float',
 		'cajero_id' => 'int',
-		'orden_id' => 'int',
 		'cliente_id' => 'int'
-	];
-
-	protected $dates = [
-		'fecha'
 	];
 
 	protected $fillable = [
 		'total',
 		'fecha',
 		'cajero_id',
-		'orden_id',
 		'cliente_id'
 	];
 
@@ -40,8 +34,8 @@ class Factura extends Model
 		return $this->belongsTo(Cliente::class);
 	}
 
-	public function orden()
+	public function ordenes()
 	{
-		return $this->belongsTo(Orden::class);
+		return $this->hasMany(Orden::class);
 	}
 }
