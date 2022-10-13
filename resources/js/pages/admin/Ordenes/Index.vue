@@ -12,7 +12,7 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Total</th>
-                                        <th>Estadodfdfhdf</th>
+                                        <th>Estadodfdfhdhgfhdfhfdf</th>
                                     </tr>
                                 </thead>
                                 <tbody>
