@@ -12,7 +12,7 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Total</th>
-                                        <th>Estado</th>
+                                        <th>Estadodfdfhdf</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -20,7 +20,9 @@
                                         <td>#{{order.id}}</td>
                                         <td>{{order.total}}</td>
                                         <td>{{order.estado}}</td>
-                                        <td><button class="btn" @click="editar(order.id)"><span class="ti-pencil-alt"></span></button></td>
+                                        <td><button class="btn" @click="editar(order.id)">edi<span class=""></span></button></td>
+                                        <td><button type="button" @click="eliminar()" class="btn btn-main" >edi<span class=""></span></button></td>
+                   
                                     </tr>
                                 </tbody>
                             </table>
@@ -64,6 +66,13 @@ export default {
                 })
         },editar(id){
             this.$router.push('/admin/ordenes/'+id)
+        }
+    }, computed: {
+        user() {
+            return this.$store.getters.getUser
+        },
+        role(){
+            return this.$store.getters.getRole
         }
     }
 }
