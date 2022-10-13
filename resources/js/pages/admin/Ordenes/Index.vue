@@ -10,9 +10,10 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
+                                        <th>IDhvuvyvhjvhjvhjv</th>
                                         <th>Total</th>
                                         <th>Estado</th>
+                                        <th>Estado Phnfdlindoifng</th>
                                     </tr>
                                 </thead>
                                 <tbody>
