@@ -103,4 +103,12 @@ class OrdenController extends Controller
             "message" => $msg
         ]);
     }
+    public function makeorder(Request $request)
+    {
+        $data = $request->items;
+        
+        $all_ids = array();
+
+        return $data;
+    }
 }

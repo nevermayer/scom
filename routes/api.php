@@ -64,6 +64,7 @@ Route::controller(OrdenController::class)->group(function () {
     Route::get('/orden', 'index');
     Route::post('/orden', 'store');
     Route::post('/ordenes', 'createorder');
+    Route::post('/makeorder', 'makeorder');
     Route::get('/orden/{id}', 'show');
     Route::put('/orden/{id}', 'update');
     Route::delete('/orden/{id}', 'destroy');

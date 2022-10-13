@@ -84,7 +84,7 @@ export default {
                 this.Orden.nombre = datos.data.nombre
                 this.Orden.estado = datos.data.estado
                 this.Orden.total = datos.data.total
-                this.Orden.fecha = datos.data.fecha.split("T", 1)
+                this.Orden.fecha = datos.data.fecha
                 this.items = datos.data.productos
                 console.log(datos.data.productos)
             })
