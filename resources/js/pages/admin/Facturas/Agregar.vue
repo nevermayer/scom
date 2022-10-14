@@ -8,16 +8,28 @@
                         <h2>Solicitud de Factura :</h2>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="">NIT</label>
-                    <input type="number" v-model="cliente.id" class="form-control" placeholder="NIT/ID Cliente">
+
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <div class="form-group">
+                        <label for="">NIT</label>
+                        <input type="number" v-model="cliente.id" class="form-control" placeholder="NIT/ID Cliente">
+                    </div>
+                    <div class="form-group">
+                        <button type="button" @click="buscarCliente()" class="btn btn-main"> Buscar Cliente</button>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <button type="button" @click="buscarCliente()" class="btn btn-main"> Buscar Cliente</button>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <br />
+                    <strong>Apellidos : </strong> {{cliente.apellido_pat}} {{cliente.apellido_mat}}
+                    <br />
+                    <strong>Nombres :</strong>{{cliente.nombre}} <br />
+                    <strong>Email :</strong> {{cliente.email}}
+
                 </div>
-                <div class="form-group">
-                    <label for="">Nombre</label>
-                    <input type="text" v-model="cliente.nombre" class="form-control" placeholder="Nombre Cliente">
+                <div class="col-lg-4 col-md-4 col-sm-4">
+
+                    <br />
+                    <strong>Telefono :</strong> {{cliente.telefono}}
                 </div>
                 <div class="row activity-card">
                     <hr />
@@ -92,8 +104,13 @@
 <script>
 import DashboardLayout from '@/components/Layouts/DashboardLayout.vue'
 import modal from '@/components/Modal.vue'
+import { useToast } from "vue-toastification"
 export default {
     name: 'Agregar',
+    setup() {
+        const toast = useToast()
+        return { toast }
+    },
     components: {
         DashboardLayout,
         modal
@@ -136,10 +153,16 @@ export default {
     },
     methods: {
         buscarCliente() {
+            const { id } = this.cliente
+            if (!id) {
+                return this.toast.error("Ingrese nit o ci!")
+            }
             this.$axios.get('/api/cliente/' + this.cliente.id)
                 .then(res => {
-                    console.log(res.data)
-                    this.cliente = res.data
+                    if (res.data == '')
+                        this.toast.error("No se encontro cliente con ese Nit o Ci")
+                    else
+                        this.cliente = res.data
                 })
                 .catch(error => {
                     console.log(error.response)
@@ -180,7 +203,7 @@ export default {
         },
         addFactura() {
             console.log(this.usuario.cajeros[0].id)
-            let total=0
+            let total = 0
             this.Factura.items.map(item => {
                 total += Number(item.precio) * Number(item.pivot.cantidad)
             })
@@ -188,8 +211,8 @@ export default {
                 cajero_id: this.usuario.cajeros[0].id,
                 items: JSON.stringify(this.Factura.items),
                 orden_id: this.ordenid,
-                cliente_id:this.cliente.id,
-                total:        total    
+                cliente_id: this.cliente.id,
+                total: total
             }
             this.$axios.post('/api/factura', data, {
                 headers: {

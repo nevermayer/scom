@@ -116,8 +116,13 @@
 <script>
 import Nav from '@/components/Nav.vue'
 import modal from '@/components/Modal.vue'
+import { useToast } from "vue-toastification";
 export default {
     name: 'carta',
+    setup() {
+      const toast = useToast()
+      return { toast }
+    },
     components: {
         Nav,
         modal
@@ -177,8 +182,7 @@ export default {
                 let cart = [menuitem]
                 localStorage.setItem('cart', JSON.stringify(cart))
                 this.cart.push(menuitem)
-
-                //this.$alertify.success('Item added to Cart')
+                this.toast.success("Producto agregado al pedido!")
                 return
             }
             let cart = JSON.parse(cartDB)
@@ -196,7 +200,7 @@ export default {
             }
             this.cart = cart
             localStorage.setItem('cart', JSON.stringify(cart))
-            this.$alertify.success('Item added to Cart');
+            this.toast.success("Producto agregado al pedido!")
         },
         updateItemQty(index, item, flag) {
             if (flag === 0 && Number(item.qty) > 1) {
@@ -206,12 +210,12 @@ export default {
             }
             this.cart[index] = item
             localStorage.setItem('cart', JSON.stringify(this.cart))
-            this.$alertify.success('Cart successfully updated');
+            this.toast.success("Pedido actualizado!")
         },
         dropItem(index) {
             this.cart.splice(index, 1)
             localStorage.setItem('cart', JSON.stringify(this.cart))
-            this.$alertify.success('Item removed from Cart');
+            this.toast.success("Producto quitado!")
         },
         createOrder() {
             const token = localStorage.token
@@ -229,13 +233,13 @@ export default {
                 localStorage.removeItem('cart')
                 this.address = ''
                 this.cart = []
-                //  this.$alertify.success(res.data.message)
+                this.toast.success(res.data.message)
 
             }).catch(error => {
                 if (error) {
                     return console.log(error.response.data.message)
                 }
-                this.$alertify.error(Object.values(error.response.data)[0][0])
+                this.toast.error(Object.values(error.response.data)[0][0])
             })
         },
         close() {

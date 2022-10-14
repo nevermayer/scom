@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\Models\Cliente;
 
@@ -15,7 +16,7 @@ class ClienteController extends Controller
     public function store(Request $request)
     {
         $cliente = new Cliente();
-        $cliente->id=$request->ci;
+        $cliente->id = $request->ci;
         $cliente->nombre = $request->nombre;
         $cliente->apellido_pat = $request->apellido_pat;
         $cliente->apellido_mat = $request->apellido_mat;
@@ -29,7 +30,9 @@ class ClienteController extends Controller
     public function show($id)
     {
         $cliente = Cliente::find($id);
-        return $cliente;
+        if (isset($cliente->id))
+            return $cliente;
+        return null;
     }
     public function update(Request $request, $id)
     {
