@@ -40,6 +40,7 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
 Route::get('users', [UsersController::class, 'index']);
 Route::get('user/{id}', [UsersController::class, 'show']);
 Route::put('user/{id}', [UsersController::class, 'update']);
+Route::delete('user/{id}', [UsersController::class, 'destroy']);
 
 // PARTE INGREDIENTES
 Route::controller(IngredientesController::class)->group(function () {
@@ -66,6 +67,7 @@ Route::controller(OrdenController::class)->group(function () {
     Route::post('/ordenes', 'createorder');
     Route::post('/makeorder', 'makeorder');
     Route::get('/orden/{id}', 'show');
+    Route::get('/ordenfactura/{id}', 'ordenfactura');
     Route::put('/orden/{id}', 'update');
     Route::delete('/orden/{id}', 'destroy');
 });

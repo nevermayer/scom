@@ -11,7 +11,7 @@
 
                 <div class="col-lg-4 col-md-4 col-sm-4">
                     <div class="form-group">
-                        <label for="">NIT</label>
+                        <label for="">NIT o CI</label>
                         <input type="number" v-model="cliente.id" class="form-control" placeholder="NIT/ID Cliente">
                     </div>
                     <div class="form-group">
@@ -169,14 +169,22 @@ export default {
                 })
         },
         additemsOrder() {
-            console.log(this.ordenid)
-            this.$axios.get('/api/orden/' + this.ordenid)
+            this.$axios.get('/api/ordenfactura/' + this.ordenid)
                 .then(res => {
-                    console.log(res.data.productos)
-                    this.Factura.items = res.data.productos
+                    if(res.data.message=="false"){
+                        if(res.data.data!=null){
+                            this.Factura.items =res.data.data.productos
+                            this.toast.success("Orden agregada a la factura")
+                        }else{
+                            this.toast.error("No se encontro la Orden")
+                        }
+                    }
+                    else{
+                        this.toast.error(res.data.message)
+                    }
                 })
                 .catch(error => {
-                    console.log(error.response)
+                    console.log(error)
                 })
         },
         clean() {
