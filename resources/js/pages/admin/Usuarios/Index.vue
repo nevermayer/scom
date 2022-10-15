@@ -32,7 +32,14 @@
                                         <td>{{user.apellido_pat}}</td>
                                         <td>{{user.apellido_mat}}</td>
                                         <td>{{user.turno}}</td>
-                                        <td><button class="btn" @click="editar(user.id)"><span class="ti-pencil-alt"></span></button></td>
+                                        <button class="btn btn-success" @click="editar(user.id)"><span class="ti-pencil-alt"></span></button>
+                                        <li v-if="user !== null && role=='admin'">
+                                           <router-link to="/admin/usuarios" >
+                                           <span class="ti-folder"></span>
+                                           <button class="btn btn-danger btn-sm" @click="eliminar(user.id)"><span class="ti-trash"></span></button>
+                                           </router-link>
+                                        </li>
+                                      
                                     </tr>
                                 </tbody>
                             </table>
@@ -72,10 +79,22 @@ export default {
             .catch(error => {
                 console.log(error.response)
             })
+        }, eliminar(id) {
+           
         },
         editar(id){
             this.$router.push('/admin/usuarios/'+id)
         },
+    }, computed: {
+        user() {
+            return this.$store.getters.getUser
+        },
+        role(){
+            return this.$store.getters.getRole
+        }
     }
 }
 </script>
+<style scoped>
+@import "@/assets/css/bootstrap.min.css";
+</style>
