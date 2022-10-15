@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('descripcion');
             $table->string('imagen');
+            $table->string('status')->default('activo');
             $table->double('precio');
             $table->integer('cantidad');
         });

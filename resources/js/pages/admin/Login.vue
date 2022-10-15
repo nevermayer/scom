@@ -2,28 +2,23 @@
     <div class="admin-login-wrapper">
         <div class="admin-form-wrapper">
             <h3>Panel de Administración SCOM</h3>
-            <div v-if="error !== null" class="alert alert-danger alert-dismissible fade show" role="alert">
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <form>
+                <div class="form-group">
+                    <label for="">Nombre de cuenta</label>
+                    <input type="text" v-model="creds.nombre_cuenta" class="form-control" autocomplete="username"
+                        placeholder="nombre de cuenta" />
+                </div>
 
-                <strong>{{error}}</strong>
-            </div>
+                <div class="form-group">
+                    <label for="">Password</label>
+                    <input type="password" v-model="creds.password" class="form-control" placeholder="**********"
+                        autocomplete="current-password" />
+                </div>
 
-            <div class="form-group">
-                <label for="">Nombre de cuenta</label>
-                <input type="text" v-model="creds.nombre_cuenta" class="form-control" autocomplete="username"
-                    placeholder="nombre de cuenta" />
-            </div>
-
-            <div class="form-group">
-                <label for="">Password</label>
-                <input type="password" v-model="creds.password" class="form-control" placeholder="**********"
-                    autocomplete="current-password" />
-            </div>
-
-            <div class="form-group">
-                <button class="btn btn-main btn-block" @click="signin">Ingresar</button>
-            </div>
-
+                <div class="form-group">
+                    <button type="button" class="btn btn-main btn-block" @click="signin">Ingresar</button>
+                </div>
+            </form>
             <div class="form-group form-link">
                 <router-link to="/">Volver a Inicio</router-link>
             </div>
@@ -32,24 +27,28 @@
 </template>
 
 <script>
-import router from '../../router/router';
+import router from '../../router/router'
+import { useToast } from "vue-toastification"
 
 export default {
     name: 'AdminLogin',
+    setup() {
+        const toast = useToast()
+        return { toast }
+    },
     data() {
         return {
             creds: {
                 nombre_cuenta: '',
                 password: ''
             },
-            error: null
         }
     },
     methods: {
         signin() {
             const { nombre_cuenta, password } = this.creds
             if (!nombre_cuenta || !password) {
-                return this.error = 'complete los campos';
+                return this.toast.error("complete los campos!")
             }
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
                 this.$axios.post('/api/login', {
@@ -70,10 +69,10 @@ export default {
                         router.push('/admin/dashboard');
                         //this.$router.go('Home');
                     } else {
-                        this.error = response.data.message
+                        this.toast.error(response.data.message)
                     }
                 }).catch(function (error) {
-                    this.error = error.response.data.message;
+                    this.toast.error(error.response.data.message);
                 });
             })
 

@@ -34,7 +34,6 @@ class OrdenController extends Controller
     // Para capturar por id cada orden
     public function show($id)
     {
-
         $orden = Orden::find($id);
         isset($orden->productos);
         return $orden;
@@ -103,12 +102,16 @@ class OrdenController extends Controller
             "message" => $msg
         ]);
     }
-    public function makeorder(Request $request)
+    public function ordenfactura($id)
     {
-        $data = $request->items;
-        
-        $all_ids = array();
-
-        return $data;
+        $orden=Orden::where('id','=',$id)->first();
+        if(!isset($orden->factura_id)){
+isset($orden->productos);
+return response()->json([
+    "message" => "false",
+"data"=>$orden]);
+        }
+        return response()->json([
+            "message" => "La Orden ya ha sido facturada"]);        
     }
 }

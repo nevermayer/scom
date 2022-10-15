@@ -18,6 +18,7 @@
                                         <th>ID</th>
                                         <th>Nombre</th>
                                         <th>Descripcion</th>
+                                        <th>Estado</th>
                                         <th>Precio</th>
                                         <th>Cantidad</th>
                                         <th>Acciones</th>
@@ -28,6 +29,7 @@
                                         <td>{{producto.id}}</td>
                                         <td>{{producto.nombre}}</td>
                                         <td>{{producto.descripcion}}</td>
+                                        <td>{{producto.status}}</td>
                                         <td>{{producto.precio}}</td>
                                         <td>{{producto.cantidad}}</td>
                                         <td><button class="btn" @click="editar(producto.id)"><span class="ti-pencil-alt"></span></button></td>

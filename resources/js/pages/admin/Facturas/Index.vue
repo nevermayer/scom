@@ -18,7 +18,7 @@
                                         <th>Total</th>
                                         <th>Fecha</th>
                                         <th>Cajero Id</th>
-                                        <th>Orden Id</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -27,7 +27,6 @@
                                         <td>{{Factura.total}}</td>
                                         <td>{{Factura.fecha}}</td>
                                         <td>{{Factura.cajero_id}}</td>
-                                        <td>{{Factura.orden_id}}</td>
                                         <td><button class="btn" @click="editar(Factura.id)"><span class="ti-pencil-alt"></span></button></td>
                                     </tr>
                                 </tbody>
