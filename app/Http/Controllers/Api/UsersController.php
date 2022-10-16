@@ -155,4 +155,9 @@ class UsersController extends Controller
         $usuario->save();
         return $usuario;
     }
+    public function destroy($id)
+    {
+        $usuario = User::destroy($id);
+        return $usuario;
+    }
 }
