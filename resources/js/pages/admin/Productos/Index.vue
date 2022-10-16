@@ -1,6 +1,9 @@
 <template>
     <dashboard-layout>
         <div slot="main-content">
+            <div class="alert alert-info" v-if="message">
+            {{message}}
+            </div> 
             <h2 class="dash-title">Productos</h2>
                     
             <div class="page-action">
@@ -35,8 +38,8 @@
                                         <td><button class="btn btn-success" @click="editar(producto.id)"><span class="ti-pencil-alt"></span></button>
                                         <li v-if="user !== null && role=='admin'">
                                            <router-link to="/admin/productos" >
-                                           <span class="ti-folder"></span>
-                                           <button class="btn btn-danger btn-sm" @click="editar(producto.id)"><span class="ti-trash"></span></button>
+                                           <td class='text-right'><button type="button" class="btn btn-main-gradient"
+                                                @click="eliminar(producto.id)"><span class="ti-trash"></span></button></td>
                                            </router-link>
                                         </li></td>
                                     </tr>
@@ -51,15 +54,20 @@
 </template>
 <script>
 import DashboardLayout from '@/components/Layouts/DashboardLayout.vue'
-
+import { useToast } from "vue-toastification"
 export default {
     name: 'Productos',
+    setup() {
+        const toast = useToast()
+        return { toast }
+    },
     components: {
         DashboardLayout,
     },
     data() {
         return {
-            productos: []
+            productos: [],
+            message:""
         }
     },
     mounted() {
@@ -79,7 +87,14 @@ export default {
                 console.log(error.response)
             })
         }, eliminar(id) {
-           
+            this.$axios.delete('/api/producto/'+id)
+            .then(res => {
+                console.log(res);
+                this.toast.success("Se elimino producto")
+            })
+            .catch(error => {
+                console.log(error.response)
+            })
         },
         editar(id){
             this.$router.push('/admin/productos/'+id)
