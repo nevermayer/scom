@@ -13,6 +13,8 @@
                                         <th>ID</th>
                                         <th>Total</th>
                                         <th>Estado</th>
+                                        <th>#Factura</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -23,6 +25,9 @@
                                         <button class="btn btn-success" @click="editar(order.id)"><span class="ti-pencil-alt"></span></button>
                                         <button type="button" class="btn btn-main-gradient"
                                                 @click="eliminar(order.id)" v-if="user !== null && role=='camarero'"><span class="ti-trash"></span></button>
+                                        <td>{{order.factura_id}}</td>
+                                        <td><button class="btn" @click="editar(order.id)"><span
+                                                    class="ti-pencil-alt"></span></button></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -82,6 +87,8 @@ export default {
         }
         ,editar(id){
             this.$router.push('/admin/ordenes/'+id)
+        }, editar(id) {
+            this.$router.push('/admin/ordenes/' + id)
         }
     }, computed: {
         user() {

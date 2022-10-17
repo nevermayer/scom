@@ -65,7 +65,7 @@ Route::controller(OrdenController::class)->group(function () {
     Route::get('/orden', 'index');
     Route::post('/orden', 'store');
     Route::post('/ordenes', 'createorder');
-    Route::post('/makeorder', 'makeorder');
+    Route::put('/changestatus/{id}', 'changeStatus');
     Route::get('/orden/{id}', 'show');
     Route::get('/ordenfactura/{id}', 'ordenfactura');
     Route::put('/orden/{id}', 'update');

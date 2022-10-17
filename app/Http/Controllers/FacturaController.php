@@ -15,32 +15,30 @@ class FacturaController extends Controller
     public function store(Request $request)
     {
         $fecha = date('Y-m-d');
-       /* $factura = Factura::where('orden_id', '=', $request->orden_id)->first();
-        if (!isset($factura->id)) {
-            $factura = Factura::create([
-                'total' => $request->total,
-                'fecha' => $fecha,
-                'orden_id' => $request->orden_id,
-                'cajero_id' => $request->cajero_id,
-            ]);
-        }*/
-        $factura = Factura::create([
+        $ordenes =$request->ordenes;
+       $factura = Factura::create([
             'total' => $request->total,
             'fecha' => $fecha,
-            'orden_id' => $request->orden_id,
             'cliente_id'=>$request->cliente_id,
             'cajero_id' => $request->cajero_id,
         ]);
+        foreach($ordenes as $id){
+            $orden=Orden::find($id);
+            $orden->factura_id=$factura->id;
+            $orden->save();
+        }
         return response()->json([
             "data" => $factura->id]);
     }
     public function show($id)
     {
         $factura = Factura::find($id);
-        $orden=Orden::find($factura->orden_id);
+        $orden=Orden::where('factura_id','=',$id)
+        ->with('productos')
+        ->get();
         return response()->json([
             "factura" => $factura,
-            "consumo" => $orden->productos,
+            "consumo"=>$orden,
             "cliente"=>$factura->cliente
         ]);
     }

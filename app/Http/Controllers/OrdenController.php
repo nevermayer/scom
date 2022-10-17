@@ -114,4 +114,9 @@ return response()->json([
         return response()->json([
             "message" => "La Orden ya ha sido facturada"]);        
     }
+    public function changeStatus(Request $request, $id){
+        $orden = Orden::findOrFail($id);
+        $orden->estado = $request->estado;
+        $orden->save();
+    }
 }

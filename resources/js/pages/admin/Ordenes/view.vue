@@ -1,7 +1,22 @@
 <template>
     <dashboard-layout>
+        <section>
+            <div
+                style="display: flex;flex-direction: column;align-content: space-around;align-items: stretch;flex-wrap: wrap;">
+                Estado:
+                <div class="form-group">
+                    <select v-model="Orden.estado" class="form-control">
+                        <option value="Elaboracion">Elaboracion</option>
+                        <option value="Terminado">Terminado</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button type="button" @click="editStatus()" class="btn btn-main">Cambiar Estado</button>
+                </div>
+            </div>
+        </section>
         <section id="print">
-            <strong>Orden #{{ordenid}}</strong>
+            <h3> <strong>Orden #{{ordenid}}</strong></h3>
             <div class="mainText">
                 <div>
 
@@ -11,15 +26,13 @@
                 </div>
                 <div>
                     <strong>Total :</strong>
-                    <br><strong>Fecha :</strong>
+                    <br /><strong>Fecha :</strong>
                 </div>
                 <div>
-                    <p>{{Orden.total}}Bs</p>
-                    <p>{{Orden.fecha}}</p>
+                    {{Orden.total}}Bs
+                    <br />{{Orden.fecha}}
                 </div>
             </div>
-
-
             <table class="table table-borderless factura">
                 <thead>
                     <tr>
@@ -129,12 +142,25 @@ export default {
                 })
         }, editar(id) {
             this.$router.push('/admin/ordenes/' + id)
+        },
+        editStatus() {
+            console.log(this.Orden.estado)
+            console.log(this.$route.params.id)
+
+            this.$axios.put('/api/changestatus/' + this.$route.params.id, this.Orden, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.token}`
+                }
+            })
+                .then(data => {
+                    this.$router.push('/admin/ordenes')
+                })
         }
     }, computed: {
         user() {
             return this.$store.getters.getUser
         },
-        role(){
+        role() {
             return this.$store.getters.getRole
         }
     }
