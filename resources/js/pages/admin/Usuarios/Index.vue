@@ -2,8 +2,8 @@
     <dashboard-layout>
         <div slot="main-content">
             <h2 class="dash-title">Usuarios</h2>
-                    
-            <div class="page-action">
+            
+           <div class="page-action">
                 <button class="btn btn-main" @click="$router.push('/admin/usuarios/add')"><span class="ti-plus"></span> Nuevo usuario</button>
             </div>
             <section class="recent">
@@ -35,8 +35,8 @@
                                         <button class="btn btn-success" @click="editar(user.id)"><span class="ti-pencil-alt"></span></button>
                                         <li v-if="user !== null && role=='admin'">
                                            <router-link to="/admin/usuarios" >
-                                           <span class="ti-folder"></span>
-                                           <button class="btn btn-danger btn-sm" @click="eliminar(user.id)"><span class="ti-trash"></span></button>
+                                           <td class='text-right'><button type="button" class="btn btn-main-gradient"
+                                                @click="eliminar(user.id)"><span class="ti-trash"></span></button></td>
                                            </router-link>
                                         </li>
                                       
@@ -52,9 +52,13 @@
 </template>
 <script>
 import DashboardLayout from '@/components/Layouts/DashboardLayout.vue'
-
+import { useToast } from "vue-toastification"
 export default {
     name: 'Usuarios',
+    setup() {
+        const toast = useToast()
+        return { toast }
+    },
     components: {
         DashboardLayout,
     },
@@ -79,8 +83,16 @@ export default {
             .catch(error => {
                 console.log(error.response)
             })
-        }, eliminar(id) {
-           
+        }, 
+        eliminar(id) {
+           this.$axios.delete('/api/user/'+id)
+           .then((res) => {
+                console.log(res);
+                this.toast.success("Se elimino usuario")
+            })
+            .catch(error => {
+                console.log(error.response)
+            })
         },
         editar(id){
             this.$router.push('/admin/usuarios/'+id)
