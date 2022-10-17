@@ -10,10 +10,11 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <th>IDhvuvyvhjvhjvhjv</th>
+                                        <th>ID</th>
                                         <th>Total</th>
                                         <th>Estado</th>
-                                        <th>Estado Phnfdlindoifng</th>
+                                        <th>#Factura</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -21,7 +22,9 @@
                                         <td>#{{order.id}}</td>
                                         <td>{{order.total}}</td>
                                         <td>{{order.estado}}</td>
-                                        <td><button class="btn" @click="editar(order.id)"><span class="ti-pencil-alt"></span></button></td>
+                                        <td>{{order.factura_id}}</td>
+                                        <td><button class="btn" @click="editar(order.id)"><span
+                                                    class="ti-pencil-alt"></span></button></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -63,8 +66,8 @@ export default {
                 .catch(error => {
                     console.log(error.response)
                 })
-        },editar(id){
-            this.$router.push('/admin/ordenes/'+id)
+        }, editar(id) {
+            this.$router.push('/admin/ordenes/' + id)
         }
     }
 }
