@@ -30,6 +30,9 @@
 
                     <br />
                     <strong>Telefono :</strong> {{cliente.telefono}}
+                    <br />
+                    <br />
+                    <strong>Total :</strong> {{facturaTotal}} Bs.
                 </div>
                 <div class="row activity-card">
                     <hr />
@@ -50,9 +53,9 @@
                                     <tr v-for="(item, index) in Factura.items" :key="index">
                                         <td class='text-center'>{{item.id}}</td>
                                         <td>{{item.nombre}}</td>
-                                        <td class='text-center'>{{item.pivot.cantidad}}</td>
+                                        <td class='text-center'>{{item.cantidad}}</td>
                                         <td class='text-center'>{{item.precio}}</td>
-                                        <td class='text-center'>{{item.pivot.cantidad*item.precio}}</td>
+                                        <td class='text-center'>{{item.cantidad*item.precio}}</td>
                                         <td class='text-right'><button type="button" class="btn btn-main-gradient"
                                                 @click="dropItem(index)"><span class="ti-trash"></span></button></td>
                                     </tr>
@@ -131,25 +134,18 @@ export default {
             ordenid: 0,
             categories: [],
             Factura: {
+                ordenes: [],
                 total: '',
                 fecha: '',
                 items: []
             },
             usuario: '',
-
         }
     },
     mounted() {
         if (localStorage.user) {
             this.usuario = JSON.parse(localStorage.user)
         }
-        this.$axios.get('/api/facturas')
-            .then(res => {
-                this.Factura = res.data
-            })
-            .catch(error => {
-                console.log(error.response)
-            })
     },
     methods: {
         buscarCliente() {
@@ -169,23 +165,38 @@ export default {
                 })
         },
         additemsOrder() {
+            if (this.Factura.ordenes.includes(this.ordenid)) {
+                return this.toast.error("La Orden esta siendo procesada")
+            }
+            let item = {}
             this.$axios.get('/api/ordenfactura/' + this.ordenid)
                 .then(res => {
-                    if(res.data.message=="false"){
-                        if(res.data.data!=null){
-                            this.Factura.items =res.data.data.productos
+                    if (res.data.message == "false") {
+                        if (res.data.data != null) {
+                            res.data.data.productos.forEach(element => {
+                                item.id = element.id
+                                item.nombre = element.nombre
+                                item.cantidad = element.pivot.cantidad
+                                item.precio = element.precio
+                                this.additemtable(item)
+                                item = {}
+                            })
                             this.toast.success("Orden agregada a la factura")
-                        }else{
+                            this.Factura.ordenes.push(this.ordenid)
+                        } else {
                             this.toast.error("No se encontro la Orden")
                         }
                     }
-                    else{
+                    else {
                         this.toast.error(res.data.message)
                     }
                 })
                 .catch(error => {
                     console.log(error)
                 })
+        },
+        additemtable(item) {
+            this.Factura.items.push(item)
         },
         clean() {
             this.item = {
@@ -198,28 +209,25 @@ export default {
         addOrden() {
             this.additemModal = true
         },
-        addTable(item) {
-            this.Factura.items.push(item)
-            this.clean()
-        },
-        selectOrden(item) {
-            this.item.id = item.id
-            this.item.nombre = item.nombre
-        },
         dropItem(index) {
             this.Factura.items.splice(index, 1)
         },
         addFactura() {
+            if (this.Factura.ordenes.length == 0)
+                return this.toast.error("No hay Ordenes que facturar")
+            if (this.cliente.nombre == '')
+                return this.toast.error("Seleccione un cliente")
+            this.Factura.ordenes.length
             console.log(this.usuario.cajeros[0].id)
             let total = 0
             this.Factura.items.map(item => {
-                total += Number(item.precio) * Number(item.pivot.cantidad)
+                total += Number(item.precio) * Number(item.cantidad)
             })
             const data = {
                 cajero_id: this.usuario.cajeros[0].id,
                 items: JSON.stringify(this.Factura.items),
-                orden_id: this.ordenid,
                 cliente_id: this.cliente.id,
+                ordenes:this.Factura.ordenes,
                 total: total
             }
             this.$axios.post('/api/factura', data, {
@@ -227,8 +235,9 @@ export default {
                     Authorization: `Bearer ${localStorage.token}`
                 }
             })
-                .then(() => {
-                    this.$router.push('/admin/facturas')
+                .then(res => {
+                    console.log(res.data.data)
+                  this.$router.push('/admin/facturas/'+res.data.data)
                 })
                 .catch(error => {
                     if (error.response.data.message) {
@@ -238,10 +247,13 @@ export default {
                 })
         }
     }, computed: {
-        search() {
-
+        facturaTotal() {
+            let total = 0
+            this.Factura.items.map(item => {
+                total += Number(item.precio) * Number(item.cantidad)
+            })
+            return total
         }
-
     }
 }
 </script>

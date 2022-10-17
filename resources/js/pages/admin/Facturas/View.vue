@@ -3,26 +3,21 @@
         <section id="print">
             <strong>FACTURA #{{Factura.id}}</strong>
             <div class="mainText">
-
                 <div>
                     <strong>CI o NIT:</strong> {{Cliente.id}}
-                    <strong>Nombre:</strong>{{Cliente.apellido_pat}} {{Cliente.nombre}}
+                    <br /><strong>Nombre:</strong> {{Cliente.apellido_pat}} {{Cliente.nombre}}
                 </div>
                 <div>
-
                 </div>
                 <div>
-
-                    <strong>Total :</strong>{{Factura.total}}Bs
-                    <br><strong>Fecha :</strong>{{Factura.fecha}}
+                    <strong>Total :</strong> {{Factura.total}}Bs
+                    <br><strong>Fecha :</strong> {{Factura.fecha}}
                 </div>
                 <div>
                     <p></p>
                     <p></p>
                 </div>
             </div>
-
-
             <table class="table table-borderless factura">
                 <thead>
                     <tr>
@@ -34,10 +29,10 @@
                 </thead>
                 <tbody>
                     <tr v-for="(item, index) in Detalle" :key="index">
-                        <td>{{item.pivot.cantidad}}</td>
+                        <td>{{item.cantidad}}</td>
                         <td>{{item.nombre}}</td>
                         <td>{{item.precio}}</td>
-                        <td>{{item.precio*item.pivot.cantidad}}</td>
+                        <td>{{item.precio*item.cantidad}}</td>
                     </tr>
                 </tbody>
                 <tfoot>
@@ -73,9 +68,9 @@ export default {
         this.$axios.get('/api/factura/' + this.facturaid)
             .then(datos => {
                 this.Factura = datos.data.factura
-                this.Detalle = datos.data.consumo
+                this.addItemsTable(datos.data.consumo)
                 this.Cliente = datos.data.cliente
-                this.Factura.fecha = this.Factura.fecha.split("T", 1)
+                this.Factura.fecha = this.Factura.fecha
             })
     },
     data() {
@@ -89,15 +84,17 @@ export default {
         print() {
             window.print()
         }, facturas() { this.$router.push('/admin/facturas') },
-        editFactura() {
-            this.$axios.put('/api/factura/' + this.facturaid, {
-                headers: {
-                    Authorization: `Bearer ${localStorage.token}`
-                }
-            })
-                .then(data => {
-                    this.$router.push('/admin/facturas')
+        addItemsTable(item) {
+            item.forEach(element => {
+                element.productos.forEach(element => {
+                    console.log(element.pivot.cantidad)
+                    item.cantidad = element.pivot.cantidad
+                    item.nombre = element.nombre
+                    item.precio = element.precio
+                    this.Detalle.push(item)
+                    item = {}
                 })
+            })
         }
     }
 }
