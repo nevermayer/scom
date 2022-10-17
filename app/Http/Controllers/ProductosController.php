@@ -88,21 +88,31 @@ class ProductosController extends Controller
 
     public function getplatillos()
     {
-         $platillos = Platillo::join('productos', 'productos.id', '=', 'platillos.producto_id')->with('ingredientes')->get();
+        //$platillos = Platillo::join('productos', 'productos.id', '=', 'platillos.producto_id')->with('ingredientes')->get();
         // $platillos = Platillo::with(['producto'])->with(['ingredientes'=> function ($query) {$query->select('nombre','imagen');}])->get();
+        $platillos = Platillo::join('productos', 'productos.id', '=', 'platillos.producto_id')
+            ->where('productos.status', '=', 'activo')
+            ->where('productos.cantidad', '>', 0)
+            ->get(['productos.*', 'tiempo_elaboracion']);
         return $platillos;
     }
 
     public function getpostres()
     {
         $postres = Postre::join('productos', 'productos.id', '=', 'postres.producto_id')
+            ->where('productos.status', '=', 'activo')
+            ->where('productos.cantidad', '>', 0)
             ->get(['productos.*', 'tiempo_elaboracion']);
+        //$postres = Postre::join('productos', 'productos.id', '=', 'postres.producto_id')
+        //   ->get(['productos.*', 'tiempo_elaboracion']);
         return $postres;
     }
 
     public function getbebidas()
     {
         $bebidas = Bebida::join('productos', 'productos.id', '=', 'bebidas.producto_id')
+            ->where('productos.status', '=', 'activo')
+            ->where('productos.cantidad', '>', 0)
             ->get(['productos.*', 'grado_alcoholico']);
         return $bebidas;
     }

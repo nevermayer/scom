@@ -9,7 +9,7 @@ import dashboard from '@/pages/admin/dashboard.vue'
 import categories from '@/pages/admin/Categories.vue'
 import Login from '@/pages/admin/Login.vue'
 //usuarios
-import User from '@/pages/admin/Usuarios/index.vue'
+import User from '@/pages/admin/Usuarios/Index.vue'
 import AddUser from '@/pages/admin/Usuarios/Agregar.vue'
 import EditUser from '@/pages/admin/Usuarios/Editar.vue'
 //productos

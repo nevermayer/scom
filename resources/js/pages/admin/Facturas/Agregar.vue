@@ -155,10 +155,11 @@ export default {
             }
             this.$axios.get('/api/cliente/' + this.cliente.id)
                 .then(res => {
-                    if (res.data == '')
-                        this.toast.error("No se encontro cliente con ese Nit o Ci")
+                    console.log(res.data.message)
+                    if (res.data.message)
+                        this.cliente = res.data.data
                     else
-                        this.cliente = res.data
+                        this.toast.error("No se encontro cliente con ese Nit o Ci")
                 })
                 .catch(error => {
                     console.log(error.response)
@@ -227,7 +228,7 @@ export default {
                 cajero_id: this.usuario.cajeros[0].id,
                 items: JSON.stringify(this.Factura.items),
                 cliente_id: this.cliente.id,
-                ordenes:this.Factura.ordenes,
+                ordenes: this.Factura.ordenes,
                 total: total
             }
             this.$axios.post('/api/factura', data, {
@@ -237,7 +238,7 @@ export default {
             })
                 .then(res => {
                     console.log(res.data.data)
-                  this.$router.push('/admin/facturas/'+res.data.data)
+                    this.$router.push('/admin/facturas/' + res.data.data)
                 })
                 .catch(error => {
                     if (error.response.data.message) {

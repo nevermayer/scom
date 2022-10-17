@@ -31,8 +31,13 @@ class ClienteController extends Controller
     {
         $cliente = Cliente::find($id);
         if (isset($cliente->id))
-            return $cliente;
-        return null;
+            return response()->json([
+                "message"=>true,
+                "data" => $cliente
+            ]);
+        return response()->json([
+            "message" => false
+        ]);
     }
     public function update(Request $request, $id)
     {
