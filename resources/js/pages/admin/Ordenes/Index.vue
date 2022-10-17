@@ -1,9 +1,6 @@
 <template>
     <dashboard-layout>
-        <div slot="main-content">
-            <div class="alert alert-info" v-if="message">
-            {{message}}
-            </div> 
+        <div slot="main-content"> 
             <h2 class="dash-title">Ordenes</h2>
             <section class="recent">
                 <div class="">
@@ -24,12 +21,8 @@
                                         <td>{{order.total}}</td>
                                         <td>{{order.estado}}</td>
                                         <button class="btn btn-success" @click="editar(order.id)"><span class="ti-pencil-alt"></span></button>
-                                        <li v-if="user !== null && role=='camarero'">
-                                           <router-link to="/admin/ordenes" >
-                                           <td class='text-right'><button type="button" class="btn btn-main-gradient"
-                                                @click="eliminar(order.id)"><span class="ti-trash"></span></button></td>
-                                           </router-link>
-                                        </li>
+                                        <button type="button" class="btn btn-main-gradient"
+                                                @click="eliminar(order.id)" v-if="user !== null && role=='camarero'"><span class="ti-trash"></span></button>
                                     </tr>
                                 </tbody>
                             </table>
