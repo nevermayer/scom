@@ -13,7 +13,7 @@ import User from '@/pages/admin/Usuarios/Index.vue'
 import AddUser from '@/pages/admin/Usuarios/Agregar.vue'
 import EditUser from '@/pages/admin/Usuarios/Editar.vue'
 //productos
-import Producto from '@/pages/admin/Productos/index.vue'
+import Producto from '@/pages/admin/Productos/Index.vue'
 import AddProducto from '@/pages/admin/Productos/Agregar.vue'
 import EditProducto from '@/pages/admin/Productos/Editar.vue'
 //SolicitudChef
@@ -21,26 +21,26 @@ import SolicitudChef from '@/pages/admin/SolicitudChefs/view.vue'
 import AddSolicitudChef from '@/pages/admin/SolicitudChefs/Agregar.vue'
 import EditSolicitudChef from '@/pages/admin/SolicitudChefs/Editar.vue'
 //Facturas
-import Factura from '@/pages/admin/Facturas/index.vue'
+import Factura from '@/pages/admin/Facturas/Index.vue'
 import AddFactura from '@/pages/admin/Facturas/Agregar.vue'
 import ViewFactura from '@/pages/admin/Facturas/View.vue'
 //Clientes
-import Cliente from '@/pages/admin/Clientes/index.vue'
+import Cliente from '@/pages/admin/Clientes/Index.vue'
 import AddCliente from '@/pages/admin/Clientes/Agregar.vue'
 import EditCliente from '@/pages/admin/Clientes/Editar.vue'
 //Mesas
-import Mesa from '@/pages/admin/Mesas/index.vue'
+import Mesa from '@/pages/admin/Mesas/Index.vue'
 import AddMesa from '@/pages/admin/Mesas/Agregar.vue'
 import EditMesa from '@/pages/admin/Mesas/Editar.vue'
 //Ordenes
-import Orden from '@/pages/admin/Ordenes/index.vue'
+import Orden from '@/pages/admin/Ordenes/Index.vue'
 import ViewOrden from '@/pages/admin/Ordenes/view.vue'
 //Ingredientes
-import Ingrediente from '@/pages/admin/Ingredientes/index.vue'
+import Ingrediente from '@/pages/admin/Ingredientes/Index.vue'
 import AddIngrediente from '@/pages/admin/Ingredientes/Agregar.vue'
 import EditIngrediente from '@/pages/admin/Ingredientes/Editar.vue'
 //Auditoria
-import Auditoria from '@/pages/admin/Auditorias/index.vue'
+import Auditoria from '@/pages/admin/Auditorias/Index.vue'
 //definiendo rutas
 const routes = [
     {
