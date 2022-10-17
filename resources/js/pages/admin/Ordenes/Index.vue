@@ -22,12 +22,10 @@
                                         <td>{{order.id}}</td>
                                         <td>{{order.total}}</td>
                                         <td>{{order.estado}}</td>
+                                        <td>{{order.factura_id}}</td>
                                         <button class="btn btn-success" @click="editar(order.id)"><span class="ti-pencil-alt"></span></button>
                                         <button type="button" class="btn btn-main-gradient"
                                                 @click="eliminar(order.id)" v-if="user !== null && role=='camarero'"><span class="ti-trash"></span></button>
-                                        <td>{{order.factura_id}}</td>
-                                        <td><button class="btn" @click="editar(order.id)"><span
-                                                    class="ti-pencil-alt"></span></button></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -101,6 +99,3 @@ export default {
 }
 
 </script>
-<style scoped>
-@import "@/assets/css/bootstrap.min.css";
-</style>
