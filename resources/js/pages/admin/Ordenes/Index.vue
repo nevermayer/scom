@@ -1,6 +1,6 @@
 <template>
     <dashboard-layout>
-        <div slot="main-content"> 
+        <div slot="main-content">
             <h2 class="dash-title">Ordenes</h2>
             <section class="recent">
                 <div class="">
@@ -23,9 +23,11 @@
                                         <td>{{order.total}}</td>
                                         <td>{{order.estado}}</td>
                                         <td>{{order.factura_id}}</td>
-                                        <button class="btn btn-success" @click="editar(order.id)"><span class="ti-pencil-alt"></span></button>
-                                        <button type="button" class="btn btn-main-gradient"
-                                                @click="eliminar(order.id)" v-if="user !== null && role=='camarero'"><span class="ti-trash"></span></button>
+                                        <td>
+                                            <button class="btn btn-main" @click="editar(order.id)"><span class="ti-pencil-alt"></span></button>
+                                            <button type="button" class="btn btn-main-gradient" @click="eliminar(order.id)" v-if="user !== null && role=='camarero'">
+                                                <span class="ti-trash"></span></button>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -54,7 +56,7 @@ export default {
             orders: []
         }
     },
-    
+
     mounted() {
         this.getOrders()
     },
@@ -73,18 +75,18 @@ export default {
                     console.log(error.response)
                 })
         }, eliminar(id) {
-            this.$axios.delete('/api/orden/'+id)
-           .then(res => {
-                console.log(res);
-                this.toast.success("Se elimino orden")
-            
-                 } )
-            .catch(error => {
-                console.log(error.response)
-            })
+            this.$axios.delete('/api/orden/' + id)
+                .then(res => {
+                    console.log(res);
+                    this.toast.success("Se elimino orden")
+
+                })
+                .catch(error => {
+                    console.log(error.response)
+                })
         }
-        ,editar(id){
-            this.$router.push('/admin/ordenes/'+id)
+        , editar(id) {
+            this.$router.push('/admin/ordenes/' + id)
         }, editar(id) {
             this.$router.push('/admin/ordenes/' + id)
         }
@@ -92,10 +94,9 @@ export default {
         user() {
             return this.$store.getters.getUser
         },
-        role(){
+        role() {
             return this.$store.getters.getRole
         }
     }
 }
-
 </script>
