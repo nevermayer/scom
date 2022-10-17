@@ -1,9 +1,6 @@
 <template>
     <dashboard-layout>
-        <div slot="main-content">
-            <div class="alert alert-info" v-if="message">
-            {{message}}
-            </div> 
+        <div slot="main-content"> 
             <h2 class="dash-title">Productos</h2>
                     
             <div class="page-action">
@@ -36,12 +33,8 @@
                                         <td>{{producto.precio}}</td>
                                         <td>{{producto.cantidad}}</td>
                                         <td><button class="btn btn-success" @click="editar(producto.id)"><span class="ti-pencil-alt"></span></button>
-                                        <li v-if="user !== null && role=='admin'">
-                                           <router-link to="/admin/productos" >
-                                           <td class='text-right'><button type="button" class="btn btn-main-gradient"
-                                                @click="eliminar(producto.id)"><span class="ti-trash"></span></button></td>
-                                           </router-link>
-                                        </li></td>
+                                            <button type="button" class="btn btn-main-gradient"
+                                                @click="eliminar(producto.id)" v-if="user !== null && role=='admin'"><span class="ti-trash"></span></button></td>
                                     </tr>
                                 </tbody>
                             </table>
