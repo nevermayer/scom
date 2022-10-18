@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('apellido_pat');
             $table->string('apellido_mat');
             $table->string('nombre');
-            $table->boolean('activo');
-            $table->boolean('super_usuario');
+            $table->integer('activo');
+            $table->integer('super_usuario');
             $table->string('turno');
         });
     }
