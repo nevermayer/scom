@@ -131,4 +131,9 @@ class ProductosController extends Controller
         $temp = Bebida::findOrFail($id);
         return $temp->ingredientes;
     }
+    public function productosStatus(Request $request, $id){
+        $producto = Producto::findOrFail($id);
+        $producto->status = $request->estado;
+        $producto->save();
+    }
 }

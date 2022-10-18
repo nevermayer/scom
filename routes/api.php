@@ -76,6 +76,7 @@ Route::controller(OrdenController::class)->group(function () {
 // PRODUCTOS...
 Route::controller(ProductosController::class)->group(function () {
     Route::get('/productos', 'index');
+    Route::put('/productosstatus/{id}', 'productosStatus');
     Route::get('/platillos', 'getplatillos');
     Route::get('/postres', 'getpostres');
     Route::get('/bebidas', 'getbebidas');
