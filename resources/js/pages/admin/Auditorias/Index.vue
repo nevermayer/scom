@@ -11,19 +11,16 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <th>Id User</th>
-                                        <th>Nombre de cuenta</th>
                                         <th>Id Auditoria</th>
+                                        <th>Id Usuario</th>
                                         <th>Fecha</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr v-for="(auditoria, index) in auditoria" :key="index" >
                                         <td>{{auditoria.id}}</td>
-                                        <td>{{auditoria.nombre_cuenta}}</td>
-                                        <td>{{auditoria.id}}</td>
+                                        <td>{{auditoria.id_usuario}}</td>
                                         <td>{{auditoria.fecha}}</td>
-                                        <td><button class="btn" @click="editar(auditoria.id)"><span class="ti-pencil-alt"></span></button></td>
                                     </tr>
                                 </tbody>
                             </table>
