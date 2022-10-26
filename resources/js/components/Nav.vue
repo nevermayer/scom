@@ -11,7 +11,13 @@
                     <input type="search" placeholder="Buscar producto...." />
                 </div>
                 <div class="front-nav-links">
-                    <div> </div>
+                    <div v-if="user === null">
+                        <router-link to="/account"><small>Login</small></router-link> | <router-link to="/account"><small>Register</small></router-link>
+                    </div>
+
+                    <div v-else>
+                        <button class="btn-link" @click="signout"><small><span class="ti-user"></span> Profile</small></button> | <button class="btn-link" @click="signout"><small><span class="ti-power-off"></span> Logout</small></button>
+                    </div>
                     <div>
                         <button class="btn btn-main-gradient">
                             <span class="ti-shopping-cart"></span>
@@ -30,8 +36,14 @@ export default {
     props: ['user', 'cart', 'categories'],
     methods: {
         signout() {
+            this.$axios.get('/api/logout', {
+                headers: {
+                    Authorization: `Bearer ${localStorage.token}`
+                }
+            })
             localStorage.removeItem('user')
             localStorage.removeItem('token')
+            localStorage.removeItem('role')
             location.reload()
         }
     }

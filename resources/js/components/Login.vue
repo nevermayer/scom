@@ -2,7 +2,7 @@
     <div class="account-form">
         <h3>Introduzca datos de la cuenta</h3>
         <div class="form-group">
-            <label for="">Email</label>
+            <label for="">Email o cuenta</label>
             <input type="text" v-model="data.email" class="form-control" placeholder="example@gmail.com" />
         </div>
 

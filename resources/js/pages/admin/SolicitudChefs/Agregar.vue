@@ -23,9 +23,9 @@
                                 </thead>
                                 <tbody class='items'>
                                     <tr v-for="(item, index) in SolicitudChef.items" :key="index">
-                                        <td class='text-center'>{{item.id}}</td>
-                                        <td>{{item.nombre}}</td>
-                                        <td class='text-center'>{{item.cantidad}}</td>
+                                        <td class='text-center'>{{ item.id }}</td>
+                                        <td>{{ item.nombre }}</td>
+                                        <td class='text-center'>{{ item.cantidad }}</td>
                                         <td class='text-right'><button type="button" class="btn btn-main-gradient"
                                                 @click="dropItem(index)"><span class="ti-trash"></span></button></td>
                                     </tr>
@@ -60,9 +60,9 @@
                 <label>Ingrediente</label>
                 <input class="form-control" v-model="item.nombre">
                 <input type="hidden" class="form-control" v-model="item.id">
-                <ul v-if="item.id==0">
+                <ul v-if="item.id == 0">
                     <li v-for="(ingrediente, index) in ingredientes" :key="index"
-                        @click="selectIngrediente(ingrediente)">{{ingrediente.nombre}}</li>
+                        @click="selectIngrediente(ingrediente)">{{ ingrediente.nombre }}</li>
                 </ul>
             </div>
             <div class="col-md-12">
@@ -87,8 +87,13 @@
 <script>
 import DashboardLayout from '@/components/Layouts/DashboardLayout.vue'
 import modal from '@/components/Modal.vue'
+import { useToast } from "vue-toastification"
 export default {
     name: 'Agregar',
+    setup() {
+        const toast = useToast()
+        return { toast }
+    },
     components: {
         DashboardLayout,
         modal
@@ -107,11 +112,11 @@ export default {
                 items: [],
                 id_chef: ''
             },
-            usuario:''
+            usuario: ''
         }
     },
     mounted() {
-        if (localStorage.user){
+        if (localStorage.user) {
             this.usuario = JSON.parse(localStorage.user)
         }
         this.$axios.get('/api/ingredientes')
@@ -147,8 +152,10 @@ export default {
             this.SolicitudChef.items.splice(index, 1)
         },
         addSolicitudChef() {
+            if (!this.usuario.chefs.length)
+                return this.toast.error("Solo el chef de cocina puede hacer solicitudes")
             const data = {
-                chef_id: this.usuario.camareros[0].id,
+                chef_id: this.usuario.chefs[0].id,
                 items: JSON.stringify(this.SolicitudChef.items)
             }
             this.$axios.post('/api/solicitud-chef', data, {

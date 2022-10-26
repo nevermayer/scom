@@ -32,9 +32,11 @@
                                         <td>{{user.apellido_pat}}</td>
                                         <td>{{user.apellido_mat}}</td>
                                         <td>{{user.turno}}</td>
+                                        <td>
                                         <button class="btn btn-success" @click="editar(user.id)"><span class="ti-pencil-alt"></span></button>
-                                        <button type="button" class="btn btn-main-gradient"
+                                        <button type="button" class="btn btn-danger"
                                                 @click="eliminar(user.id)" v-if="user !== null && role=='admin'"><span class="ti-trash"></span></button>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>

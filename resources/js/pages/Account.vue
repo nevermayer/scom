@@ -8,12 +8,13 @@
                 </div>
 
                 <div class="account-tabs">
-                    <button :class="isActive === 0? 'is-active': ''" @click="isActive = 0">Acceda</button>
-                    <button :class="isActive === 1? 'is-active': ''" @click="isActive = 1">Registrese</button>
+                    <button :class="isActive === 0 ? 'is-active' : ''" @click="isActive = 0">Acceda</button>
+                    <button :class="isActive === 1 ? 'is-active' : ''" @click="isActive = 1">Registrese</button>
                 </div>
 
                 <div class="account-form-wrapper">
-                    <component :is="compsArr[isActive]" :data="compsData[isActive]" @eventact="processEvent"></component>
+                    <component :is="compsArr[isActive]" :data="compsData[isActive]" @eventact="processEvent">
+                    </component>
                 </div>
             </div>
         </div>
@@ -23,9 +24,13 @@
 <script>
 import Login from '@/components/Login.vue'
 import Register from '@/components/Register.vue'
-
+import { useToast } from "vue-toastification"
 export default {
     name: 'Account',
+    setup() {
+        const toast = useToast()
+        return { toast }
+    },
     data() {
         return {
             compsArr: [
@@ -39,73 +44,79 @@ export default {
                     password: '',
                 },
                 {
-                    name: '',
+                    ci: '',
+                    nombre: '',
+                    apellido_pat: '',
+                    apellido_mat: '',
                     email: '',
                     password: '',
-                    role: '',
+                    telefono: '',
                 }
             ]
         }
     },
     methods: {
         processEvent(payload) {
-            if(payload.eventType === 'signin') {
+            if (payload.eventType === 'signin') {
                 this.signin()
-            }else if(payload.eventType === 'signup') {
+            } else if (payload.eventType === 'signup') {
                 this.signup()
             }
         },
         signin() {
             const { email, password } = this.compsData[this.isActive]
 
-            if(!email || !password) {
-                //return this.$alertify.error('Incomplete credentials');
-                return console.log('faltan datos')
+            if (!email || !password) {
+                return this.toast.error("complete los campos!")
             }
 
-            this.$axios.post(`${this.$apiUrl}/auth/login`, {
-                email, 
+            this.$axios.post('/api/auth/login', {
+                email,
                 password
             })
-            .then(res => {
-                const data = res.data
-
-                if(data.user.role !== 'admin') {
-                    localStorage.token = JSON.stringify(data.token)
-                    localStorage.user = JSON.stringify(data.user)
-                    this.$store.commit('setUser', data.user)
-                    this.$router.push('/')
-                }
-            })
-            .catch(error => {
-                this.$alertify.error(error.response.data.message)
-            })
+                .then(res => {
+                    if (res.data.success) {
+                        localStorage.user = JSON.stringify(res.data.user)
+                        localStorage.role = res.data.role
+                        if (res.data.role == 'cliente')
+                            this.$router.push('/menu')
+                        else {
+                            localStorage.setItem('token', res.data.access_token)
+                            this.$router.push('/admin/dashboard')
+                        }
+                    }
+                    else
+                        this.toast.error(res.message)
+                })
+                .catch(error => {
+                    this.toast.error(error)
+                })
         },
         signup() {
-            let { role, name, email, password } = this.compsData[this.isActive]
+            let { ci, nombre, apellido_pat, apellido_mat, email, password, telefono, } = this.compsData[this.isActive]
 
-            if(!email || !password || !role || !name) {
-                return this.$alertify.error('Incomplete form data');
+            if (!ci || !email || !password || !nombre || !apellido_pat || !apellido_mat || !telefono) {
+                return this.toast.error('Complete los datos para el registro');
             }
-            
-            this.$axios.post(`${this.$apiUrl}/auth/register`, {
-                name, 
-                email,
-                password, 
-                role
+
+            this.$axios.post('/api/cliente', {
+                ci, nombre, apellido_pat, apellido_mat, email, password, telefono,activo:'1'
             })
-            .then(res => {
-                this.compsData[this.isActive] = {
-                    name: '',
-                    email: '',
-                    password: '',
-                    role: '',
-                }
-                this.$alertify.success(res.data.message)
-            })
-            .catch(error => {
-                this.$alertify.error(error.response.data.message)
-            })
+                .then(res => {
+                    this.compsData[this.isActive] = {
+                        ci: '',
+                        nombre: '',
+                        apellido_pat: '',
+                        apellido_mat: '',
+                        email: '',
+                        password: '',
+                        telefono: '',
+                    }
+                    this.toast.success('Complete los datos para el registro');
+                })
+                .catch(error => {
+                    this.$alertify.error(error.response.data.message)
+                })
 
         }
     }

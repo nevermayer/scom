@@ -92,6 +92,7 @@ Route::controller(ProductosController::class)->group(function () {
 Route::controller(ClienteController::class)->group(function () {
     Route::get('/clientes', 'index');
     Route::post('/cliente', 'store');
+    Route::post('/auth/login', 'login');
     Route::get('/cliente/{id}', 'show');
     Route::put('/cliente/{id}', 'update');
     Route::delete('/cliente/{id}', 'destroy');

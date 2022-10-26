@@ -29,6 +29,11 @@
                     <li><a href="#about-us">Acerca de nosotros</a></li>
                     <li><a href="#price">menu</a></li>
                     <li><a href="#footer">contactos</a></li>
+                    <li>
+                      <router-link to="/account">
+                        <span>Login</span>
+                      </router-link>
+                    </li>
                   </ul>
                 </div><!-- /.navbar-collapse -->
               </div><!-- /.container-fluid -->
@@ -119,11 +124,11 @@
                     </div>
                     <div class="desc pl-3">
                       <div class="d-flex text align-items-center">
-                        <h3><span>{{item.nombre}}</span></h3>
-                        <span class="price">Bs. {{item.precio}}</span>
+                        <h3><span>{{ item.nombre }}</span></h3>
+                        <span class="price">Bs. {{ item.precio }}</span>
                       </div>
                       <div class="d-block">
-                        <p>{{item.descripcion}}</p>
+                        <p>{{ item.descripcion }}</p>
                       </div>
                     </div>
                   </div>
@@ -145,7 +150,7 @@
               <ul>
                 <li>
                   <h4><i class="fa fa-phone"></i>Telefono</h4>
-                  <p>(000) 123 456 78- (000) 123 4567 89</p>
+                  <p>752 97272 - 700 00000</p>
 
                 </li>
                 <li>
@@ -154,7 +159,7 @@
                 </li>
                 <li>
                   <h4><i class="fa fa-envelope"></i>E mail</h4>
-                  <p>rest@gmail.com - scomrest@mail.bo</p>
+                  <p>jramoss2@fcpn.edu.bo - pruebacontrolador@gmail.com</p>
 
                 </li>
               </ul>
@@ -394,6 +399,8 @@ export default {
 .px-3 {
   padding-left: 1rem !important;
 }
+
 .d-block {
-  display: block !important; }
+  display: block !important;
+}
 </style>

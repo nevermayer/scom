@@ -1,34 +1,28 @@
 <template>
     <div class="account-form">
-        <h3>Create your account</h3>
+        <h3>Crea tu Cuenta ahora</h3>
         <div class="form-group">
-            <label for="">Sign up as</label>
-            <div class="role-grid">
-                <div class="role">
-                    <span>Customer</span>
-                    <input type="radio" id="customer" name="role" value="customer" v-model="data.role">
-                    <label for="customer">
-                        <span></span>
-                    </label>
-                </div>
-
-                <div class="role">
-                    <span>Driver</span>
-                    <input type="radio" id="driver" name="role" value="driver" v-model="data.role">
-                    <label for="driver">
-                        <span></span>
-                    </label>
-                </div>
-            </div>
+            <label for="">Area de Registro</label>
+        </div>
+        <div class="form-group">
+            <label for="">CI o NIT</label>
+            <input type="number" v-model="data.ci" class="form-control" placeholder="CI or NIT" />
+        </div>
+        <div class="form-group">
+            <label for="">Nombres</label>
+            <input type="text" v-model="data.nombre" class="form-control" placeholder="John doe" />
+        </div>
+        <div class="form-group">
+            <label for="">Apellido Paterno</label>
+            <input type="text" v-model="data.apellido_pat" class="form-control" placeholder="Paterno" />
+        </div>
+        <div class="form-group">
+            <label for="">Apellido Materno</label>
+            <input type="text" v-model="data.apellido_mat" class="form-control" placeholder="Materno" />
         </div>
 
         <div class="form-group">
-            <label for="">Full name</label>
-            <input type="text" v-model="data.name" class="form-control" placeholder="John doe" />
-        </div>
-
-        <div class="form-group">
-            <label for="">Email</label>
+            <label for="">Email o nombre de cuenta</label>
             <input type="text" v-model="data.email" class="form-control" placeholder="example@gmail.com" />
         </div>
         
@@ -36,9 +30,12 @@
             <label for="">Password</label>
             <input type="password" v-model="data.password" class="form-control" placeholder="**********" />
         </div>
-
         <div class="form-group">
-            <button class="btn btn-main-gradient btn-block" @click="$emit('eventact', {eventType: 'signup'})">Sign up</button>
+            <label for="">Telefono</label>
+            <input type="number" v-model="data.telefono" class="form-control" placeholder="numero de telefono" />
+        </div>
+        <div class="form-group">
+            <button class="btn btn-main-gradient btn-block" @click="$emit('eventact', {eventType: 'signup'})">Registro</button>
         </div>
     </div>
 </template>

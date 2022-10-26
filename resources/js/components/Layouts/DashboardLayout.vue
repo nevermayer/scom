@@ -32,43 +32,43 @@
                     </li>
                     <li v-if="user !== null && (role=='admin' || role=='cajero')">
                         <router-link to="/admin/facturas">
-                            <span class="ti-folder"></span>
+                            <span class="ti-receipt"></span>
                             <span>Facturas</span>
                         </router-link>
                     </li>
                     <li v-if="user !== null && role=='admin'">
                         <router-link to="/admin/usuarios" >
-                            <span class="ti-folder"></span>
+                            <span class="ti-user"></span>
                             <span>Usuarios</span>
                         </router-link>
                     </li>
                     <li v-if="user !== null && role=='admin'">
                         <router-link to="/admin/auditorias" >
-                            <span class="ti-folder"></span>
+                            <span class="ti-bookmark-alt"></span>
                             <span>Auditorias</span>
                         </router-link>
                     </li>
                     <li v-if="user !== null && (role=='admin' || role=='cajero')">
                         <router-link to="/admin/clientes">
-                            <span class="ti-folder"></span>
+                            <span class="ti-user"></span>
                             <span>Clientes</span>
                         </router-link>
                     </li>
                     <li v-if="user !== null && (role=='admin' || role=='camarero')">
                         <router-link to="/admin/mesas">
-                            <span class="ti-agenda"></span>
+                            <span class="ti-layout-grid2"></span>
                             <span>Mesas</span>
                         </router-link>
                     </li>
                     <li v-if="user !== null && (role=='admin' || role=='chef')">
                         <router-link to="/admin/ingredientes">
-                            <span class="ti-agenda"></span>
+                            <span class="ti-list"></span>
                             <span>Ingredientes</span>
                         </router-link>
                     </li>
                     <li v-if="user !== null && (role=='admin' || role=='chef')">
                         <router-link to="/admin/solicitudchefs">
-                            <span class="ti-agenda"></span>
+                            <span class="ti-write"></span>
                             <span>Solicitud Ingredientes</span>
                         </router-link>
                     </li>
@@ -112,7 +112,7 @@ export default {
             localStorage.removeItem('token')
             localStorage.removeItem('user')
             localStorage.removeItem('role')
-            this.$router.push('/admin/login');
+            this.$router.push('/admin/login')
         }
     }, computed: {
         user() {
