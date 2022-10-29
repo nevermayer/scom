@@ -68,7 +68,6 @@ export default {
                 }
             })
                 .then(res => {
-                    console.log(res.data)
                     this.orders = res.data
                 })
                 .catch(error => {
@@ -77,7 +76,6 @@ export default {
         }, eliminar(id) {
             this.$axios.delete('/api/orden/' + id)
                 .then(res => {
-                    console.log(res);
                     this.toast.success("Se elimino orden")
 
                 })

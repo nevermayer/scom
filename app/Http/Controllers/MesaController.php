@@ -51,4 +51,14 @@ class MesaController extends Controller
         $mesa = Mesa::destroy($id);
         return $mesa;
      }
+     public function setCamarero(Request $request)
+     {
+         $mesa = Mesa::find($request->mesa_id);
+         $mesa->camarero_id=$request->camarero_id;
+         $mesa->save();
+         return response()->json([
+            "success" => true,
+            "message" => "se asigno camarero satisfactoriamente"
+        ]);
+    }
 }

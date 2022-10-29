@@ -1,6 +1,6 @@
 <template>
     <dashboard-layout>
-        <section>
+        <section v-if="user !== null && role=='chef'">
             <div
                 style="display: flex;flex-direction: column;align-content: space-around;align-items: stretch;flex-wrap: wrap;">
                 Estado:
@@ -99,7 +99,6 @@ export default {
                 this.Orden.total = datos.data.total
                 this.Orden.fecha = datos.data.fecha
                 this.items = datos.data.productos
-                console.log(datos.data.productos)
             })
         if (localStorage.user)
             this.usuario = JSON.parse(localStorage.user)
@@ -115,7 +114,6 @@ export default {
                     Authorization: `Bearer ${localStorage.token}`
                 }
             }).then(res => {
-                console.log(res.data.data)
                 this.$router.push('/admin/facturas/' + res.data.data)
             }).catch(error => {
                 if (error) {

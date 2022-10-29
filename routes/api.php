@@ -41,6 +41,7 @@ Route::get('users', [UsersController::class, 'index']);
 Route::get('user/{id}', [UsersController::class, 'show']);
 Route::put('user/{id}', [UsersController::class, 'update']);
 Route::delete('user/{id}', [UsersController::class, 'destroy']);
+Route::get('getcamarero', [UsersController::class, 'getCamarero']);
 
 // PARTE INGREDIENTES
 Route::controller(IngredientesController::class)->group(function () {
@@ -58,6 +59,7 @@ Route::controller(MesaController::class)->group(function () {
     Route::get('/mesa/{id}', 'show');
     Route::put('/mesa/{id}', 'update');
     Route::delete('/mesa/{id}', 'destroy');
+    Route::post('/setcamarero', 'setCamarero');
 });
 
 // PARTE ORDEN

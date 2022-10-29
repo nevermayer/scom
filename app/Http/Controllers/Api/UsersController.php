@@ -160,4 +160,9 @@ class UsersController extends Controller
         $usuario = User::destroy($id);
         return $usuario;
     }
+    public function getCamarero()
+    {
+        $camarero   = Camarero::join('users', 'users.id', '=', 'camarero.id_usuario')->get(['users.*', 'camarero.id']);
+        return $camarero;
+    }
 }
